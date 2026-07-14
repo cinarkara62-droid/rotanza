@@ -13,7 +13,8 @@ interface CacheEntry {
 
 const cache = new Map<string, CacheEntry>();
 const CACHE_TTL_MS = 1000 * 60 * 60 * 6; // 6 hours
-const FAILURE_CACHE_TTL_MS = 1000 * 60 * 3; // 3 minutes
+const FAILURE_CACHE_TTL_MS = 1000 * 15; // 15 seconds — long enough to stop a burst of retries
+// from making a transient blip worse, short enough that a real user isn't locked out for minutes.
 
 // Failures are cached too (briefly) — when Overpass is degraded or rate-
 // limiting us, this stops every repeated request for the same city from
