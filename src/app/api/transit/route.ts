@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { findTransitLinesNear } from "@/lib/osm-client";
 
+// Overpass relation queries can take longer than Vercel's 10s default
+// function timeout, which kills the request before Overpass even replies.
+export const maxDuration = 30;
+
 export async function GET(req: NextRequest) {
   const lat = parseFloat(req.nextUrl.searchParams.get("lat") ?? "");
   const lon = parseFloat(req.nextUrl.searchParams.get("lon") ?? "");

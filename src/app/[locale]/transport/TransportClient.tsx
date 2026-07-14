@@ -9,6 +9,7 @@ import { MetroLine } from "@/lib/types";
 import { PageHeader } from "@/components/PageHeader";
 import { MetroSchematic } from "@/components/MetroSchematic";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 export function TransportClient({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
@@ -29,7 +30,7 @@ export function TransportClient({ locale }: { locale: Locale }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- kicking off a network fetch triggered by prop change, not a render loop
     setLiveLoading(true);
     setLiveNotFound(false);
-    fetch(`/api/transit?lat=${customCity.lat}&lon=${customCity.lon}`)
+    fetchWithTimeout(`/api/transit?lat=${customCity.lat}&lon=${customCity.lon}`)
       .then((r) => r.json())
       .then((data) => {
         if (cancelled) return;

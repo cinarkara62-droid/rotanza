@@ -7,6 +7,7 @@ import { cities, getCity } from "@/lib/mock-data/cities";
 import { getRestaurantsForCity } from "@/lib/mock-data/restaurants";
 import { PageHeader } from "@/components/PageHeader";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 interface LivePlace {
   osmId: number;
@@ -36,7 +37,7 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- kicking off a network fetch triggered by prop change, not a render loop
     setLiveLoading(true);
     setLiveError(false);
-    fetch(`/api/places?lat=${customCity.lat}&lon=${customCity.lon}&kind=restaurant`)
+    fetchWithTimeout(`/api/places?lat=${customCity.lat}&lon=${customCity.lon}&kind=restaurant`)
       .then((r) => r.json())
       .then((data) => {
         if (!cancelled) setLiveResults(data.results ?? []);

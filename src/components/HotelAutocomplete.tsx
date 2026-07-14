@@ -5,6 +5,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { searchHotelsByName } from "@/lib/mock-data/hotels";
 import { getCity } from "@/lib/mock-data/cities";
 import { estimateNightlyRate } from "@/lib/budget";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 export interface HotelSelection {
   name: string;
@@ -58,7 +59,7 @@ export function HotelAutocomplete({
     debounceRef.current = setTimeout(async () => {
       try {
         // Sent verbatim to the real Nominatim search API — this is the "characters typed go to a real hotel API" step.
-        const res = await fetch(`/api/hotels-search?q=${encodeURIComponent(q + " hotel")}`);
+        const res = await fetchWithTimeout(`/api/hotels-search?q=${encodeURIComponent(q + " hotel")}`);
         const data = await res.json();
         setLiveResults(data.results ?? []);
       } catch {

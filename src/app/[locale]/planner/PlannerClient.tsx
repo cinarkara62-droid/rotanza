@@ -10,6 +10,7 @@ import { BudgetLevel, InterestTag, PointOfInterest } from "@/lib/types";
 import { PageHeader } from "@/components/PageHeader";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
 import { getPoisForCity } from "@/lib/mock-data/pois";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 const INTEREST_OPTIONS: InterestTag[] = ["history", "food", "nature", "nightlife", "shopping", "art"];
 const BUDGET_OPTIONS: BudgetLevel[] = ["economy", "standard", "luxury"];
@@ -64,7 +65,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
     if (customCity) {
       setLoading(true);
       try {
-        const res = await fetch(`/api/attractions?lat=${customCity.lat}&lon=${customCity.lon}`);
+        const res = await fetchWithTimeout(`/api/attractions?lat=${customCity.lat}&lon=${customCity.lon}`);
         const data = await res.json();
         const livePois: PointOfInterest[] = (data.results ?? []).map(
           (a: { osmId: number; name: string; categories: InterestTag[]; emoji: string }, i: number) => ({

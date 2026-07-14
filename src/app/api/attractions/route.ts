@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { findAttractionsNear } from "@/lib/osm-client";
 import { categorizeAttraction, emojiForAttraction } from "@/lib/mock-data/attraction-map";
 
+// Overpass queries for this route can take longer than Vercel's 10s default
+// function timeout, which kills the request before Overpass even replies.
+export const maxDuration = 30;
+
 export async function GET(req: NextRequest) {
   const lat = parseFloat(req.nextUrl.searchParams.get("lat") ?? "");
   const lon = parseFloat(req.nextUrl.searchParams.get("lon") ?? "");

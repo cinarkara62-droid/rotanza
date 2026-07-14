@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cities } from "@/lib/mock-data/cities";
 import type { Locale } from "@/lib/i18n/config";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 export interface CustomCity {
   name: string;
@@ -73,7 +74,7 @@ export function CitySearchInput({
     setLoading(true);
     debounceRef.current = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/geocode?q=${encodeURIComponent(q)}`);
+        const res = await fetchWithTimeout(`/api/geocode?q=${encodeURIComponent(q)}`);
         const data = await res.json();
         setLiveResults(data.results ?? []);
       } catch {
