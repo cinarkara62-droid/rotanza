@@ -79,12 +79,3 @@ export interface TransportCity {
   ticketEn: string;
 }
 
-export interface Reservation {
-  id: string;
-  type: "flight" | "hotel" | "restaurant" | "activity";
-  title: string;
-  date: string;
-  time?: string;
-  confirmation?: string;
-  notes?: string;
-}

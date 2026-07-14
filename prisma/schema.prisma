@@ -21,7 +21,8 @@ model User {
   subscriptionStatus   String? // Stripe subscription status, e.g. "active", "canceled", "past_due"
   currentPeriodEnd     DateTime?
 
-  priceAlerts PriceAlert[]
+  priceAlerts  PriceAlert[]
+  reservations Reservation[]
 }
 
 model PriceAlert {
@@ -43,4 +44,24 @@ model PriceAlert {
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+}
+
+model Reservation {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type         String // "flight" | "hotel" | "restaurant" | "activity"
+  title        String
+  date         DateTime
+  time         String?
+  confirmation String?
+  notes        String?
+
+  reminderSentAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([date])
 }

@@ -4,9 +4,17 @@ import { useEffect, useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { PageHeader } from "@/components/PageHeader";
-import { Reservation } from "@/lib/types";
 
-const STORAGE_KEY = "rotanza:reservations";
+interface Reservation {
+  id: string;
+  type: "flight" | "hotel" | "restaurant" | "activity";
+  title: string;
+  date: string;
+  time: string | null;
+  confirmation: string | null;
+  notes: string | null;
+}
+
 const TYPE_EMOJI: Record<Reservation["type"], string> = {
   flight: "✈️",
   hotel: "🏨",
@@ -17,10 +25,12 @@ const TYPES: Reservation["type"][] = ["flight", "hotel", "restaurant", "activity
 
 export function ReservationsClient({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
+  const isTr = locale === "tr";
 
   const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const [type, setType] = useState<Reservation["type"]>("flight");
   const [title, setTitle] = useState("");
@@ -30,19 +40,11 @@ export function ReservationsClient({ locale }: { locale: Locale }) {
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage after mount, not a render-loop update
-      if (raw) setReservations(JSON.parse(raw));
-    } catch {
-      // ignore malformed local data
-    }
-    setLoaded(true);
+    fetch("/api/reservations")
+      .then((r) => r.json())
+      .then((data) => setReservations(data.reservations ?? []))
+      .finally(() => setLoading(false));
   }, []);
-
-  useEffect(() => {
-    if (loaded) localStorage.setItem(STORAGE_KEY, JSON.stringify(reservations));
-  }, [reservations, loaded]);
 
   function resetForm() {
     setType("flight");
@@ -53,25 +55,33 @@ export function ReservationsClient({ locale }: { locale: Locale }) {
     setNotes("");
   }
 
-  function handleSave(e: React.FormEvent) {
+  async function handleSave(e: React.FormEvent) {
     e.preventDefault();
     if (!title || !date) return;
-    const newReservation: Reservation = {
-      id: crypto.randomUUID(),
-      type,
-      title,
-      date,
-      time: time || undefined,
-      confirmation: confirmation || undefined,
-      notes: notes || undefined,
-    };
-    setReservations((prev) => [...prev, newReservation].sort((a, b) => a.date.localeCompare(b.date)));
-    resetForm();
-    setShowForm(false);
+
+    setSaving(true);
+    try {
+      const res = await fetch("/api/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, title, date, time, confirmation, notes }),
+      });
+      if (!res.ok) {
+        alert(isTr ? "Bir şeyler ters gitti, tekrar deneyin." : "Something went wrong, please try again.");
+        return;
+      }
+      const data = await res.json();
+      setReservations((prev) => [...prev, data.reservation].sort((a, b) => a.date.localeCompare(b.date)));
+      resetForm();
+      setShowForm(false);
+    } finally {
+      setSaving(false);
+    }
   }
 
-  function handleDelete(id: string) {
+  async function handleDelete(id: string) {
     setReservations((prev) => prev.filter((r) => r.id !== id));
+    await fetch(`/api/reservations/${id}`, { method: "DELETE" });
   }
 
   return (
@@ -160,12 +170,19 @@ export function ReservationsClient({ locale }: { locale: Locale }) {
             />
           </label>
 
+          <p className="text-xs leading-relaxed text-brand-950/40 sm:col-span-2">
+            {isTr
+              ? "Rezervasyon tarihi yaklaştığında hesabınızın e-posta adresine otomatik bir hatırlatma gönderilir."
+              : "You'll get an automatic email reminder to your account address as the reservation date approaches."}
+          </p>
+
           <div className="flex gap-3 sm:col-span-2">
             <button
               type="submit"
-              className="rounded-full bg-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-500/25"
+              disabled={saving}
+              className="rounded-full bg-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-500/25 disabled:opacity-60"
             >
-              {dict.reservations.form.save}
+              {saving ? (isTr ? "Kaydediliyor…" : "Saving…") : dict.reservations.form.save}
             </button>
             <button
               type="button"
@@ -181,44 +198,44 @@ export function ReservationsClient({ locale }: { locale: Locale }) {
         </form>
       )}
 
-      <div className="mt-10 space-y-3">
-        {reservations.length === 0 && !showForm && (
-          <p className="text-center text-sm text-brand-950/50">{dict.reservations.empty}</p>
-        )}
-        {reservations.map((r) => (
-          <div
-            key={r.id}
-            className="flex items-start justify-between gap-4 rounded-2xl border border-black/5 bg-white p-5 shadow-sm"
-          >
-            <div className="flex items-start gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-xl">
-                {TYPE_EMOJI[r.type]}
-              </div>
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide text-brand-500">
-                  {dict.reservations.typeLabels[r.type]}
-                </div>
-                <div className="text-sm font-semibold text-brand-950">{r.title}</div>
-                <div className="mt-0.5 text-xs text-brand-950/50">
-                  {r.date}
-                  {r.time ? ` · ${r.time}` : ""}
-                  {r.confirmation ? ` · #${r.confirmation}` : ""}
-                </div>
-                {r.notes && <p className="mt-1 text-xs text-brand-950/50">{r.notes}</p>}
-              </div>
-            </div>
-            <button
-              onClick={() => handleDelete(r.id)}
-              className="shrink-0 text-xs font-semibold text-coral-600 hover:underline"
-            >
-              {dict.reservations.delete}
-            </button>
-          </div>
-        ))}
-      </div>
+      {loading && <p className="mt-10 text-center text-sm text-brand-950/50">{isTr ? "Yükleniyor…" : "Loading…"}</p>}
 
-      {reservations.length > 0 && (
-        <p className="mt-6 text-center text-xs text-brand-950/40">{dict.reservations.localOnly}</p>
+      {!loading && (
+        <div className="mt-10 space-y-3">
+          {reservations.length === 0 && !showForm && (
+            <p className="text-center text-sm text-brand-950/50">{dict.reservations.empty}</p>
+          )}
+          {reservations.map((r) => (
+            <div
+              key={r.id}
+              className="flex items-start justify-between gap-4 rounded-2xl border border-black/5 bg-white p-5 shadow-sm"
+            >
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-xl">
+                  {TYPE_EMOJI[r.type]}
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-wide text-brand-500">
+                    {dict.reservations.typeLabels[r.type]}
+                  </div>
+                  <div className="text-sm font-semibold text-brand-950">{r.title}</div>
+                  <div className="mt-0.5 text-xs text-brand-950/50">
+                    {new Date(r.date).toLocaleDateString(isTr ? "tr-TR" : "en-US")}
+                    {r.time ? ` · ${r.time}` : ""}
+                    {r.confirmation ? ` · #${r.confirmation}` : ""}
+                  </div>
+                  {r.notes && <p className="mt-1 text-xs text-brand-950/50">{r.notes}</p>}
+                </div>
+              </div>
+              <button
+                onClick={() => handleDelete(r.id)}
+                className="shrink-0 text-xs font-semibold text-coral-600 hover:underline"
+              >
+                {dict.reservations.delete}
+              </button>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
