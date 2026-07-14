@@ -38,6 +38,9 @@ export const es: Dictionary = {
       chip1Sub: "Generado en 12 segundos",
       chip2Title: "Hotel en París",
       chip2Sub: "Precio bajó un 25%",
+      searchLabel: "¿A dónde quieres ir?",
+      searchPlaceholder: "ej. Tokio, 7 días, menos de $2000",
+      searchCta: "Preguntar a la IA",
     },
     trustedBy: "Diseñado para viajeros independientes, parejas y familias que planifican su próximo viaje",
     features: {
@@ -59,6 +62,20 @@ export const es: Dictionary = {
         { title: "Dinos a dónde vas", desc: "Elige un destino, la duración del viaje y lo que te gusta — comida, arte, vida nocturna, naturaleza." },
         { title: "Recibe tu plan personalizado", desc: "Rotanza arma al instante una ruta día a día, una selección de restaurantes y una estimación de presupuesto." },
         { title: "Reserva, sigue y relájate", desc: "Organiza tus reservas y deja que nuestras alertas de precio vigilen hoteles y vuelos por ti." },
+      ],
+    },
+    why: {
+      title: "¿Por qué Rotanza?",
+      subtitle: "La mayoría de las herramientas de viaje hacen una sola cosa. Rotanza cubre todo el viaje.",
+      headerFeature: "Función",
+      headerUs: "Rotanza",
+      headerOthers: "Sitios de viaje habituales",
+      rows: [
+        { feature: "Planificación de viajes con IA", others: "no" },
+        { feature: "Calculadora de presupuesto", others: "no" },
+        { feature: "Alertas de precio de hotel y vuelo", others: "partial" },
+        { feature: "Guías de metro y transporte", others: "partial" },
+        { feature: "Todo en un solo lugar", others: "no" },
       ],
     },
     pricingTeaser: {

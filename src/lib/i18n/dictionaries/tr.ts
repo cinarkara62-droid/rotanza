@@ -38,6 +38,9 @@ export const tr: Dictionary = {
       chip1Sub: "12 saniyede oluşturuldu",
       chip2Title: "Paris'te otel",
       chip2Sub: "Fiyat %25 düştü",
+      searchLabel: "Nereye gitmek istersin?",
+      searchPlaceholder: "örn. Tokyo, 7 gün, $2000 altında",
+      searchCta: "AI'ya Sor",
     },
     trustedBy: "Bir sonraki seyahatini planlayan bireysel gezginler, çiftler ve aileler için tasarlandı",
     features: {
@@ -59,6 +62,20 @@ export const tr: Dictionary = {
         { title: "Nereye gittiğini söyle", desc: "Bir varış noktası, seyahat süresi ve neyi sevdiğini seç — yemek, sanat, gece hayatı, doğa." },
         { title: "Kişisel planını al", desc: "Rotanza saniyeler içinde günlük rotanı, restoran listeni ve bütçe tahminini oluşturur." },
         { title: "Rezerve et, takip et, rahatla", desc: "Rezervasyonlarını organize et, fiyat alarmları otel ve uçak fiyatlarını senin için izlesin." },
+      ],
+    },
+    why: {
+      title: "Neden Rotanza?",
+      subtitle: "Çoğu seyahat aracı tek bir şey yapar. Rotanza tüm seyahati kapsar.",
+      headerFeature: "Özellik",
+      headerUs: "Rotanza",
+      headerOthers: "Klasik seyahat siteleri",
+      rows: [
+        { feature: "Yapay zeka ile rota planlama", others: "no" },
+        { feature: "Bütçe hesaplayıcı", others: "no" },
+        { feature: "Otel & uçak fiyat alarmları", others: "partial" },
+        { feature: "Metro ve ulaşım rehberi", others: "partial" },
+        { feature: "Her şey tek yerde", others: "no" },
       ],
     },
     pricingTeaser: {

@@ -36,6 +36,9 @@ export const en = {
       chip1Sub: "Generated in 12 seconds",
       chip2Title: "Paris hotel",
       chip2Sub: "Price dropped 25%",
+      searchLabel: "Where do you want to go?",
+      searchPlaceholder: "e.g. Tokyo for 7 days under $2,000",
+      searchCta: "Ask AI",
     },
     trustedBy: "Built for independent travelers, couples, and families planning their next trip",
     features: {
@@ -57,6 +60,20 @@ export const en = {
         { title: "Tell us where you're headed", desc: "Pick a destination, trip length, and what you love — food, art, nightlife, nature." },
         { title: "Get your personalized plan", desc: "Rotanza assembles a day-by-day route, restaurant shortlist, and budget estimate instantly." },
         { title: "Book, track, relax", desc: "Organize your reservations and let our price alerts watch hotels and flights for you." },
+      ],
+    },
+    why: {
+      title: "Why Rotanza?",
+      subtitle: "Most travel tools do one thing. Rotanza does the whole trip.",
+      headerFeature: "Feature",
+      headerUs: "Rotanza",
+      headerOthers: "Typical travel sites",
+      rows: [
+        { feature: "AI trip planning", others: "no" },
+        { feature: "Budget calculator", others: "no" },
+        { feature: "Hotel & flight price alerts", others: "partial" },
+        { feature: "Metro & transit guides", others: "partial" },
+        { feature: "Everything in one place", others: "no" },
       ],
     },
     pricingTeaser: {

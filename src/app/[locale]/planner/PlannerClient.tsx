@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { cities, getCity } from "@/lib/mock-data/cities";
@@ -21,17 +22,28 @@ function slotFor(categories: InterestTag[], index: number): "morning" | "afterno
 export function PlannerClient({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const isTr = locale === "tr";
+  const searchParams = useSearchParams();
 
-  const [cityId, setCityId] = useState<string | null>(cities[0].id);
+  const initialCity = (() => {
+    const fromQuery = searchParams.get("city");
+    return (fromQuery && getCity(fromQuery)) ? fromQuery : cities[0].id;
+  })();
+  const initialDays = (() => {
+    const fromQuery = Number(searchParams.get("days"));
+    return fromQuery >= 1 && fromQuery <= 7 ? fromQuery : 3;
+  })();
+  const initialCityObj = getCity(initialCity)!;
+
+  const [cityId, setCityId] = useState<string | null>(initialCity);
   const [customCity, setCustomCity] = useState<CustomCity | null>(null);
-  const [days, setDays] = useState(3);
+  const [days, setDays] = useState(initialDays);
   const [interests, setInterests] = useState<InterestTag[]>(["history", "food"]);
   const [budgetLevel, setBudgetLevel] = useState<BudgetLevel>("standard");
   const [itinerary, setItinerary] = useState<ItineraryDay[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const [destinationLabel, setDestinationLabel] = useState(
-    `${cities[0].emoji} ${isTr ? cities[0].cityTr : cities[0].cityEn}`
+    `${initialCityObj.emoji} ${isTr ? initialCityObj.cityTr : initialCityObj.cityEn}`
   );
 
   const city = cityId ? getCity(cityId) : null;

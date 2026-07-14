@@ -79,22 +79,6 @@ export interface TransportCity {
   ticketEn: string;
 }
 
-export interface PriceAlertItem {
-  id: string;
-  type: "hotel" | "flight";
-  titleTr: string;
-  titleEn: string;
-  routeOrLocationTr: string;
-  routeOrLocationEn: string;
-  originalPrice: number;
-  currentPrice: number;
-  currency: string;
-  history: number[];
-  emoji: string;
-  /** Stable source identifier (e.g. "osm:123456") the entity was picked from — never a free-typed string. */
-  entityId?: string;
-}
-
 export interface Reservation {
   id: string;
   type: "flight" | "hotel" | "restaurant" | "activity";

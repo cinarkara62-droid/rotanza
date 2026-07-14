@@ -20,4 +20,27 @@ model User {
   stripeSubscriptionId String?   @unique
   subscriptionStatus   String? // Stripe subscription status, e.g. "active", "canceled", "past_due"
   currentPeriodEnd     DateTime?
+
+  priceAlerts PriceAlert[]
+}
+
+model PriceAlert {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type          String // "hotel" | "flight"
+  name          String
+  location      String
+  entityId      String? // stable OSM id the hotel/route was picked from, e.g. "osm:123456"
+  currentPrice  Float
+  previousPrice Float
+  targetPrice   Float
+  lowestPrice   Float
+  priceHistory  Float[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
 }

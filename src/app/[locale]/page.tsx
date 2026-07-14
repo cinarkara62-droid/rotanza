@@ -2,6 +2,7 @@ import Link from "next/link";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { notFound } from "next/navigation";
+import { HeroQuickSearch } from "@/components/HeroQuickSearch";
 
 export default async function HomePage({
   params,
@@ -52,6 +53,13 @@ export default async function HomePage({
                 {dict.home.hero.ctaSecondary}
               </a>
             </div>
+
+            <HeroQuickSearch
+              locale={l}
+              label={dict.home.hero.searchLabel}
+              placeholder={dict.home.hero.searchPlaceholder}
+              cta={dict.home.hero.searchCta}
+            />
           </div>
 
           {/* floating landmark stack */}
@@ -127,6 +135,39 @@ export default async function HomePage({
               <p className="mt-2 text-sm leading-relaxed text-brand-950/60">{item.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* WHY ROTANZA */}
+      <section className="py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-brand-950 sm:text-4xl">{dict.home.why.title}</h2>
+            <p className="mt-4 text-base text-brand-950/60">{dict.home.why.subtitle}</p>
+          </div>
+
+          <div className="mt-10 overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-black/5 bg-sand-50/60">
+                  <th className="px-5 py-3 font-semibold text-brand-950">{dict.home.why.headerFeature}</th>
+                  <th className="px-5 py-3 text-center font-semibold text-brand-700">{dict.home.why.headerUs}</th>
+                  <th className="px-5 py-3 text-center font-semibold text-brand-950/50">{dict.home.why.headerOthers}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dict.home.why.rows.map((row, i) => (
+                  <tr key={row.feature} className={i % 2 === 1 ? "bg-sand-50/40" : ""}>
+                    <td className="px-5 py-3.5 text-brand-950/80">{row.feature}</td>
+                    <td className="px-5 py-3.5 text-center text-base">✅</td>
+                    <td className="px-5 py-3.5 text-center text-base">
+                      {row.others === "partial" ? "⚠️" : "❌"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 

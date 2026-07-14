@@ -38,6 +38,9 @@ export const de: Dictionary = {
       chip1Sub: "In 12 Sekunden erstellt",
       chip2Title: "Hotel in Paris",
       chip2Sub: "Preis um 25% gefallen",
+      searchLabel: "Wohin möchtest du?",
+      searchPlaceholder: "z. B. Tokio, 7 Tage, unter $2000",
+      searchCta: "KI fragen",
     },
     trustedBy: "Entwickelt für Alleinreisende, Paare und Familien, die ihre nächste Reise planen",
     features: {
@@ -59,6 +62,20 @@ export const de: Dictionary = {
         { title: "Sag uns, wohin es geht", desc: "Wähle ein Ziel, die Reisedauer und was du liebst — Essen, Kunst, Nachtleben, Natur." },
         { title: "Erhalte deinen persönlichen Plan", desc: "Rotanza erstellt sofort eine tageweise Route, eine Restaurant-Auswahl und eine Budgetschätzung." },
         { title: "Buchen, verfolgen, entspannen", desc: "Organisiere deine Reservierungen und lass unsere Preisalarme Hotels und Flüge für dich beobachten." },
+      ],
+    },
+    why: {
+      title: "Warum Rotanza?",
+      subtitle: "Die meisten Reise-Tools können eine Sache. Rotanza deckt die ganze Reise ab.",
+      headerFeature: "Funktion",
+      headerUs: "Rotanza",
+      headerOthers: "Typische Reiseseiten",
+      rows: [
+        { feature: "KI-Reiseplanung", others: "no" },
+        { feature: "Budgetrechner", others: "no" },
+        { feature: "Hotel- & Flugpreisalarme", others: "partial" },
+        { feature: "U-Bahn- & Verkehrsguides", others: "partial" },
+        { feature: "Alles an einem Ort", others: "no" },
       ],
     },
     pricingTeaser: {
