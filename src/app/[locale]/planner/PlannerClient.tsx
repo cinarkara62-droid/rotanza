@@ -182,7 +182,13 @@ export function PlannerClient({ locale }: { locale: Locale }) {
           >
             {loading ? (isTr ? "Yükleniyor…" : "Loading…") : itinerary ? dict.planner.form.regenerate : dict.planner.form.submit}
           </button>
-          <p className="mt-3 text-xs text-brand-950/40">{dict.planner.limitNote}</p>
+          <p className="mt-3 text-xs text-brand-950/40">
+            {loading && customCity
+              ? isTr
+                ? "Küçük şehirlerde bu biraz uzun sürebilir…"
+                : "This can take a bit longer for smaller cities…"
+              : dict.planner.limitNote}
+          </p>
         </div>
       </form>
 

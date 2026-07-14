@@ -137,7 +137,7 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
       <div className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-5 sm:grid-cols-2">
         {liveLoading && (
           <p className="col-span-2 text-center text-sm text-brand-950/50">
-            {isTr ? "Yükleniyor…" : "Loading…"}
+            {isTr ? "Yükleniyor… küçük şehirlerde biraz uzun sürebilir." : "Loading… this can take a bit longer for smaller cities."}
           </p>
         )}
         {liveError && (

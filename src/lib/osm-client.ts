@@ -95,20 +95,19 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Single short retry on rate-limit/server-busy responses — the free public
-// Overpass instance is shared fair-use infrastructure and does throttle
-// under load. Interactive requests can't afford the long backoffs the
-// batch data-fetch scripts use, so this fails fast to a friendly "not
-// found" after one retry rather than making the user wait a long time.
+// The public Overpass instance is shared fair-use infrastructure — under
+// load it can take well over 10s to answer even a simple query, so the
+// *first* attempt gets a generous budget rather than failing fast. A 429/406
+// (instant rejection, not genuine slowness) still gets one quick retry.
 // Vercel kills serverless functions after ~30s (we set maxDuration=30 on
-// every route that calls this) — so the two attempts here, plus the gap
-// between them, must fit well inside that with margin, or the platform
-// hard-kills the request with no response at all instead of our own
-// graceful "not found".
-async function queryOverpassRaw(query: string, timeoutMs = 10000): Promise<RawOverpassElement[]> {
+// every route that calls this), so the longest possible path here — one
+// long attempt, or a fast rejection plus one short retry — stays safely
+// under that ceiling either way.
+async function queryOverpassRaw(query: string, timeoutMs = 24000): Promise<RawOverpassElement[]> {
   for (let attempt = 1; attempt <= 2; attempt++) {
+    const attemptTimeout = attempt === 1 ? timeoutMs : 8000;
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const timer = setTimeout(() => controller.abort(), attemptTimeout);
     try {
       const res = await fetch("https://overpass-api.de/api/interpreter", {
         method: "POST",
@@ -120,9 +119,10 @@ async function queryOverpassRaw(query: string, timeoutMs = 10000): Promise<RawOv
         body: "data=" + encodeURIComponent(query),
         signal: controller.signal,
       });
-      // 406 shows up intermittently from Overpass's load-balanced backends
-      // even with correct headers — same transient-failure family as 429/504.
-      if (res.status === 429 || res.status === 504 || res.status === 406) {
+      // 429/406 are near-instant rejections worth one quick retry. A 504
+      // means Overpass itself timed out after already taking a long time —
+      // retrying with a short budget won't help, so that's treated as final.
+      if (res.status === 429 || res.status === 406) {
         if (attempt === 1) {
           await sleep(1500);
           continue;
@@ -134,6 +134,7 @@ async function queryOverpassRaw(query: string, timeoutMs = 10000): Promise<RawOv
       return data.elements;
     } catch (err) {
       if (attempt === 2) throw err;
+      if (err instanceof Error && err.name === "AbortError") throw err; // our own timeout — no point retrying short
       await sleep(1500);
     } finally {
       clearTimeout(timer);
@@ -162,7 +163,7 @@ export interface TransitLine {
 export async function findTransitLinesNear(lat: number, lon: number, radiusMeters = 8000): Promise<TransitLine[]> {
   const key = `transit:${lat.toFixed(2)}:${lon.toFixed(2)}:${radiusMeters}`;
   return cachedFetch(key, async () => {
-    const query = `[out:json][timeout:9];
+    const query = `[out:json][timeout:22];
 (
   relation["route"="subway"]["name"](around:${radiusMeters},${lat},${lon});
   relation["route"="light_rail"]["name"](around:${radiusMeters},${lat},${lon});
@@ -223,7 +224,7 @@ export async function findAttractionsNear(
   const key = `attractions:${lat.toFixed(3)}:${lon.toFixed(3)}:${radiusMeters}`;
   return cachedFetch(key, async () => {
     const around = `around:${radiusMeters},${lat},${lon}`;
-    const query = `[out:json][timeout:9];
+    const query = `[out:json][timeout:22];
 (
   node["tourism"="museum"]["name"](${around});
   node["tourism"="gallery"]["name"](${around});
@@ -256,7 +257,7 @@ export async function findPlacesNear(
   const key = `places:${kind}:${lat.toFixed(3)}:${lon.toFixed(3)}:${radiusMeters}`;
   return cachedFetch(key, async () => {
     const filter = kind === "restaurant" ? '["amenity"="restaurant"]' : '["tourism"="hotel"]';
-    const query = `[out:json][timeout:9];node${filter}["name"](around:${radiusMeters},${lat},${lon});out body ${limit};`;
+    const query = `[out:json][timeout:22];node${filter}["name"](around:${radiusMeters},${lat},${lon});out body ${limit};`;
     const elements = await queryOverpass(query);
     return elements
       .filter((el) => el.tags?.name)
