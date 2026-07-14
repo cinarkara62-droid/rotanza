@@ -1,0 +1,88 @@
+import { City } from "@/lib/types";
+
+export const cities: City[] = [
+  {
+    id: "istanbul",
+    countryTr: "Türkiye",
+    countryEn: "Turkey",
+    cityTr: "İstanbul",
+    cityEn: "Istanbul",
+    emoji: "🕌",
+    currency: "TRY",
+    dailyCostIndex: 0.6,
+  },
+  {
+    id: "paris",
+    countryTr: "Fransa",
+    countryEn: "France",
+    cityTr: "Paris",
+    cityEn: "Paris",
+    emoji: "🗼",
+    currency: "EUR",
+    dailyCostIndex: 1.3,
+  },
+  {
+    id: "rome",
+    countryTr: "İtalya",
+    countryEn: "Italy",
+    cityTr: "Roma",
+    cityEn: "Rome",
+    emoji: "🏛️",
+    currency: "EUR",
+    dailyCostIndex: 1.1,
+  },
+  {
+    id: "tokyo",
+    countryTr: "Japonya",
+    countryEn: "Japan",
+    cityTr: "Tokyo",
+    cityEn: "Tokyo",
+    emoji: "⛩️",
+    currency: "JPY",
+    dailyCostIndex: 1.2,
+  },
+  {
+    id: "barcelona",
+    countryTr: "İspanya",
+    countryEn: "Spain",
+    cityTr: "Barselona",
+    cityEn: "Barcelona",
+    emoji: "🏖️",
+    currency: "EUR",
+    dailyCostIndex: 1.0,
+  },
+  {
+    id: "london",
+    countryTr: "Birleşik Krallık",
+    countryEn: "United Kingdom",
+    cityTr: "Londra",
+    cityEn: "London",
+    emoji: "🎡",
+    currency: "GBP",
+    dailyCostIndex: 1.5,
+  },
+  {
+    id: "newyork",
+    countryTr: "Amerika Birleşik Devletleri",
+    countryEn: "United States",
+    cityTr: "New York",
+    cityEn: "New York",
+    emoji: "🗽",
+    currency: "USD",
+    dailyCostIndex: 1.6,
+  },
+  {
+    id: "amsterdam",
+    countryTr: "Hollanda",
+    countryEn: "Netherlands",
+    cityTr: "Amsterdam",
+    cityEn: "Amsterdam",
+    emoji: "🚲",
+    currency: "EUR",
+    dailyCostIndex: 1.2,
+  },
+];
+
+export function getCity(id: string) {
+  return cities.find((c) => c.id === id);
+}

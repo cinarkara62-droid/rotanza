@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+
+  plan                 String    @default("free") // "free" | "pro" | "max"
+  billingCycle         String? // "monthly" | "yearly"
+  stripeCustomerId     String?   @unique
+  stripeSubscriptionId String?   @unique
+  subscriptionStatus   String? // Stripe subscription status, e.g. "active", "canceled", "past_due"
+  currentPeriodEnd     DateTime?
+}

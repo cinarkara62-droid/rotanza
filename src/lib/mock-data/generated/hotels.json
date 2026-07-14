@@ -1,0 +1,3208 @@
+{
+  "istanbul": [
+    {
+      "osmId": 262396496,
+      "name": "Yiğitalp Oteli",
+      "stars": null,
+      "lat": 41.0111805,
+      "lon": 28.955849,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 269507773,
+      "name": "Tepebaşı",
+      "stars": null,
+      "lat": 41.0309708,
+      "lon": 28.9741781,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 269523672,
+      "name": "W Hotel",
+      "stars": null,
+      "lat": 41.0422396,
+      "lon": 29.0024836,
+      "street": "Süleyman Seba Caddesi",
+      "housenumber": "22",
+      "website": null
+    },
+    {
+      "osmId": 275600519,
+      "name": "Hotel Grand Yavuz",
+      "stars": null,
+      "lat": 41.0059174,
+      "lon": 28.9691511,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 277139847,
+      "name": "Senator Hotel",
+      "stars": null,
+      "lat": 41.0120502,
+      "lon": 28.9549786,
+      "street": "Gencturk Cad. Sirvanizade Sok., No 5. Vezneciler Fatih Istanbul, 34134, Turkey",
+      "housenumber": "5",
+      "website": null
+    },
+    {
+      "osmId": 278004998,
+      "name": "Mavi Guesthouse",
+      "stars": null,
+      "lat": 41.0069969,
+      "lon": 28.9813746,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 278615640,
+      "name": "Divan Hotel",
+      "stars": null,
+      "lat": 41.0411019,
+      "lon": 28.9870408,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 292561278,
+      "name": "Euro Plaza",
+      "stars": null,
+      "lat": 41.0346238,
+      "lon": 28.9738797,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 415156587,
+      "name": "Aşkin Hotel",
+      "stars": null,
+      "lat": 41.0057,
+      "lon": 28.9791309,
+      "street": "Dalbasti Sokak",
+      "housenumber": "16",
+      "website": null
+    },
+    {
+      "osmId": 415156588,
+      "name": "Blue House Hotel",
+      "stars": null,
+      "lat": 41.005534,
+      "lon": 28.9790454,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 500060394,
+      "name": "Hürriyet",
+      "stars": null,
+      "lat": 41.0144076,
+      "lon": 28.977219,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 513386309,
+      "name": "Taksim Yufa Suites",
+      "stars": null,
+      "lat": 41.039124,
+      "lon": 28.9826462,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 732308107,
+      "name": "Fuar",
+      "stars": null,
+      "lat": 41.0070714,
+      "lon": 28.9499738,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 792556744,
+      "name": "Hotel Occidental Taksim",
+      "stars": null,
+      "lat": 41.039905,
+      "lon": 28.9841155,
+      "street": "Topcu Caddesi",
+      "housenumber": "9-11",
+      "website": null
+    },
+    {
+      "osmId": 803325001,
+      "name": "Grand Hotel de Londres",
+      "stars": null,
+      "lat": 41.0323954,
+      "lon": 28.975235,
+      "street": "Meşrutiyet Caddesi",
+      "housenumber": "53",
+      "website": "https://londrahotel.net/"
+    },
+    {
+      "osmId": 904611372,
+      "name": "Hotel Aziyadé",
+      "stars": "4",
+      "lat": 41.0063214,
+      "lon": 28.9692225,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 939122974,
+      "name": "Vardar Palace",
+      "stars": null,
+      "lat": 41.0343318,
+      "lon": 28.9844953,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 952160695,
+      "name": "Telia",
+      "stars": null,
+      "lat": 41.0126588,
+      "lon": 28.9569243,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1000021823,
+      "name": "Güleç Konak Hotel",
+      "stars": null,
+      "lat": 41.0054141,
+      "lon": 28.9799391,
+      "street": "Akbıyık Caddesi",
+      "housenumber": "52",
+      "website": null
+    },
+    {
+      "osmId": 1106083650,
+      "name": "Sumengen Hotel",
+      "stars": null,
+      "lat": 41.0043453,
+      "lon": 28.9802508,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1106083653,
+      "name": "Obelisk Hotel - Best Western",
+      "stars": null,
+      "lat": 41.0045357,
+      "lon": 28.9801642,
+      "street": "Amiral Tafdil Sokak",
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1161228099,
+      "name": "Arts Hotel Taksim",
+      "stars": null,
+      "lat": 41.0400994,
+      "lon": 28.9848089,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1249920994,
+      "name": "Acra Hotel",
+      "stars": null,
+      "lat": 41.0046865,
+      "lon": 28.9802381,
+      "street": "Amiral Tafdil Sokak",
+      "housenumber": "5",
+      "website": null
+    },
+    {
+      "osmId": 1251645280,
+      "name": "Hotel Peninsula",
+      "stars": null,
+      "lat": 41.0061282,
+      "lon": 28.9813913,
+      "street": null,
+      "housenumber": "6",
+      "website": "https://www.hotelpeninsula.com/"
+    },
+    {
+      "osmId": 1325246139,
+      "name": "Nobel Hostel",
+      "stars": null,
+      "lat": 41.0049321,
+      "lon": 28.9790616,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.nobelhostel.com/"
+    },
+    {
+      "osmId": 1325246155,
+      "name": "Armagrandi Spina Hotel",
+      "stars": null,
+      "lat": 41.0059321,
+      "lon": 28.9791644,
+      "street": "Utangaç Sokağı",
+      "housenumber": "19",
+      "website": "https://www.armagrandi.com/"
+    },
+    {
+      "osmId": 1343734824,
+      "name": "istanbul port hotel",
+      "stars": null,
+      "lat": 41.0056825,
+      "lon": 28.9645057,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1473034819,
+      "name": "Anatolia Suites Sultanahmet",
+      "stars": null,
+      "lat": 41.0035378,
+      "lon": 28.976337,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1496713040,
+      "name": "Hotel Sapphire",
+      "stars": null,
+      "lat": 41.0129563,
+      "lon": 28.9772993,
+      "street": "Ibn-I-Kemal Caddesi",
+      "housenumber": "8",
+      "website": "https://hotelsapphire.com/"
+    },
+    {
+      "osmId": 1604780631,
+      "name": "Taksim Star Hotel",
+      "stars": null,
+      "lat": 41.0348645,
+      "lon": 28.9847348,
+      "street": "Sıraselviler Caddesi",
+      "housenumber": "37",
+      "website": "http://www.starhotelsgroup.com/Our-Hotels/Taksim-Star-Hotel-C46-P42.html"
+    },
+    {
+      "osmId": 1632647865,
+      "name": "Ahmet Efendi Evi",
+      "stars": null,
+      "lat": 41.0035569,
+      "lon": 28.9801446,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1690329824,
+      "name": "Point Hotel",
+      "stars": null,
+      "lat": 41.040702,
+      "lon": 28.9858378,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1770234334,
+      "name": "Weingart Hotel",
+      "stars": null,
+      "lat": 41.0248728,
+      "lon": 28.9779749,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1784912021,
+      "name": "Olimpiyat Hotel",
+      "stars": null,
+      "lat": 41.012149,
+      "lon": 28.9779399,
+      "street": "Ebussuud Caddesi",
+      "housenumber": "6-8",
+      "website": "http://www.olimpiyathotel.com/"
+    },
+    {
+      "osmId": 1784912033,
+      "name": "Yasmak Sultan Hotel",
+      "stars": null,
+      "lat": 41.0123061,
+      "lon": 28.9776865,
+      "street": "Ebussuud Caddesi",
+      "housenumber": "18",
+      "website": "http://hotelyasmaksultan.com"
+    },
+    {
+      "osmId": 1789464100,
+      "name": "Cheers Port House",
+      "stars": null,
+      "lat": 41.0242509,
+      "lon": 28.9784036,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1807703795,
+      "name": "Ottoman Hotel",
+      "stars": null,
+      "lat": 41.0050264,
+      "lon": 28.9679432,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1839561313,
+      "name": "Faros Hotel",
+      "stars": null,
+      "lat": 41.0125967,
+      "lon": 28.9781873,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1885894932,
+      "name": "Zeynep Sultan Hotel",
+      "stars": null,
+      "lat": 41.0100651,
+      "lon": 28.9780687,
+      "street": "Zeynepsultan Camii Sokağı",
+      "housenumber": "25",
+      "website": "https://zeynepsultanhotel.com/indexmobile.php"
+    }
+  ],
+  "paris": [
+    {
+      "osmId": 224711659,
+      "name": "Ibis",
+      "stars": null,
+      "lat": 48.8403064,
+      "lon": 2.3155776,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 247435032,
+      "name": "Hôtel Saint-Honoré",
+      "stars": "3",
+      "lat": 48.8611819,
+      "lon": 2.3436118,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.hotelsthonore.com"
+    },
+    {
+      "osmId": 247435275,
+      "name": "Hôtel Montpensier",
+      "stars": "2",
+      "lat": 48.8643588,
+      "lon": 2.3362645,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.hotelmontpensierparis.com/"
+    },
+    {
+      "osmId": 247436637,
+      "name": "Hôtel Louvre Bon Enfants",
+      "stars": "3",
+      "lat": 48.8629098,
+      "lon": 2.3381793,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 247437972,
+      "name": "Hôtel Costes",
+      "stars": null,
+      "lat": 48.8662827,
+      "lon": 2.3280089,
+      "street": "Rue de Castiglione",
+      "housenumber": "7",
+      "website": "https://hotelcostes.com"
+    },
+    {
+      "osmId": 251001754,
+      "name": "Résidence les Boulevards",
+      "stars": "4",
+      "lat": 48.8696872,
+      "lon": 2.3486973,
+      "street": "Rue de la Villeneuve",
+      "housenumber": "10",
+      "website": null
+    },
+    {
+      "osmId": 251001755,
+      "name": "Hôtel Marie",
+      "stars": null,
+      "lat": 48.8695728,
+      "lon": 2.348676,
+      "street": "Rue de la Villeneuve",
+      "housenumber": "6",
+      "website": null
+    },
+    {
+      "osmId": 251127867,
+      "name": "Hôtel du Loiret",
+      "stars": "3",
+      "lat": 48.8569202,
+      "lon": 2.3552931,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.hotelduloiret.fr"
+    },
+    {
+      "osmId": 251127869,
+      "name": "Charles V",
+      "stars": null,
+      "lat": 48.8534874,
+      "lon": 2.3618354,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251130907,
+      "name": "Hôtel de la Place des Vosges",
+      "stars": null,
+      "lat": 48.8544261,
+      "lon": 2.3652418,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251531804,
+      "name": "Hôtel Port-Royal",
+      "stars": null,
+      "lat": 48.8371263,
+      "lon": 2.350581,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.port-royal-hotel.fr"
+    },
+    {
+      "osmId": 251733867,
+      "name": "Le Clos Medicis",
+      "stars": "3",
+      "lat": 48.8482841,
+      "lon": 2.3405763,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251733871,
+      "name": "L'Hôtel",
+      "stars": "5",
+      "lat": 48.8563424,
+      "lon": 2.3352399,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.l-hotel.com/"
+    },
+    {
+      "osmId": 251733872,
+      "name": "Victoria Palace Hôtel",
+      "stars": "4",
+      "lat": 48.8457742,
+      "lon": 2.3243407,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.victoriapalace.com/"
+    },
+    {
+      "osmId": 251758241,
+      "name": "Le Petit Chomel",
+      "stars": "3",
+      "lat": 48.8519344,
+      "lon": 2.3253667,
+      "street": null,
+      "housenumber": null,
+      "website": "http://www.lepetitchomel.com/"
+    },
+    {
+      "osmId": 251758242,
+      "name": "Signature",
+      "stars": "4",
+      "lat": 48.8521505,
+      "lon": 2.326091,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.signature-saintgermain.com"
+    },
+    {
+      "osmId": 251758243,
+      "name": "Hôtel du Champ de Mars",
+      "stars": null,
+      "lat": 48.856397,
+      "lon": 2.3060759,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251758244,
+      "name": "Hôtel Saint-Dominique",
+      "stars": null,
+      "lat": 48.8599286,
+      "lon": 2.308788,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251758245,
+      "name": "Hôtel Duquesne Eiffel",
+      "stars": null,
+      "lat": 48.8526441,
+      "lon": 2.3090461,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251758246,
+      "name": "Hôtel de la Tulipe",
+      "stars": null,
+      "lat": 48.8599838,
+      "lon": 2.3062819,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251758247,
+      "name": "Grand Hôtel Leveque",
+      "stars": null,
+      "lat": 48.8571307,
+      "lon": 2.3063556,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251758248,
+      "name": "Timhôtel Best Western Tour Eiffel Invalides",
+      "stars": null,
+      "lat": 48.8604075,
+      "lon": 2.3104739,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251758255,
+      "name": "Four Seasons Hôtel George V",
+      "stars": null,
+      "lat": 48.868784,
+      "lon": 2.3006774,
+      "street": "Avenue George V",
+      "housenumber": "31",
+      "website": "https://www.fourseasons.com/fr/paris/"
+    },
+    {
+      "osmId": 251851365,
+      "name": "Matissia",
+      "stars": "4",
+      "lat": 48.876717,
+      "lon": 2.3485948,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.matissia.com/"
+    },
+    {
+      "osmId": 251851395,
+      "name": "Hôtel du Terrage",
+      "stars": null,
+      "lat": 48.8774454,
+      "lon": 2.3624214,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251851402,
+      "name": "Hôtel Brady",
+      "stars": null,
+      "lat": 48.8711954,
+      "lon": 2.3550205,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.hotelbrady.com/"
+    },
+    {
+      "osmId": 252683844,
+      "name": "New Hotel Republique",
+      "stars": null,
+      "lat": 48.8661043,
+      "lon": 2.3685294,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252684077,
+      "name": "Grand Hôtel Nouvel Opera",
+      "stars": null,
+      "lat": 48.8551772,
+      "lon": 2.3787982,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252732427,
+      "name": "Hôtel du Nord et de l'Est",
+      "stars": "3",
+      "lat": 48.8658412,
+      "lon": 2.367479,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252788280,
+      "name": "Hôtel Parisianer",
+      "stars": null,
+      "lat": 48.8456578,
+      "lon": 2.3753746,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252789601,
+      "name": "Hôtel Prince Albert",
+      "stars": null,
+      "lat": 48.8467986,
+      "lon": 2.3778628,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252793231,
+      "name": "9 Hôtel Bastille-Lyon",
+      "stars": null,
+      "lat": 48.8473827,
+      "lon": 2.3714639,
+      "street": "Rue de Lyon",
+      "housenumber": "23",
+      "website": null
+    },
+    {
+      "osmId": 252806984,
+      "name": "Paris Reuilly - Aparthotels Adagio",
+      "stars": null,
+      "lat": 48.8490103,
+      "lon": 2.3856902,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252806985,
+      "name": "Hôtel Palym",
+      "stars": null,
+      "lat": 48.8462381,
+      "lon": 2.3733925,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252809356,
+      "name": "Novotel",
+      "stars": null,
+      "lat": 48.8452783,
+      "lon": 2.3754729,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252817439,
+      "name": "Kyriad Italie Gobelins",
+      "stars": "3",
+      "lat": 48.8337711,
+      "lon": 2.3550065,
+      "street": null,
+      "housenumber": null,
+      "website": "http://www.kyriad-paris-13-italie-gobelins.fr"
+    },
+    {
+      "osmId": 252819332,
+      "name": "Jack's",
+      "stars": "3",
+      "lat": 48.8329489,
+      "lon": 2.3593174,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.jacks-hotel.com"
+    },
+    {
+      "osmId": 252819333,
+      "name": "La Manufacture",
+      "stars": null,
+      "lat": 48.8329337,
+      "lon": 2.355328,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252820658,
+      "name": "Mercure Gobelins",
+      "stars": null,
+      "lat": 48.8321073,
+      "lon": 2.3538107,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 252820661,
+      "name": "Holiday Inn Express Paris place d'Italie",
+      "stars": "3",
+      "lat": 48.8316326,
+      "lon": 2.3573399,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    }
+  ],
+  "rome": [
+    {
+      "osmId": 259299923,
+      "name": "Residence Aldrovandi",
+      "stars": "4",
+      "lat": 41.9187772,
+      "lon": 12.4847551,
+      "street": "Via Ulisse Aldrovandi",
+      "housenumber": "11",
+      "website": "https://www.aldrovandiresidence.it/en/default.html"
+    },
+    {
+      "osmId": 261733735,
+      "name": "Hotel \"Parco dei Principi\"",
+      "stars": "5",
+      "lat": 41.9175913,
+      "lon": 12.4920147,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.parcodeiprincipi.com/"
+    },
+    {
+      "osmId": 261737031,
+      "name": "Marriott Grand Flora Hotel",
+      "stars": null,
+      "lat": 41.9091036,
+      "lon": 12.4889198,
+      "street": "Via Vittorio Veneto",
+      "housenumber": "191",
+      "website": "https://marriot.com"
+    },
+    {
+      "osmId": 261737033,
+      "name": "Hotel Westin Excelsior",
+      "stars": null,
+      "lat": 41.9075961,
+      "lon": 12.4900588,
+      "street": "Via Vittorio Veneto",
+      "housenumber": "125",
+      "website": "http://www.westinrome.com"
+    },
+    {
+      "osmId": 261737105,
+      "name": "Hotel Majestic",
+      "stars": "5",
+      "lat": 41.9056434,
+      "lon": 12.4878678,
+      "street": "Via Vittorio Veneto",
+      "housenumber": "50",
+      "website": "https://www.hotelmajestic.com/"
+    },
+    {
+      "osmId": 379012827,
+      "name": "Hotel Verona",
+      "stars": "3",
+      "lat": 41.8973968,
+      "lon": 12.4970978,
+      "street": "Via di Santa Maria Maggiore",
+      "housenumber": "154",
+      "website": "https://www.hotelveronarome.com/"
+    },
+    {
+      "osmId": 410833072,
+      "name": "Istituto Maria Santissima Bambina",
+      "stars": null,
+      "lat": 41.9012692,
+      "lon": 12.4581531,
+      "street": "Via Paolo Sesto",
+      "housenumber": "21",
+      "website": "https://www.goodnightandgodbless.com/monasteries/istituto-maria-santissima-bambina/704"
+    },
+    {
+      "osmId": 443610569,
+      "name": "Royal Santina",
+      "stars": "4",
+      "lat": 41.9030687,
+      "lon": 12.5015828,
+      "street": "Via Marsala",
+      "housenumber": "22",
+      "website": "https://www.hotelroyalsantina.com/"
+    },
+    {
+      "osmId": 530719587,
+      "name": "Quattro Fontane",
+      "stars": null,
+      "lat": 41.9024796,
+      "lon": 12.4894763,
+      "street": "Quattro Fontane",
+      "housenumber": "149a",
+      "website": "https://www.hotel4fontane.com"
+    },
+    {
+      "osmId": 534730709,
+      "name": "Villa delle Rose",
+      "stars": "3",
+      "lat": 41.9033398,
+      "lon": 12.5034554,
+      "street": "Via Vicenza",
+      "housenumber": "5",
+      "website": "http://www.villadellerose.it/"
+    },
+    {
+      "osmId": 535329954,
+      "name": "Ripetta25",
+      "stars": null,
+      "lat": 41.9088079,
+      "lon": 12.4761677,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 560446911,
+      "name": "Ateneo Palace",
+      "stars": "4",
+      "lat": 41.8984776,
+      "lon": 12.5113043,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 585485646,
+      "name": "Palladium Palace",
+      "stars": "4",
+      "lat": 41.8984389,
+      "lon": 12.5003513,
+      "street": "Via Gioberti",
+      "housenumber": "36",
+      "website": "https://www.hotelpalladiumpalace.com/"
+    },
+    {
+      "osmId": 599818117,
+      "name": "Mercure Rome Piazza Bologna",
+      "stars": "3",
+      "lat": 41.9122737,
+      "lon": 12.518668,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 619379528,
+      "name": "Best Western Villafranca",
+      "stars": "4",
+      "lat": 41.9051294,
+      "lon": 12.5050019,
+      "street": "Via Villafranca",
+      "housenumber": "9",
+      "website": "http://www.villafrancaroma.it/"
+    },
+    {
+      "osmId": 627053984,
+      "name": "De Russie",
+      "stars": null,
+      "lat": 41.9099087,
+      "lon": 12.4775123,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 668952085,
+      "name": "Grand Hotel Plaza Rome",
+      "stars": "5",
+      "lat": 41.9051237,
+      "lon": 12.4788451,
+      "street": "Via del Corso",
+      "housenumber": "126",
+      "website": null
+    },
+    {
+      "osmId": 675162232,
+      "name": "Best Western Globus Hotel",
+      "stars": "3",
+      "lat": 41.9062742,
+      "lon": 12.5168796,
+      "street": "Viale Ippocrate",
+      "housenumber": "119",
+      "website": "https://www.globushotel.com/"
+    },
+    {
+      "osmId": 685957641,
+      "name": "Hotel Navona",
+      "stars": "3",
+      "lat": 41.8978576,
+      "lon": 12.4746972,
+      "street": "Via dei Sediari",
+      "housenumber": "8",
+      "website": null
+    },
+    {
+      "osmId": 696078932,
+      "name": "Hotel Nazionale",
+      "stars": null,
+      "lat": 41.9010332,
+      "lon": 12.4779468,
+      "street": "Piazza di Montecitorio",
+      "housenumber": "131",
+      "website": "https://www.hotelnazionale.it/"
+    },
+    {
+      "osmId": 708898438,
+      "name": "Hotel Santa Chiara",
+      "stars": null,
+      "lat": 41.8976597,
+      "lon": 12.4769406,
+      "street": "Via Santa Chiara",
+      "housenumber": "21",
+      "website": "https://www.albergosantachiara.com/"
+    },
+    {
+      "osmId": 735757599,
+      "name": "Boscolo Exedra",
+      "stars": null,
+      "lat": 41.9019505,
+      "lon": 12.4961199,
+      "street": "Piazza della Repubblica",
+      "housenumber": "47",
+      "website": "https://exedra-roma.boscolohotels.com/"
+    },
+    {
+      "osmId": 738082551,
+      "name": "Nova Domus",
+      "stars": "4",
+      "lat": 41.9120467,
+      "lon": 12.4502855,
+      "street": "Via Girolamo Savonarola",
+      "housenumber": "38",
+      "website": "https://www.novadomushotel.it"
+    },
+    {
+      "osmId": 762061203,
+      "name": "Hotel RomAntica",
+      "stars": null,
+      "lat": 41.8984143,
+      "lon": 12.5007312,
+      "street": "Via Principe Amedeo",
+      "housenumber": "77",
+      "website": null
+    },
+    {
+      "osmId": 817332910,
+      "name": "Hotel Principessa Isabella",
+      "stars": null,
+      "lat": 41.9099325,
+      "lon": 12.4937313,
+      "street": "Via Sardegna",
+      "housenumber": "151",
+      "website": "https://www.hotelprincipessaisabella.eu/"
+    },
+    {
+      "osmId": 925227216,
+      "name": "Exe International Palace",
+      "stars": null,
+      "lat": 41.9000195,
+      "lon": 12.4924025,
+      "street": "Via Nazionale",
+      "housenumber": "46",
+      "website": null
+    },
+    {
+      "osmId": 961818637,
+      "name": "Hotel Homs",
+      "stars": "4",
+      "lat": 41.9041615,
+      "lon": 12.4823779,
+      "street": "Via della Vite",
+      "housenumber": "71",
+      "website": "https://hotelhoms.it/"
+    },
+    {
+      "osmId": 966364440,
+      "name": "Hotel Amalfi",
+      "stars": "3",
+      "lat": 41.8963331,
+      "lon": 12.4993108,
+      "street": "Via Merulana",
+      "housenumber": "278",
+      "website": "https://hotelamalfiroma.it/it/"
+    },
+    {
+      "osmId": 980480340,
+      "name": "Guesthouse Urbana",
+      "stars": null,
+      "lat": 41.8970262,
+      "lon": 12.4948638,
+      "street": "Via Urbana",
+      "housenumber": "12",
+      "website": null
+    },
+    {
+      "osmId": 984885716,
+      "name": "Locanda Cairoli",
+      "stars": null,
+      "lat": 41.8933147,
+      "lon": 12.4750871,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 986960273,
+      "name": "Flavia",
+      "stars": null,
+      "lat": 41.9073259,
+      "lon": 12.4973569,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1134598821,
+      "name": "Picasso",
+      "stars": null,
+      "lat": 41.8998064,
+      "lon": 12.4931839,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.picassohotel.com"
+    },
+    {
+      "osmId": 1134598828,
+      "name": "Caravaggio",
+      "stars": "3",
+      "lat": 41.8993324,
+      "lon": 12.4928201,
+      "street": "Via Palermo",
+      "housenumber": "75",
+      "website": "http://www.hotelcaravaggiorome.com/"
+    },
+    {
+      "osmId": 1134598830,
+      "name": "Italia",
+      "stars": "2",
+      "lat": 41.8997271,
+      "lon": 12.4929567,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1134598858,
+      "name": "Selene",
+      "stars": "3",
+      "lat": 41.900718,
+      "lon": 12.4967531,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1226463170,
+      "name": "B&B Felicia",
+      "stars": null,
+      "lat": 41.8811477,
+      "lon": 12.5083842,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.bbfelicia.it"
+    },
+    {
+      "osmId": 1239229273,
+      "name": "Grand hotel Gianicolo",
+      "stars": "4",
+      "lat": 41.8875437,
+      "lon": 12.4608418,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.grandhotelgianicolo.it/"
+    },
+    {
+      "osmId": 1242055819,
+      "name": "Eurostars Saint John",
+      "stars": null,
+      "lat": 41.8890741,
+      "lon": 12.5050245,
+      "street": "Via Matteo Boiardo",
+      "housenumber": "30",
+      "website": null
+    },
+    {
+      "osmId": 1243321894,
+      "name": "Hotel Art by the Spanish Steps",
+      "stars": "4",
+      "lat": 41.9076906,
+      "lon": 12.4807216,
+      "street": "Via Margutta",
+      "housenumber": "56",
+      "website": "http://www.hotelart.it/"
+    },
+    {
+      "osmId": 1248116068,
+      "name": "Hotel Trevi",
+      "stars": "3",
+      "lat": 41.9003134,
+      "lon": 12.4840953,
+      "street": "Vicolo del Babuccio",
+      "housenumber": "20/21A",
+      "website": "https://www.hoteltrevirome.com/"
+    }
+  ],
+  "tokyo": [
+    {
+      "osmId": 251055437,
+      "name": "Hotel Sumisho",
+      "stars": null,
+      "lat": 35.6855571,
+      "lon": 139.7792233,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 417434076,
+      "name": "The AGNES",
+      "stars": null,
+      "lat": 35.6999399,
+      "lon": 139.7404848,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090861,
+      "name": "Premiere Hotel CABIN 新宿",
+      "stars": null,
+      "lat": 35.697295,
+      "lon": 139.702079,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090874,
+      "name": "THE KNOT TOKYO Shinjuku",
+      "stars": null,
+      "lat": 35.688616,
+      "lon": 139.688399,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090893,
+      "name": "ホテルウィングインターナショナル プレミアム東京四谷",
+      "stars": null,
+      "lat": 35.688,
+      "lon": 139.718399,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090896,
+      "name": "新宿ワシントンホテル",
+      "stars": null,
+      "lat": 35.686832,
+      "lon": 139.692856,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090897,
+      "name": "リステル新宿",
+      "stars": null,
+      "lat": 35.692899,
+      "lon": 139.711418,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090903,
+      "name": "Century Southern Tower Hotel",
+      "stars": null,
+      "lat": 35.686442,
+      "lon": 139.700367,
+      "street": null,
+      "housenumber": "1",
+      "website": "https://www.southerntower.co.jp/"
+    },
+    {
+      "osmId": 475090904,
+      "name": "新宿プリンスホテル",
+      "stars": null,
+      "lat": 35.694746,
+      "lon": 139.700121,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090905,
+      "name": "相鉄フレッサイン",
+      "stars": null,
+      "lat": 35.6985649,
+      "lon": 139.7079263,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090913,
+      "name": "ホテルウィングインターナショナル新宿",
+      "stars": null,
+      "lat": 35.6953113,
+      "lon": 139.7010311,
+      "street": null,
+      "housenumber": "7",
+      "website": "https://www.hotelwing.co.jp/shinjuku/"
+    },
+    {
+      "osmId": 475090915,
+      "name": "Shinjuku Park Hotel",
+      "stars": null,
+      "lat": 35.686045,
+      "lon": 139.7029785,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090921,
+      "name": "Shinjuku Sunlite Hotel",
+      "stars": null,
+      "lat": 35.694154,
+      "lon": 139.707068,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090929,
+      "name": "Sunroute Plaza Shinjuku Hotel",
+      "stars": null,
+      "lat": 35.6870907,
+      "lon": 139.6988811,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090935,
+      "name": "Ibis",
+      "stars": null,
+      "lat": 35.6938283,
+      "lon": 139.6980573,
+      "street": null,
+      "housenumber": "5",
+      "website": "https://www.accorhotels.com/it/hotel-8620-ibis-tokyo-shinjuku/index.shtml"
+    },
+    {
+      "osmId": 475090943,
+      "name": "ホテルローズガーデン新宿",
+      "stars": null,
+      "lat": 35.69442,
+      "lon": 139.693741,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 475090954,
+      "name": "ホテルマイステイズ西新宿",
+      "stars": null,
+      "lat": 35.694981,
+      "lon": 139.697342,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 506125524,
+      "name": "旅館　更新館",
+      "stars": null,
+      "lat": 35.717683,
+      "lon": 139.7588315,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 573261208,
+      "name": "マンダリンオリエンタル",
+      "stars": "5",
+      "lat": 35.687145,
+      "lon": 139.772888,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 582347970,
+      "name": "ANA Intercontinental Tokyo",
+      "stars": null,
+      "lat": 35.6680126,
+      "lon": 139.7406833,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 597692326,
+      "name": "渋谷東武ホテル (Tobu Hotel)",
+      "stars": null,
+      "lat": 35.6631863,
+      "lon": 139.6989863,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 618102602,
+      "name": "The b' Akasaka",
+      "stars": null,
+      "lat": 35.671271,
+      "lon": 139.7331552,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 739064479,
+      "name": "Avanshell Akasaka",
+      "stars": null,
+      "lat": 35.6715601,
+      "lon": 139.7378726,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 744436432,
+      "name": "JR東日本ホテルメッツ渋谷",
+      "stars": null,
+      "lat": 35.6558289,
+      "lon": 139.7039691,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.hotelmets.jp/shibuya"
+    },
+    {
+      "osmId": 760552145,
+      "name": "Touganeya Hotel",
+      "stars": null,
+      "lat": 35.7109556,
+      "lon": 139.7779092,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 810644323,
+      "name": "ハイアットリージェンシー東京",
+      "stars": null,
+      "lat": 35.6907122,
+      "lon": 139.6911633,
+      "street": null,
+      "housenumber": null,
+      "website": "https://tokyo.regency.hyatt.com/"
+    },
+    {
+      "osmId": 825084540,
+      "name": "インターコンチネンタル東京ベイ",
+      "stars": null,
+      "lat": 35.6530574,
+      "lon": 139.762218,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 943719809,
+      "name": "Hotel Wing International Korakuen",
+      "stars": null,
+      "lat": 35.7056418,
+      "lon": 139.7558662,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1129461705,
+      "name": "三井ガーデンホテル上野",
+      "stars": null,
+      "lat": 35.7118296,
+      "lon": 139.7782141,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.gardenhotels.co.jp/ueno"
+    },
+    {
+      "osmId": 1130555411,
+      "name": "御茶ノ水 イン",
+      "stars": null,
+      "lat": 35.7015293,
+      "lon": 139.7663266,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1178907123,
+      "name": "Hotel New Washington",
+      "stars": null,
+      "lat": 35.6651151,
+      "lon": 139.6940483,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1185605122,
+      "name": "東横イン 溜池山王駅官邸南",
+      "stars": null,
+      "lat": 35.6721908,
+      "lon": 139.7423292,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1401917496,
+      "name": "オリエンタル",
+      "stars": null,
+      "lat": 35.7098534,
+      "lon": 139.7751903,
+      "street": null,
+      "housenumber": null,
+      "website": "http://uenost-hostel.com"
+    },
+    {
+      "osmId": 1494149076,
+      "name": "The Capitol Hotel Tokyu",
+      "stars": null,
+      "lat": 35.6741016,
+      "lon": 139.7409221,
+      "street": null,
+      "housenumber": "10",
+      "website": "https://www.tokyuhotelsjapan.com/global/capitol-h/"
+    },
+    {
+      "osmId": 1509875950,
+      "name": "Remm Roppongi",
+      "stars": null,
+      "lat": 35.6638117,
+      "lon": 139.7314079,
+      "street": null,
+      "housenumber": "4",
+      "website": "http://www.remm.jp/roppongi/"
+    },
+    {
+      "osmId": 1661350663,
+      "name": "東京ビジネスホテル",
+      "stars": null,
+      "lat": 35.6933919,
+      "lon": 139.7104827,
+      "street": null,
+      "housenumber": null,
+      "website": "http://tbh.co.jp/"
+    },
+    {
+      "osmId": 1681422026,
+      "name": "Tokyu Inn",
+      "stars": null,
+      "lat": 35.660113,
+      "lon": 139.7021214,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1687225183,
+      "name": "ホテル堀留ヴィラ",
+      "stars": "2",
+      "lat": 35.6888856,
+      "lon": 139.7798531,
+      "street": null,
+      "housenumber": null,
+      "website": "http://www.horidomevilla.jp/"
+    },
+    {
+      "osmId": 1693368709,
+      "name": "ホテルマイステイズ 浜松町",
+      "stars": null,
+      "lat": 35.6582131,
+      "lon": 139.7551969,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1727248049,
+      "name": "リッチモンドホテル東京芝",
+      "stars": null,
+      "lat": 35.6569028,
+      "lon": 139.7523432,
+      "street": null,
+      "housenumber": "4",
+      "website": "https://richmondhotel.jp/tokyo-shiba/"
+    }
+  ],
+  "barcelona": [
+    {
+      "osmId": 192066541,
+      "name": "Hotel Millenni",
+      "stars": "4",
+      "lat": 41.3759505,
+      "lon": 2.1670539,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 192067263,
+      "name": "Hotel Barcelona Universal",
+      "stars": "4",
+      "lat": 41.3751971,
+      "lon": 2.1682509,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 199125462,
+      "name": "Hotel Paral·lel",
+      "stars": "2",
+      "lat": 41.3747759,
+      "lon": 2.1661966,
+      "street": "Carrer del Poeta Cabanyes",
+      "housenumber": "5-7",
+      "website": null
+    },
+    {
+      "osmId": 364735661,
+      "name": "Gran Hotel Catalonia",
+      "stars": null,
+      "lat": 41.3938035,
+      "lon": 2.1567229,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 367695151,
+      "name": "Villa Emilia",
+      "stars": null,
+      "lat": 41.3802157,
+      "lon": 2.1539506,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 536686095,
+      "name": "Hostal Barcelona",
+      "stars": null,
+      "lat": 41.3728426,
+      "lon": 2.1661693,
+      "street": "Carrer del Roser",
+      "housenumber": "40",
+      "website": null
+    },
+    {
+      "osmId": 672090818,
+      "name": "Pensión Las Flores",
+      "stars": null,
+      "lat": 41.3813647,
+      "lon": 2.1727626,
+      "street": "La Rambla",
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 672398204,
+      "name": "Hotel Royal",
+      "stars": "4",
+      "lat": 41.3842853,
+      "lon": 2.1705638,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 673390239,
+      "name": "Hotel Ayre Casp",
+      "stars": "1",
+      "lat": 41.3960634,
+      "lon": 2.1794666,
+      "street": "Carrer de Casp",
+      "housenumber": "103",
+      "website": "http://www.ayrehoteles.com"
+    },
+    {
+      "osmId": 673978997,
+      "name": "Hosteria Grau",
+      "stars": "2",
+      "lat": 41.3846255,
+      "lon": 2.1681611,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 674096751,
+      "name": "Hotel Sir Victor",
+      "stars": "4",
+      "lat": 41.3962081,
+      "lon": 2.1609608,
+      "street": "Carrer del Rosselló",
+      "housenumber": "265",
+      "website": "http://www.hotelomm.es/"
+    },
+    {
+      "osmId": 674141698,
+      "name": "Hotel Suites Avenue",
+      "stars": "5",
+      "lat": 41.3942863,
+      "lon": 2.16178,
+      "street": "Passeig de Gràcia",
+      "housenumber": "83",
+      "website": "http://www.derbyhotels.es"
+    },
+    {
+      "osmId": 674650370,
+      "name": "Eurostars Grand Marina Hotel",
+      "stars": "5",
+      "lat": 41.3717119,
+      "lon": 2.1808851,
+      "street": "Moll de Barcelona",
+      "housenumber": "1",
+      "website": "https://www.eurostarshotels.com/eurostars-grand-marina.html"
+    },
+    {
+      "osmId": 691591937,
+      "name": "Hotel Continental",
+      "stars": "1",
+      "lat": 41.3850332,
+      "lon": 2.1707068,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 704049114,
+      "name": "H10 Catalunya Plaza",
+      "stars": "3",
+      "lat": 41.3870001,
+      "lon": 2.1684561,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 704063685,
+      "name": "Club 29",
+      "stars": null,
+      "lat": 41.3908058,
+      "lon": 2.1660695,
+      "street": "Passeig de Gràcia",
+      "housenumber": "29-31",
+      "website": "https://hiddenhotels.com/hotel-club-29/"
+    },
+    {
+      "osmId": 704064994,
+      "name": "Hotel Continental Palacete",
+      "stars": null,
+      "lat": 41.38971,
+      "lon": 2.1655726,
+      "street": "Rambla de Catalunya",
+      "housenumber": "30-32",
+      "website": null
+    },
+    {
+      "osmId": 813331259,
+      "name": "Leonardo Hotel Las Ramblas",
+      "stars": "3",
+      "lat": 41.380051,
+      "lon": 2.1710093,
+      "street": "Carrer de la Junta del Comerç",
+      "housenumber": "8,10,12",
+      "website": "https://www.leonardo-hotels.de/leonardo-hotel-barcelona-las-ramblas"
+    },
+    {
+      "osmId": 819552810,
+      "name": "Atrium Palace",
+      "stars": null,
+      "lat": 41.3908992,
+      "lon": 2.1706621,
+      "street": "Gran Via de les Corts Catalanes",
+      "housenumber": "656",
+      "website": null
+    },
+    {
+      "osmId": 820938971,
+      "name": "Hotel Suizo",
+      "stars": null,
+      "lat": 41.3837596,
+      "lon": 2.1782779,
+      "street": "Plaça de l'Àngel",
+      "housenumber": "12",
+      "website": null
+    },
+    {
+      "osmId": 824310260,
+      "name": "INNSiDE by Meliá Barcelona Apolo",
+      "stars": "4",
+      "lat": 41.3746695,
+      "lon": 2.1706835,
+      "street": "Avinguda del Paral·lel",
+      "housenumber": "57-59",
+      "website": "https://www.melia.com/es/hoteles/espana/barcelona/hotel-barcelona-apolo-by-melia"
+    },
+    {
+      "osmId": 824313214,
+      "name": "Auto Hogar",
+      "stars": null,
+      "lat": 41.3751599,
+      "lon": 2.1688148,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 824993418,
+      "name": "Le Méridien Barcelona",
+      "stars": null,
+      "lat": 41.3836207,
+      "lon": 2.1707631,
+      "street": "La Rambla",
+      "housenumber": "111",
+      "website": "https://www.marriott.com/hotels/travel/bcnmd-le-meridien-barcelona/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2"
+    },
+    {
+      "osmId": 921135618,
+      "name": "Barcelona City Hotel(Hotel Universal)",
+      "stars": null,
+      "lat": 41.3933159,
+      "lon": 2.1660451,
+      "street": "Carrer de Pau Claris",
+      "housenumber": "135",
+      "website": null
+    },
+    {
+      "osmId": 983154644,
+      "name": "Grupotel Gravina Hotel",
+      "stars": null,
+      "lat": 41.3854111,
+      "lon": 2.1660268,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 983274432,
+      "name": "chic&basic Reding Hotel",
+      "stars": null,
+      "lat": 41.3853032,
+      "lon": 2.1655507,
+      "street": "Carrer de Gravina",
+      "housenumber": "5-7",
+      "website": "https://www.chicandbasic.com/es/hotel-reding-barcelona/"
+    },
+    {
+      "osmId": 1072835643,
+      "name": "Olivia Plaza Hotel",
+      "stars": null,
+      "lat": 41.3862014,
+      "lon": 2.1711443,
+      "street": "Plaça de Catalunya",
+      "housenumber": "19",
+      "website": "http://www.oliviaplazahotel.es"
+    },
+    {
+      "osmId": 1193524889,
+      "name": "Atenea Calabria",
+      "stars": null,
+      "lat": 41.3809414,
+      "lon": 2.1531619,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1223692092,
+      "name": "Evenia Rocafort",
+      "stars": "3",
+      "lat": 41.3762298,
+      "lon": 2.1571681,
+      "street": "Carrer de Rocafort",
+      "housenumber": "23-25",
+      "website": "https://www.eveniahotels.com/"
+    },
+    {
+      "osmId": 1231242161,
+      "name": "AXEL Hotel",
+      "stars": "4",
+      "lat": 41.3873794,
+      "lon": 2.1604124,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.axelhotels.com/en/axel-hotel-barcelona/hotel"
+    },
+    {
+      "osmId": 1307755891,
+      "name": "Ayre Hotel Gran Via",
+      "stars": null,
+      "lat": 41.373363,
+      "lon": 2.1473387,
+      "street": "Gran Via de les Corts Catalanes",
+      "housenumber": "322-324",
+      "website": null
+    },
+    {
+      "osmId": 1309602319,
+      "name": "Hotel Inglés",
+      "stars": "1",
+      "lat": 41.3814535,
+      "lon": 2.1738688,
+      "street": "Carrer de la Boqueria",
+      "housenumber": "19",
+      "website": "http://www.hotelingles.net/"
+    },
+    {
+      "osmId": 1374340447,
+      "name": "Hostal la Palmera",
+      "stars": "2",
+      "lat": 41.3819104,
+      "lon": 2.1707337,
+      "street": "Carrer de Jerusalem",
+      "housenumber": "30",
+      "website": "https://www.lapalmerabcn.com/"
+    },
+    {
+      "osmId": 1374631955,
+      "name": "Aparthotel Eric Vökel Gran Vía Suites",
+      "stars": null,
+      "lat": 41.3788851,
+      "lon": 2.1547217,
+      "street": "Gran Via de les Corts Catalanes",
+      "housenumber": "454",
+      "website": "https://www.ericvokel.com/"
+    },
+    {
+      "osmId": 1386884268,
+      "name": "Hotel Denit",
+      "stars": null,
+      "lat": 41.3870752,
+      "lon": 2.1723258,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1417833791,
+      "name": "Medium Prisma",
+      "stars": null,
+      "lat": 41.3890859,
+      "lon": 2.1429632,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.mediumhoteles.com/"
+    },
+    {
+      "osmId": 1428867665,
+      "name": "Hesperia Presidente",
+      "stars": "4",
+      "lat": 41.3941217,
+      "lon": 2.1489633,
+      "street": "Avinguda Diagonal",
+      "housenumber": "570",
+      "website": "https://www.nh-hoteles.es/"
+    },
+    {
+      "osmId": 1434058713,
+      "name": "Hotel Paseo de Gracia",
+      "stars": "3",
+      "lat": 41.3958561,
+      "lon": 2.1609782,
+      "street": "Passeig de Gràcia",
+      "housenumber": "102",
+      "website": "https://www.hotelpaseodegracia.es/"
+    },
+    {
+      "osmId": 1474078091,
+      "name": "Hotel Balmes",
+      "stars": "4",
+      "lat": 41.3910913,
+      "lon": 2.1593029,
+      "street": "Carrer de Mallorca",
+      "housenumber": "216",
+      "website": "https://www.derbyhotels.com/en/hotels/balmes-hotel/"
+    },
+    {
+      "osmId": 1474078097,
+      "name": "Hotel Granados 83",
+      "stars": "4",
+      "lat": 41.3918188,
+      "lon": 2.156787,
+      "street": "Carrer d'Enric Granados",
+      "housenumber": "83",
+      "website": "http://www.derbyhotels.com/es/hotel-granados-83/"
+    }
+  ],
+  "london": [
+    {
+      "osmId": 31314241,
+      "name": "DoubleTree by Hilton Hotel London - Marble Arch",
+      "stars": "4",
+      "lat": 51.514571,
+      "lon": -0.1566381,
+      "street": "Bryanston Street",
+      "housenumber": "4",
+      "website": "https://www.hilton.com/en/hotels/lonmadi-doubletree-london-marble-arch/?WT.mc_id=zELWAKN0EMEA1DT2DMH3LocalSearch4DGGenericx6LONMADI"
+    },
+    {
+      "osmId": 59931333,
+      "name": "easyHotel Victoria",
+      "stars": null,
+      "lat": 51.4919882,
+      "lon": -0.1420048,
+      "street": "Belgrave Road",
+      "housenumber": "36-40",
+      "website": "https://www.easyhotel.com/hotels/united-kingdom/london/victoria"
+    },
+    {
+      "osmId": 254025974,
+      "name": "Crestfield Hotel",
+      "stars": null,
+      "lat": 51.5297557,
+      "lon": -0.1224147,
+      "street": "Crestfield Street",
+      "housenumber": "2-4",
+      "website": "https://www.crestfieldhotel.co.uk/"
+    },
+    {
+      "osmId": 273210322,
+      "name": "Sidney Hotel",
+      "stars": null,
+      "lat": 51.490333,
+      "lon": -0.138557,
+      "street": "Belgrave Road",
+      "housenumber": "68-76",
+      "website": null
+    },
+    {
+      "osmId": 275399020,
+      "name": "Huttons Hotel, Victoria London",
+      "stars": null,
+      "lat": 51.4906272,
+      "lon": -0.138381,
+      "street": "Belgrave Road",
+      "housenumber": "55",
+      "website": null
+    },
+    {
+      "osmId": 276070664,
+      "name": "Victor Hotel",
+      "stars": null,
+      "lat": 51.490678,
+      "lon": -0.1385005,
+      "street": "Belgrave Road",
+      "housenumber": "51",
+      "website": null
+    },
+    {
+      "osmId": 276070737,
+      "name": "Luna Simone Hotel",
+      "stars": null,
+      "lat": 51.4907457,
+      "lon": -0.1386425,
+      "street": "Belgrave Road",
+      "housenumber": "49",
+      "website": null
+    },
+    {
+      "osmId": 276070789,
+      "name": "Lidos Hotel",
+      "stars": null,
+      "lat": 51.490806,
+      "lon": -0.1387856,
+      "street": "Belgrave Road",
+      "housenumber": "45",
+      "website": null
+    },
+    {
+      "osmId": 276757512,
+      "name": "Cedar Guest House",
+      "stars": null,
+      "lat": 51.4922185,
+      "lon": -0.145766,
+      "street": "Hugh Street",
+      "housenumber": "30",
+      "website": null
+    },
+    {
+      "osmId": 276757538,
+      "name": "Alexandar House Hotel",
+      "stars": null,
+      "lat": 51.4921849,
+      "lon": -0.1458119,
+      "street": "Hugh Street",
+      "housenumber": "32",
+      "website": null
+    },
+    {
+      "osmId": 276758018,
+      "name": "Best Western Hotel",
+      "stars": null,
+      "lat": 51.4920413,
+      "lon": -0.1460686,
+      "street": "St George's Drive",
+      "housenumber": "8-12",
+      "website": null
+    },
+    {
+      "osmId": 276758495,
+      "name": "Annexe Hotel",
+      "stars": null,
+      "lat": 51.4921418,
+      "lon": -0.1458604,
+      "street": "Hugh Street",
+      "housenumber": "34",
+      "website": null
+    },
+    {
+      "osmId": 276759615,
+      "name": "Dover Hotel",
+      "stars": null,
+      "lat": 51.491896,
+      "lon": -0.1418151,
+      "street": "Belgrave Road",
+      "housenumber": "44",
+      "website": null
+    },
+    {
+      "osmId": 276761159,
+      "name": "Comfort Inn London",
+      "stars": null,
+      "lat": 51.4908881,
+      "lon": -0.1389518,
+      "street": "Belgrave Road",
+      "housenumber": "37-41",
+      "website": null
+    },
+    {
+      "osmId": 296889743,
+      "name": "The Tavistock Hotel",
+      "stars": null,
+      "lat": 51.5243225,
+      "lon": -0.1283055,
+      "street": "Tavistock Square",
+      "housenumber": null,
+      "website": "https://www.imperialhotels.co.uk"
+    },
+    {
+      "osmId": 296889744,
+      "name": "Bedford Hotel",
+      "stars": "3",
+      "lat": 51.5207075,
+      "lon": -0.1235907,
+      "street": "Southampton Row",
+      "housenumber": "83-93",
+      "website": "https://www.imperialhotels.co.uk/hotels/bedford-hotel"
+    },
+    {
+      "osmId": 296889746,
+      "name": "Bloomsbury Park Hotel",
+      "stars": null,
+      "lat": 51.520684,
+      "lon": -0.1228137,
+      "street": "Southampton Row",
+      "housenumber": "126",
+      "website": "https://www.thistle.com/bloomsbury-park/"
+    },
+    {
+      "osmId": 298347045,
+      "name": "Four Points Flex by Sheraton",
+      "stars": null,
+      "lat": 51.5263931,
+      "lon": -0.1295411,
+      "street": "Upper Woburn Place",
+      "housenumber": "8-11",
+      "website": "https://www.marriott.com/en-gb/hotels/loneu-four-points-flex-london-euston/overview/"
+    },
+    {
+      "osmId": 298347046,
+      "name": "Mabeldon Court Hotel",
+      "stars": null,
+      "lat": 51.5276532,
+      "lon": -0.1273678,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 308847205,
+      "name": "Travelodge",
+      "stars": null,
+      "lat": 51.5225673,
+      "lon": -0.0868331,
+      "street": "City Road",
+      "housenumber": "1-23",
+      "website": "https://www.travelodge.co.uk/hotels/340/London-Central-City-Road-hotel"
+    },
+    {
+      "osmId": 311877308,
+      "name": "DoubleTree by Hilton Hotel London - West End",
+      "stars": "4",
+      "lat": 51.5201101,
+      "lon": -0.12213,
+      "street": "Southampton Row",
+      "housenumber": "92",
+      "website": "https://www.hilton.com/en/hotels/lhrlbdi-doubletree-london-west-end/"
+    },
+    {
+      "osmId": 346430283,
+      "name": "The Clermont",
+      "stars": null,
+      "lat": 51.5083992,
+      "lon": -0.124718,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 347151757,
+      "name": "Park Plaza County Hall London",
+      "stars": null,
+      "lat": 51.5013601,
+      "lon": -0.1160331,
+      "street": "Addington Street",
+      "housenumber": "1",
+      "website": "https://www.radissonhotels.com/en-us/hotels/park-plaza-county-hall-london"
+    },
+    {
+      "osmId": 413596123,
+      "name": "STG Hotel Oxford Street",
+      "stars": null,
+      "lat": 51.5174483,
+      "lon": -0.1304949,
+      "street": "Bedford Avenue",
+      "housenumber": "12",
+      "website": "https://stghotel.com/"
+    },
+    {
+      "osmId": 421317867,
+      "name": "Megaro Hotel",
+      "stars": null,
+      "lat": 51.5297948,
+      "lon": -0.1237042,
+      "street": null,
+      "housenumber": null,
+      "website": "https://www.themegaro.co.uk"
+    },
+    {
+      "osmId": 427931755,
+      "name": "Howard Winchester",
+      "stars": null,
+      "lat": 51.5293476,
+      "lon": -0.1219027,
+      "street": "Argyle Square",
+      "housenumber": "9",
+      "website": null
+    },
+    {
+      "osmId": 427931756,
+      "name": "European Hotel",
+      "stars": null,
+      "lat": 51.5292504,
+      "lon": -0.1218055,
+      "street": "Argyle Square",
+      "housenumber": "11-15",
+      "website": null
+    },
+    {
+      "osmId": 427931757,
+      "name": "Hotel Montana",
+      "stars": null,
+      "lat": 51.5290388,
+      "lon": -0.1215913,
+      "street": "Argyle Square",
+      "housenumber": "16-17",
+      "website": null
+    },
+    {
+      "osmId": 427931758,
+      "name": "Elmwood Hotel",
+      "stars": null,
+      "lat": 51.5289068,
+      "lon": -0.1214553,
+      "street": "Argyle Square",
+      "housenumber": "19-20",
+      "website": null
+    },
+    {
+      "osmId": 430444169,
+      "name": "Clifton Hotel",
+      "stars": null,
+      "lat": 51.529907,
+      "lon": -0.1216299,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 431358138,
+      "name": "Royal National Hotel",
+      "stars": null,
+      "lat": 51.5234731,
+      "lon": -0.1272337,
+      "street": "Bedford Way",
+      "housenumber": "35-81",
+      "website": "https://www.imperialhotels.co.uk/hotels/royal-national-hotel"
+    },
+    {
+      "osmId": 479736311,
+      "name": "London Marriott Hotel County Hall",
+      "stars": null,
+      "lat": 51.501709,
+      "lon": -0.1188586,
+      "street": "Westminster Bridge Road",
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 603001046,
+      "name": "Premier Inn London Victoria",
+      "stars": null,
+      "lat": 51.492934,
+      "lon": -0.143082,
+      "street": "Eccleston Square",
+      "housenumber": "82-83",
+      "website": "https://www.premierinn.com/gb/en/hotels/england/greater-london/london/london-victoria.html"
+    },
+    {
+      "osmId": 603119962,
+      "name": "Seven Dials Hotel",
+      "stars": null,
+      "lat": 51.5148427,
+      "lon": -0.1267321,
+      "street": null,
+      "housenumber": null,
+      "website": "http://www.sevendialshotel.com"
+    },
+    {
+      "osmId": 664072443,
+      "name": "The Beauchamp",
+      "stars": "4",
+      "lat": 51.5203735,
+      "lon": -0.1248357,
+      "street": "Bedford Place",
+      "housenumber": "24-27",
+      "website": "https://www.grangehotels.com/hotels-london/grange-beauchamp-hotel"
+    },
+    {
+      "osmId": 665982792,
+      "name": "The Buckingham",
+      "stars": null,
+      "lat": 51.5196094,
+      "lon": -0.1239586,
+      "street": "Bedford Place",
+      "housenumber": "39",
+      "website": null
+    },
+    {
+      "osmId": 665982803,
+      "name": "The Portland",
+      "stars": null,
+      "lat": 51.5200069,
+      "lon": -0.124404,
+      "street": "Bedford Place",
+      "housenumber": "31",
+      "website": null
+    },
+    {
+      "osmId": 665982809,
+      "name": "The Penn Club",
+      "stars": null,
+      "lat": 51.5206073,
+      "lon": -0.1250999,
+      "street": "Bedford Place",
+      "housenumber": "21",
+      "website": null
+    },
+    {
+      "osmId": 677298825,
+      "name": "Lime Tree Hotel",
+      "stars": null,
+      "lat": 51.4933492,
+      "lon": -0.1499873,
+      "street": "Ebury Street",
+      "housenumber": "135-137",
+      "website": "https://www.limetreehotel.co.uk/"
+    },
+    {
+      "osmId": 677523027,
+      "name": "Cherry Court Hotel",
+      "stars": null,
+      "lat": 51.4924816,
+      "lon": -0.1451133,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    }
+  ],
+  "newyork": [
+    {
+      "osmId": 889117109,
+      "name": "Conrad",
+      "stars": null,
+      "lat": 40.7149558,
+      "lon": -74.015694,
+      "street": "North End Avenue",
+      "housenumber": "102",
+      "website": "https://www.conradnewyork.com/"
+    },
+    {
+      "osmId": 889473084,
+      "name": "The Frederick Hotel",
+      "stars": null,
+      "lat": 40.715575,
+      "lon": -74.008857,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 990032612,
+      "name": "Latham",
+      "stars": null,
+      "lat": 40.7443441,
+      "lon": -73.9867075,
+      "street": "East 28th Street",
+      "housenumber": "4",
+      "website": null
+    },
+    {
+      "osmId": 999526140,
+      "name": "Mandarin Oriental",
+      "stars": null,
+      "lat": 40.7690103,
+      "lon": -73.982912,
+      "street": "Columbus Circle",
+      "housenumber": "80",
+      "website": "https://www.mandarinoriental.com/en/new-york/manhattan"
+    },
+    {
+      "osmId": 1103801857,
+      "name": "The Standard, East Village",
+      "stars": null,
+      "lat": 40.727834,
+      "lon": -73.9907398,
+      "street": "Cooper Square",
+      "housenumber": "25",
+      "website": null
+    },
+    {
+      "osmId": 1273406878,
+      "name": "Tempo by Hilton New York Times Square",
+      "stars": null,
+      "lat": 40.7590118,
+      "lon": -73.9844836,
+      "street": "Broadway",
+      "housenumber": "1568",
+      "website": "https://www.hilton.com/en/hotels/nyctepo-tempo-new-york-times-square/"
+    },
+    {
+      "osmId": 1297296350,
+      "name": "Clarion Hotel Park Avenue",
+      "stars": null,
+      "lat": 40.7441337,
+      "lon": -73.9832129,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1427273334,
+      "name": "Fitzpatrick Grand Central Hotel",
+      "stars": null,
+      "lat": 40.7526594,
+      "lon": -73.9744845,
+      "street": "East 44th Street",
+      "housenumber": "141",
+      "website": "https://www.fitzpatrickhotels.com/fitzpatrick-grand-central.shtml"
+    },
+    {
+      "osmId": 1428427563,
+      "name": "adour alan ducasse",
+      "stars": null,
+      "lat": 40.7610689,
+      "lon": -73.9739729,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1428427564,
+      "name": "St Regis",
+      "stars": null,
+      "lat": 40.7612458,
+      "lon": -73.9743323,
+      "street": "East 55th Street",
+      "housenumber": "2",
+      "website": "http://www.stregisnewyork.com/"
+    },
+    {
+      "osmId": 1707825821,
+      "name": "TRYP",
+      "stars": null,
+      "lat": 40.7537504,
+      "lon": -73.9945935,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 1821451551,
+      "name": "YOTEL",
+      "stars": null,
+      "lat": 40.7590853,
+      "lon": -73.995439,
+      "street": "10th Avenue",
+      "housenumber": "570",
+      "website": "https://www.yotel.com/en/hotels/yotel-new-york"
+    },
+    {
+      "osmId": 1873813874,
+      "name": "Ink 48 Hotel",
+      "stars": null,
+      "lat": 40.764515,
+      "lon": -73.9958863,
+      "street": "11th Avenue",
+      "housenumber": "653",
+      "website": "https://www.ink48.com/"
+    },
+    {
+      "osmId": 2165157812,
+      "name": "W Hotels",
+      "stars": null,
+      "lat": 40.7559859,
+      "lon": -73.9725033,
+      "street": "Lexington Avenue",
+      "housenumber": "541",
+      "website": "http://www.wnewyork.com/"
+    },
+    {
+      "osmId": 2307164617,
+      "name": "Senton Hotel",
+      "stars": null,
+      "lat": 40.7451377,
+      "lon": -73.9900206,
+      "street": "West 27th Street",
+      "housenumber": "39",
+      "website": "https://www.sentonhotel.com"
+    },
+    {
+      "osmId": 2307164624,
+      "name": "Broadway Plaza Hotel",
+      "stars": null,
+      "lat": 40.744469,
+      "lon": -73.9891087,
+      "street": "Broadway",
+      "housenumber": "1155",
+      "website": "https://www.broadwayplazahotel.com"
+    },
+    {
+      "osmId": 2317577533,
+      "name": "Hotel Giraffe",
+      "stars": null,
+      "lat": 40.742143,
+      "lon": -73.984716,
+      "street": "Park Avenue South",
+      "housenumber": "365",
+      "website": "https://www.hotelgiraffe.com/"
+    },
+    {
+      "osmId": 2325990473,
+      "name": "Hotel Chelsea",
+      "stars": null,
+      "lat": 40.7443742,
+      "lon": -73.9968175,
+      "street": "West 23rd Street",
+      "housenumber": "222",
+      "website": null
+    },
+    {
+      "osmId": 2377128188,
+      "name": "The GEM Hotel Chelsea",
+      "stars": null,
+      "lat": 40.7446533,
+      "lon": -73.9993815,
+      "street": "West 22nd Street",
+      "housenumber": "300",
+      "website": "https://www.thegemhotel.com/chelsea/"
+    },
+    {
+      "osmId": 2477507999,
+      "name": "Modernhaus SoHo",
+      "stars": null,
+      "lat": 40.7226301,
+      "lon": -74.0048444,
+      "street": "Grand Street",
+      "housenumber": "27",
+      "website": "https://www.modernhaushotel.com/"
+    },
+    {
+      "osmId": 2494160712,
+      "name": "St. Mark's Hotel",
+      "stars": null,
+      "lat": 40.7292807,
+      "lon": -73.9896315,
+      "street": "Saint Marks Place",
+      "housenumber": "2",
+      "website": "http://stmarkshotel.net/"
+    },
+    {
+      "osmId": 2535060647,
+      "name": "Roger Smith Hotel",
+      "stars": null,
+      "lat": 40.7549383,
+      "lon": -73.9742339,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 2547247028,
+      "name": "Sohotel",
+      "stars": null,
+      "lat": 40.7195332,
+      "lon": -73.9947277,
+      "street": "Broome Street",
+      "housenumber": "341",
+      "website": "https://www.thesohotel.com"
+    },
+    {
+      "osmId": 2555099371,
+      "name": "NobleDen",
+      "stars": null,
+      "lat": 40.7192831,
+      "lon": -73.9968082,
+      "street": "Grand Street",
+      "housenumber": "196",
+      "website": "https://nobleden.com"
+    },
+    {
+      "osmId": 2555126668,
+      "name": "The Gatsby Hotel",
+      "stars": null,
+      "lat": 40.7231911,
+      "lon": -73.9902082,
+      "street": "East Houston Street",
+      "housenumber": "135",
+      "website": null
+    },
+    {
+      "osmId": 2563985401,
+      "name": "U.S. Pacific",
+      "stars": null,
+      "lat": 40.7179221,
+      "lon": -73.9952665,
+      "street": "Bowery",
+      "housenumber": "106",
+      "website": "https://www.uspacifichotel.com/"
+    },
+    {
+      "osmId": 2572411292,
+      "name": "SoHo 54 Hotel",
+      "stars": null,
+      "lat": 40.7238201,
+      "lon": -74.0052592,
+      "street": "Watts Street",
+      "housenumber": "54",
+      "website": "https://www.soho54hotel.com"
+    },
+    {
+      "osmId": 2610440255,
+      "name": "The Manhattan at Times Square Hotel",
+      "stars": null,
+      "lat": 40.7621727,
+      "lon": -73.9829659,
+      "street": "7th Avenue",
+      "housenumber": "790",
+      "website": "https://www.manhattanhoteltimessquare.com/"
+    },
+    {
+      "osmId": 2629371837,
+      "name": "Courtyard",
+      "stars": null,
+      "lat": 40.7573984,
+      "lon": -73.9698932,
+      "street": "Third Avenue",
+      "housenumber": "866",
+      "website": "https://www.marriott.com/hotels/travel/nycme-courtyard-new-york-manhattan-midtown-east/"
+    },
+    {
+      "osmId": 2639531871,
+      "name": "Renaissance New York Times Square Hotel",
+      "stars": null,
+      "lat": 40.7597371,
+      "lon": -73.9845837,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 2704104151,
+      "name": "Carlton Arms Hotel",
+      "stars": null,
+      "lat": 40.7401959,
+      "lon": -73.9826682,
+      "street": "East 25th Street",
+      "housenumber": "160",
+      "website": "https://carltonarms.com/"
+    },
+    {
+      "osmId": 2704105139,
+      "name": "The Marcel",
+      "stars": null,
+      "lat": 40.7394627,
+      "lon": -73.9822461,
+      "street": "East 24th Street",
+      "housenumber": "201",
+      "website": "https://themarcelatgramercy.com"
+    },
+    {
+      "osmId": 2706918023,
+      "name": "Parksouth Hotel",
+      "stars": null,
+      "lat": 40.7427837,
+      "lon": -73.9830954,
+      "street": "East 28th Street",
+      "housenumber": "124",
+      "website": "https://www.jdvhotels.com/hotels/new-york/nyc/park-south-hotel"
+    },
+    {
+      "osmId": 2706939797,
+      "name": "The Fifth Avenue Hotel",
+      "stars": null,
+      "lat": 40.7449926,
+      "lon": -73.9877939,
+      "street": "West 28th Street",
+      "housenumber": "1",
+      "website": "https://www.thefifthavenuehotel.com/"
+    },
+    {
+      "osmId": 2708083600,
+      "name": "The Quin",
+      "stars": null,
+      "lat": 40.7646529,
+      "lon": -73.9774764,
+      "street": "West 57th Street",
+      "housenumber": "101",
+      "website": "http://www.thequinhotel.com"
+    },
+    {
+      "osmId": 2708164841,
+      "name": "WestHouse Hotel New York, an SLH Hotel",
+      "stars": null,
+      "lat": 40.7643756,
+      "lon": -73.9810992,
+      "street": "West 55th Street",
+      "housenumber": "201",
+      "website": "https://www.hilton.com/en/hotels/jfkwhlx-westhouse-hotel-new-york/"
+    },
+    {
+      "osmId": 2709335872,
+      "name": "Mondrian Park Avenue",
+      "stars": null,
+      "lat": 40.7447966,
+      "lon": -73.9832361,
+      "street": "Park Avenue South",
+      "housenumber": "444",
+      "website": "https://www.sbe.com/hotels/mondrian/park-avenue"
+    },
+    {
+      "osmId": 2709702498,
+      "name": "Refinery",
+      "stars": null,
+      "lat": 40.7521714,
+      "lon": -73.9853616,
+      "street": "West 38th Street",
+      "housenumber": "63",
+      "website": "https://www.refineryhotelnewyork.com/"
+    },
+    {
+      "osmId": 2709702525,
+      "name": "Americana Inn",
+      "stars": null,
+      "lat": 40.7522336,
+      "lon": -73.9855082,
+      "street": "West 38th Street",
+      "housenumber": "69",
+      "website": null
+    },
+    {
+      "osmId": 2711712840,
+      "name": "Westgate New York Grand Central Hotel",
+      "stars": null,
+      "lat": 40.7495001,
+      "lon": -73.9718919,
+      "street": "East 42nd Street",
+      "housenumber": "304",
+      "website": "https://www.westgateresorts.com/hotels/new-york/midtown-manhattan/westgate-new-york-grand-central/"
+    }
+  ],
+  "amsterdam": [
+    {
+      "osmId": 154798750,
+      "name": "Clayton Hotel Amsterdam American",
+      "stars": "4s",
+      "lat": 52.3637964,
+      "lon": 4.88117,
+      "street": "Leidsekade",
+      "housenumber": "97",
+      "website": "https://claytonhotelamsterdam.com/"
+    },
+    {
+      "osmId": 237892288,
+      "name": "Sint Nicolaas",
+      "stars": null,
+      "lat": 52.3774839,
+      "lon": 4.8951863,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 237898651,
+      "name": "WestCord City Center",
+      "stars": null,
+      "lat": 52.3765293,
+      "lon": 4.8935818,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 237904890,
+      "name": "The Highlander",
+      "stars": null,
+      "lat": 52.3756802,
+      "lon": 4.8923093,
+      "street": "Nieuwezijds Voorburgwal",
+      "housenumber": "100",
+      "website": "https://www.thehighlanderhotel.com/nl/hotel-citadel-is-the-highlander"
+    },
+    {
+      "osmId": 237904893,
+      "name": "INK Hotel Amsterdam",
+      "stars": null,
+      "lat": 52.3755058,
+      "lon": 4.8929255,
+      "street": "Nieuwezijds Voorburgwal",
+      "housenumber": "67",
+      "website": null
+    },
+    {
+      "osmId": 237912528,
+      "name": "Park Plaza Victoria Hotel",
+      "stars": null,
+      "lat": 52.3772801,
+      "lon": 4.8976771,
+      "street": "Damrak",
+      "housenumber": "1-5",
+      "website": "https://www.parkplazavictoriaamsterdam.nl/"
+    },
+    {
+      "osmId": 237912534,
+      "name": "Kimpton De Witt Hotel",
+      "stars": null,
+      "lat": 52.3771508,
+      "lon": 4.8954929,
+      "street": "Nieuwezijds Voorburgwal",
+      "housenumber": "5",
+      "website": "https://www.kimptondewitthotel.com/en/"
+    },
+    {
+      "osmId": 237912539,
+      "name": "Avenue Hotel",
+      "stars": "3",
+      "lat": 52.3766377,
+      "lon": 4.8946387,
+      "street": "Nieuwezijds Voorburgwal",
+      "housenumber": "33",
+      "website": "https://avenue-hotel.nl"
+    },
+    {
+      "osmId": 251127911,
+      "name": "NH Collection Amsterdam Barbizon Palace",
+      "stars": "5",
+      "lat": 52.3764319,
+      "lon": 4.9003632,
+      "street": "Prins Hendrikkade",
+      "housenumber": "59-72",
+      "website": "https://www.nh-hotels.com/"
+    },
+    {
+      "osmId": 251147173,
+      "name": "De Oranje Tulp",
+      "stars": null,
+      "lat": 52.3760831,
+      "lon": 4.8965471,
+      "street": "Damrak",
+      "housenumber": "32",
+      "website": null
+    },
+    {
+      "osmId": 251147174,
+      "name": "Van Gelder",
+      "stars": null,
+      "lat": 52.3760003,
+      "lon": 4.8964629,
+      "street": "Damrak",
+      "housenumber": "34",
+      "website": null
+    },
+    {
+      "osmId": 251147177,
+      "name": "Hotel Continental",
+      "stars": null,
+      "lat": 52.3758136,
+      "lon": 4.8961439,
+      "street": "Damrak",
+      "housenumber": "40",
+      "website": "https://hotelcontinentalamsterdam.nl/"
+    },
+    {
+      "osmId": 251147179,
+      "name": "Hotel Manofa",
+      "stars": "1",
+      "lat": 52.3754934,
+      "lon": 4.8957562,
+      "street": "Damrak",
+      "housenumber": "47-48",
+      "website": "https://www.manofa-hotel.com/"
+    },
+    {
+      "osmId": 251149361,
+      "name": "De Roode Leeuw",
+      "stars": "4",
+      "lat": 52.3737184,
+      "lon": 4.8935428,
+      "street": "Damrak",
+      "housenumber": "93-94",
+      "website": "https://www.hotelamsterdam.nl/"
+    },
+    {
+      "osmId": 251149366,
+      "name": "Swissôtel",
+      "stars": "4",
+      "lat": 52.3735795,
+      "lon": 4.8933229,
+      "street": "Damrak",
+      "housenumber": "96",
+      "website": "https://www.swissotel.com/hotels/amsterdam/"
+    },
+    {
+      "osmId": 251150450,
+      "name": "Anantara Grand Hotel Krasnapolsky",
+      "stars": "5",
+      "lat": 52.3727291,
+      "lon": 4.8943846,
+      "street": "Dam",
+      "housenumber": "9",
+      "website": "https://www.anantara.com/en/grand-hotel-krasnapolsky-amsterdam"
+    },
+    {
+      "osmId": 251187547,
+      "name": "Torenzicht",
+      "stars": "1",
+      "lat": 52.3725261,
+      "lon": 4.8982082,
+      "street": "Oudezijds Achterburgwal",
+      "housenumber": "93",
+      "website": "https://www.hoteltorenzicht.com/"
+    },
+    {
+      "osmId": 251528271,
+      "name": "Hotel des Arts",
+      "stars": null,
+      "lat": 52.3678828,
+      "lon": 4.8926389,
+      "street": "Rokin",
+      "housenumber": "156",
+      "website": "https://www.hoteldesarts.nl/"
+    },
+    {
+      "osmId": 251528284,
+      "name": "NH Schiller",
+      "stars": null,
+      "lat": 52.3656834,
+      "lon": 4.8967092,
+      "street": "Rembrandtplein",
+      "housenumber": "26",
+      "website": "https://www.nh-hotels.nl/"
+    },
+    {
+      "osmId": 251528285,
+      "name": "Cordial",
+      "stars": null,
+      "lat": 52.3707199,
+      "lon": 4.8923394,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 251528289,
+      "name": "Hotel Rokin",
+      "stars": null,
+      "lat": 52.3706637,
+      "lon": 4.8931309,
+      "street": "Rokin",
+      "housenumber": "73",
+      "website": null
+    },
+    {
+      "osmId": 251528295,
+      "name": "City Hotel",
+      "stars": null,
+      "lat": 52.3657224,
+      "lon": 4.8974282,
+      "street": "Utrechtsestraat",
+      "housenumber": "2",
+      "website": "https://www.city-hotel.nl/"
+    },
+    {
+      "osmId": 251528296,
+      "name": "Atlanta",
+      "stars": null,
+      "lat": 52.3659543,
+      "lon": 4.8954921,
+      "street": "Rembrandtplein",
+      "housenumber": "8-10",
+      "website": "http://www.atlantahotel.nl"
+    },
+    {
+      "osmId": 251528300,
+      "name": "Hotel Pagi",
+      "stars": null,
+      "lat": 52.3692848,
+      "lon": 4.8917604,
+      "street": "Rokin",
+      "housenumber": "104",
+      "website": "https://www.hotelpagi.com/"
+    },
+    {
+      "osmId": 251530295,
+      "name": "NH Caransa",
+      "stars": null,
+      "lat": 52.3664488,
+      "lon": 4.8970384,
+      "street": "Rembrandtplein",
+      "housenumber": "19",
+      "website": "https://www.nh-hotels.nl/"
+    },
+    {
+      "osmId": 251823632,
+      "name": "Hotel de l'Europe",
+      "stars": "5",
+      "lat": 52.3676444,
+      "lon": 4.8944657,
+      "street": "Nieuwe Doelenstraat",
+      "housenumber": "2-14",
+      "website": "https://www.deleurope.com"
+    },
+    {
+      "osmId": 318453539,
+      "name": "The Grand",
+      "stars": "5",
+      "lat": 52.3711233,
+      "lon": 4.8954212,
+      "street": "Oudezijds Voorburgwal",
+      "housenumber": "197",
+      "website": "https://www.sofitel-legend-thegrand.com"
+    },
+    {
+      "osmId": 331630133,
+      "name": "Pulitzer",
+      "stars": "5s",
+      "lat": 52.3728089,
+      "lon": 4.8834291,
+      "street": "Prinsengracht",
+      "housenumber": "323",
+      "website": "https://www.pulitzeramsterdam.com/"
+    },
+    {
+      "osmId": 416030643,
+      "name": "Lancaster Hotel Amsterdam",
+      "stars": null,
+      "lat": 52.3658502,
+      "lon": 4.912904,
+      "street": "Plantage Middenlaan",
+      "housenumber": "48",
+      "website": "https://www.thelancasterhotelamsterdam.com/nl/"
+    },
+    {
+      "osmId": 416031707,
+      "name": "The Bridge Hotel",
+      "stars": null,
+      "lat": 52.3626403,
+      "lon": 4.9037722,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 416568030,
+      "name": "Tivoli Doelen Amsterdam",
+      "stars": null,
+      "lat": 52.368205,
+      "lon": 4.8957416,
+      "street": "Nieuwe Doelenstraat",
+      "housenumber": "24",
+      "website": "https://www.nh-collection.com/en/hotel/nh-collection-amsterdam-doelen"
+    },
+    {
+      "osmId": 418586210,
+      "name": "Marriott Hotel",
+      "stars": null,
+      "lat": 52.3624578,
+      "lon": 4.8801835,
+      "street": "Stadhouderskade",
+      "housenumber": "12",
+      "website": "https://www.marriott.com/hotels/travel/amsnt-amsterdam-marriott-hotel/"
+    },
+    {
+      "osmId": 431335034,
+      "name": "Hotel Arena",
+      "stars": "4",
+      "lat": 52.3612334,
+      "lon": 4.9162951,
+      "street": "'s-Gravesandestraat",
+      "housenumber": "55",
+      "website": "https://www.hotelarena.nl"
+    },
+    {
+      "osmId": 432506872,
+      "name": "Hotel Park Plantage",
+      "stars": "3",
+      "lat": 52.3664021,
+      "lon": 4.9112827,
+      "street": "Plantage Middenlaan",
+      "housenumber": "26",
+      "website": "https://www.hotelparkplantage.com"
+    },
+    {
+      "osmId": 439170732,
+      "name": "Hotel Rembrandt",
+      "stars": null,
+      "lat": 52.3671026,
+      "lon": 4.91033,
+      "street": null,
+      "housenumber": null,
+      "website": null
+    },
+    {
+      "osmId": 440088177,
+      "name": "NH City Centre Amsterdam",
+      "stars": "3",
+      "lat": 52.3698407,
+      "lon": 4.8886879,
+      "street": null,
+      "housenumber": null,
+      "website": "http://www.nh-hotels.com/hotel/nh-city-centre-amsterdam"
+    },
+    {
+      "osmId": 441674929,
+      "name": "Ibis",
+      "stars": "3",
+      "lat": 52.3703348,
+      "lon": 4.9075666,
+      "street": "Valkenburgerstraat",
+      "housenumber": "68",
+      "website": "https://www.ibis.com/nl/hotel-3044-ibis-amsterdam-centre-stopera/index.shtml#overview"
+    },
+    {
+      "osmId": 441682026,
+      "name": "Hotel de Munck",
+      "stars": "2",
+      "lat": 52.361375,
+      "lon": 4.9007902,
+      "street": "Achtergracht",
+      "housenumber": "1-3",
+      "website": "https://www.hoteldemunck.com/"
+    },
+    {
+      "osmId": 441754254,
+      "name": "Hermitage Hotel",
+      "stars": null,
+      "lat": 52.3645431,
+      "lon": 4.9035195,
+      "street": "Nieuwe Keizersgracht",
+      "housenumber": "16",
+      "website": "https://www.hotelhermitage.nl/en/"
+    },
+    {
+      "osmId": 447358585,
+      "name": "Hotel Allure",
+      "stars": null,
+      "lat": 52.361897,
+      "lon": 4.9104623,
+      "street": "Sarphatistraat",
+      "housenumber": "117",
+      "website": null
+    }
+  ]
+}
