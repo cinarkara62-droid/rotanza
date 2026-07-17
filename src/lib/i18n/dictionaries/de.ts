@@ -44,6 +44,8 @@ export const de: Dictionary = {
       searchCta: "KI fragen",
     },
     trustedBy: "Entwickelt für Alleinreisende, Paare und Familien, die ihre nächste Reise planen",
+    demoNotice: "Demo-Version – vorerst kostenlos",
+    languagesLabel: "Verfügbar in 6 Sprachen",
     features: {
       eyebrow: "Alles in einer App",
       title: "Ein Begleiter für die ganze Reise",

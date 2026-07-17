@@ -44,6 +44,8 @@ export const es: Dictionary = {
       searchCta: "Preguntar a la IA",
     },
     trustedBy: "Diseñado para viajeros independientes, parejas y familias que planifican su próximo viaje",
+    demoNotice: "Versión de demostración — gratis por ahora",
+    languagesLabel: "Disponible en 6 idiomas",
     features: {
       eyebrow: "Todo en una sola app",
       title: "Un compañero para todo el viaje",

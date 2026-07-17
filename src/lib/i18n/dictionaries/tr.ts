@@ -44,6 +44,8 @@ export const tr: Dictionary = {
       searchCta: "AI'ya Sor",
     },
     trustedBy: "Bir sonraki seyahatini planlayan bireysel gezginler, çiftler ve aileler için tasarlandı",
+    demoNotice: "Demo sürümü — şimdilik ücretsiz",
+    languagesLabel: "6 dilde kullanılabilir",
     features: {
       eyebrow: "Hepsi tek uygulamada",
       title: "Seyahatinin baştan sona tek arkadaşı",

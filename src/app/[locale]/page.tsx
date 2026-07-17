@@ -3,6 +3,7 @@ import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { notFound } from "next/navigation";
 import { HeroQuickSearch } from "@/components/HeroQuickSearch";
+import { LanguageStrip } from "@/components/LanguageStrip";
 
 export default async function HomePage({
   params,
@@ -25,9 +26,14 @@ export default async function HomePage({
 
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8">
           <div className="relative z-10 max-w-xl">
-            <span className="inline-flex items-center rounded-full bg-brand-950/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-950">
-              {dict.home.hero.eyebrow}
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center rounded-full bg-brand-950/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-950">
+                {dict.home.hero.eyebrow}
+              </span>
+              <span className="inline-flex items-center rounded-full bg-coral-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-coral-600">
+                {dict.home.demoNotice}
+              </span>
+            </div>
             <h1 className="mt-5 text-5xl font-extrabold leading-[1.05] tracking-tight text-brand-950 sm:text-6xl">
               {dict.home.hero.titleLine1}
               <br />
@@ -106,9 +112,12 @@ export default async function HomePage({
         </div>
       </section>
 
-      <p className="mx-auto max-w-2xl px-4 py-8 text-center text-sm text-brand-950/50">
+      <p className="mx-auto max-w-2xl px-4 pt-8 text-center text-sm text-brand-950/50">
         {dict.home.trustedBy}
       </p>
+      <div className="pb-8">
+        <LanguageStrip locale={l} label={dict.home.languagesLabel} />
+      </div>
 
       {/* FEATURES */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

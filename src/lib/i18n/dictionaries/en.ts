@@ -42,6 +42,8 @@ export const en = {
       searchCta: "Ask AI",
     },
     trustedBy: "Built for independent travelers, couples, and families planning their next trip",
+    demoNotice: "Demo version — free for now",
+    languagesLabel: "Available in 6 languages",
     features: {
       eyebrow: "Everything in one app",
       title: "One companion for the whole trip",

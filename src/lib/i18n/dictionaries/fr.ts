@@ -44,6 +44,8 @@ export const fr: Dictionary = {
       searchCta: "Demander à l'IA",
     },
     trustedBy: "Conçu pour les voyageurs solo, les couples et les familles qui planifient leur prochain voyage",
+    demoNotice: "Version de démonstration — gratuite pour l'instant",
+    languagesLabel: "Disponible en 6 langues",
     features: {
       eyebrow: "Tout dans une seule appli",
       title: "Un compagnon pour tout le voyage",
