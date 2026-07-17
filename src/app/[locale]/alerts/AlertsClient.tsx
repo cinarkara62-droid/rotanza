@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { PageHeader } from "@/components/PageHeader";
-import { HotelAutocomplete, type HotelSelection } from "@/components/HotelAutocomplete";
 import { PageBackground } from "@/components/PageBackground";
 
 interface Alert {
@@ -21,7 +20,6 @@ interface Alert {
 }
 
 const TYPE_EMOJI: Record<Alert["type"], string> = { hotel: "🏨", flight: "✈️" };
-const TYPES: Alert["type"][] = ["hotel", "flight"];
 
 function Sparkline({ history }: { history: number[] }) {
   const max = Math.max(...history);
@@ -48,12 +46,12 @@ export function AlertsClient({ locale }: { locale: Locale }) {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
-  const [type, setType] = useState<Alert["type"]>("hotel");
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
+  const [originIata, setOriginIata] = useState("");
+  const [destinationIata, setDestinationIata] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
   const [targetPrice, setTargetPrice] = useState("");
-  const [hotelSelection, setHotelSelection] = useState<HotelSelection | null>(null);
 
   useEffect(() => {
     fetch("/api/alerts")
@@ -62,40 +60,50 @@ export function AlertsClient({ locale }: { locale: Locale }) {
       .finally(() => setLoading(false));
   }, []);
 
+  function resetForm() {
+    setOriginIata("");
+    setDestinationIata("");
+    setDepartureDate("");
+    setTargetPrice("");
+    setFormError(null);
+  }
+
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
     const price = Number(targetPrice) || 0;
-    if (!price) return;
-    if (type === "hotel" && !hotelSelection) return;
-    if (type === "flight" && !title) return;
+    if (!price || !originIata || !destinationIata || !departureDate) return;
 
     setSaving(true);
+    setFormError(null);
     try {
       const res = await fetch("/api/alerts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type,
-          name: type === "hotel" ? hotelSelection!.name : title,
-          location: type === "hotel" ? hotelSelection!.location : location,
-          entityId: type === "hotel" ? hotelSelection!.entityId : undefined,
-          targetPrice: price,
-        }),
+        body: JSON.stringify({ originIata, destinationIata, departureDate, targetPrice: price }),
       });
       if (res.status === 403) {
         alert(isTr ? "Plan limitine ulaştınız. Daha fazla alarm için Pro veya Max'e yükseltin." : "You've reached your plan limit. Upgrade to Pro or Max for more alerts.");
         return;
       }
+      if (res.status === 404) {
+        setFormError(isTr ? "Bu tarih için uçuş bulunamadı." : "No flights found for that date.");
+        return;
+      }
+      if (res.status === 503) {
+        setFormError(
+          isTr
+            ? "Uçuş fiyat servisi şu an bağlı değil (Amadeus API anahtarı gerekiyor)."
+            : "Flight pricing service isn't connected yet (needs an Amadeus API key)."
+        );
+        return;
+      }
       if (!res.ok) {
-        alert(isTr ? "Bir şeyler ters gitti, tekrar deneyin." : "Something went wrong, please try again.");
+        setFormError(isTr ? "Bir şeyler ters gitti, tekrar deneyin." : "Something went wrong, please try again.");
         return;
       }
       const data = await res.json();
       setAlerts((prev) => [data.alert, ...prev]);
-      setTitle("");
-      setLocation("");
-      setTargetPrice("");
-      setHotelSelection(null);
+      resetForm();
       setShowForm(false);
     } finally {
       setSaving(false);
@@ -141,62 +149,44 @@ export function AlertsClient({ locale }: { locale: Locale }) {
           onSubmit={handleSave}
           className="mx-auto mt-6 grid max-w-xl grid-cols-1 gap-4 rounded-3xl border border-black/5 bg-white p-6 shadow-sm sm:grid-cols-2 sm:p-8"
         >
+          <p className="text-xs leading-relaxed text-brand-950/50 sm:col-span-2">
+            {isTr
+              ? "✈️ Şu an sadece uçuş fiyat alarmı oluşturabilirsiniz — Amadeus üzerinden gerçek fiyatlarla. Otel fiyat takibi, gerçek bir fiyat kaynağı bağlanana kadar kapalı."
+              : "✈️ Only flight price alerts can be created right now — backed by real Amadeus pricing. Hotel price tracking is disabled until a real pricing source is connected."}
+          </p>
+
           <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
-            {dict.alerts.form.type}
-            <select
-              value={type}
-              onChange={(e) => {
-                setType(e.target.value as Alert["type"]);
-                setTitle("");
-                setLocation("");
-                setHotelSelection(null);
-              }}
-              className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
-            >
-              {TYPES.map((t) => (
-                <option key={t} value={t}>
-                  {TYPE_EMOJI[t]} {t === "hotel" ? dict.reservations.typeLabels.hotel : dict.reservations.typeLabels.flight}
-                </option>
-              ))}
-            </select>
+            {isTr ? "Kalkış (havalimanı kodu)" : "Origin (airport code)"}
+            <input
+              value={originIata}
+              onChange={(e) => setOriginIata(e.target.value.toUpperCase())}
+              placeholder="IST"
+              maxLength={3}
+              required
+              className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm uppercase text-brand-950 outline-none focus:border-brand-400"
+            />
           </label>
-          {type === "hotel" ? (
-            <label className="flex flex-col gap-2 text-sm font-medium text-brand-950 sm:col-span-2">
-              {dict.alerts.form.title}
-              <HotelAutocomplete
-                locale={locale}
-                placeholder={dict.alerts.form.titlePlaceholder}
-                onSelect={(selection) => setHotelSelection(selection)}
-              />
-            </label>
-          ) : (
-            <>
-              <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
-                {dict.alerts.form.title}
-                <input
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder={dict.alerts.form.titlePlaceholder}
-                  required
-                  className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
-                />
-              </label>
-              <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
-                {dict.alerts.form.location}
-                <input
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
-                />
-              </label>
-            </>
-          )}
-          {type === "hotel" && hotelSelection && (
-            <p className="text-xs font-medium text-brand-700 sm:col-span-2">
-              {isTr ? "Seçilen otel: " : "Selected hotel: "}
-              <span className="font-semibold">{hotelSelection.name}</span> · {hotelSelection.location}
-            </p>
-          )}
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
+            {isTr ? "Varış (havalimanı kodu)" : "Destination (airport code)"}
+            <input
+              value={destinationIata}
+              onChange={(e) => setDestinationIata(e.target.value.toUpperCase())}
+              placeholder="CDG"
+              maxLength={3}
+              required
+              className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm uppercase text-brand-950 outline-none focus:border-brand-400"
+            />
+          </label>
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
+            {isTr ? "Kalkış tarihi" : "Departure date"}
+            <input
+              type="date"
+              value={departureDate}
+              onChange={(e) => setDepartureDate(e.target.value)}
+              required
+              className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
+            />
+          </label>
           <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
             {dict.alerts.form.targetPrice}
             <input
@@ -208,26 +198,22 @@ export function AlertsClient({ locale }: { locale: Locale }) {
               className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
             />
           </label>
-          <p className="text-xs leading-relaxed text-brand-950/40 sm:col-span-2">
-            {isTr
-              ? "Otel arama sonuçları OpenStreetMap'ten gelen gerçek işletmelerdir. Alarmlar hesabınıza kaydedilir. Fiyat takibi şu an başlangıç referans fiyatıyla başlar — canlı, gerçek zamanlı fiyatlar için bir uçuş/otel fiyat servisine (ör. Amadeus) bağlanmamız gerekiyor."
-              : "Hotel search results are real businesses from OpenStreetMap. Alerts are saved to your account. Price tracking currently starts from a reference price — live, real-time prices require connecting a flight/hotel pricing service (e.g. Amadeus)."}
-          </p>
+
+          {formError && <p className="text-xs font-medium text-coral-600 sm:col-span-2">{formError}</p>}
+
           <div className="flex gap-3 sm:col-span-2">
             <button
               type="submit"
-              disabled={saving || (type === "hotel" && !hotelSelection)}
+              disabled={saving}
               className="rounded-full bg-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-500/25 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {saving ? (isTr ? "Kaydediliyor…" : "Saving…") : dict.alerts.form.save}
+              {saving ? (isTr ? "Aranıyor…" : "Searching…") : dict.alerts.form.save}
             </button>
             <button
               type="button"
               onClick={() => {
+                resetForm();
                 setShowForm(false);
-                setTitle("");
-                setLocation("");
-                setHotelSelection(null);
               }}
               className="rounded-full border border-black/10 px-6 py-2.5 text-sm font-semibold text-brand-950/70"
             >

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import { searchHotelsByName } from "@/lib/mock-data/hotels";
 import { getCity } from "@/lib/mock-data/cities";
-import { estimateNightlyRate } from "@/lib/budget";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 export interface HotelSelection {
@@ -117,22 +116,18 @@ export function HotelAutocomplete({
               </div>
               {curatedMatches.map((h) => {
                 const city = getCity(h.cityId);
-                const index = city?.dailyCostIndex ?? 1;
                 return (
                   <button
                     key={h.id}
                     type="button"
                     onClick={() => pickCurated(h)}
-                    className="flex w-full items-center justify-between gap-2 px-3.5 py-2 text-start text-sm hover:bg-sand-50"
+                    className="flex w-full items-center gap-2 px-3.5 py-2 text-start text-sm hover:bg-sand-50"
                   >
                     <span className="min-w-0">
                       <span className="block truncate font-medium text-brand-950">🏨 {h.name}</span>
                       <span className="block truncate text-xs text-brand-950/40">
                         {city ? (isTr ? city.cityTr : city.cityEn) : ""}
                       </span>
-                    </span>
-                    <span className="shrink-0 text-xs font-semibold text-brand-950/50">
-                      ~${estimateNightlyRate(index, h.name)}
                     </span>
                   </button>
                 );

@@ -23,6 +23,8 @@ export default async function HomePage({
         <div className="pointer-events-none absolute -left-10 top-24 h-40 w-72 rounded-full bg-white/40 blur-2xl" />
         <div className="pointer-events-none absolute right-10 top-10 h-32 w-56 rounded-full bg-white/30 blur-2xl" />
         <div className="pointer-events-none absolute bottom-0 left-1/3 h-40 w-96 rounded-full bg-white/20 blur-3xl" />
+        {/* soft fade into the page background instead of a hard color cut */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[var(--background)] sm:h-36" />
 
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8">
           <div className="relative z-10 max-w-xl">
