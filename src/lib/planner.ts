@@ -1,11 +1,17 @@
 import { getPoisForCity } from "@/lib/mock-data/pois";
 import { InterestTag, PointOfInterest } from "@/lib/types";
 
+export interface ItineraryStop extends PointOfInterest {
+  aiTip?: string;
+  bestVisitTime?: string;
+  crowdNote?: string;
+}
+
 export interface ItineraryDay {
   day: number;
-  morning?: PointOfInterest;
-  afternoon?: PointOfInterest;
-  evening?: PointOfInterest;
+  morning?: ItineraryStop;
+  afternoon?: ItineraryStop;
+  evening?: ItineraryStop;
 }
 
 const SLOTS: Array<"morning" | "afternoon" | "evening"> = ["morning", "afternoon", "evening"];

@@ -248,16 +248,22 @@ out body ${limit};`;
   });
 }
 
+const PLACE_FILTERS: Record<"restaurant" | "hotel" | "viewpoint", string> = {
+  restaurant: '["amenity"="restaurant"]',
+  hotel: '["tourism"="hotel"]',
+  viewpoint: '["tourism"="viewpoint"]',
+};
+
 export async function findPlacesNear(
   lat: number,
   lon: number,
-  kind: "restaurant" | "hotel",
+  kind: "restaurant" | "hotel" | "viewpoint",
   radiusMeters = 2500,
   limit = 30
 ): Promise<OsmPlace[]> {
   const key = `places:${kind}:${lat.toFixed(3)}:${lon.toFixed(3)}:${radiusMeters}`;
   return cachedFetch(key, async () => {
-    const filter = kind === "restaurant" ? '["amenity"="restaurant"]' : '["tourism"="hotel"]';
+    const filter = PLACE_FILTERS[kind];
     const query = `[out:json][timeout:22];node${filter}["name"](around:${radiusMeters},${lat},${lon});out body ${limit};`;
     const elements = await queryOverpass(query);
     return elements

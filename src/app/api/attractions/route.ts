@@ -23,6 +23,10 @@ export async function GET(req: NextRequest) {
         lon: p.lon,
         categories: categorizeAttraction(p.tags),
         emoji: emojiForAttraction(p.tags),
+        openingHours: p.tags.opening_hours,
+        phone: p.tags.phone ?? p.tags["contact:phone"],
+        website: p.tags.website ?? p.tags["contact:website"],
+        wikidataId: p.tags.wikidata,
       }))
       .filter((p) => p.categories.length > 0);
     return NextResponse.json({ results });

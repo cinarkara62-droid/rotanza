@@ -4,11 +4,11 @@
 // on within a bounded time.
 // Kept just above our API routes' own maxDuration=30 budget so a slow-but-
 // eventually-successful Overpass response isn't cut off client-side first.
-export async function fetchWithTimeout(url: string, timeoutMs = 28000): Promise<Response> {
+export async function fetchWithTimeout(url: string, init?: RequestInit, timeoutMs = 28000): Promise<Response> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    return await fetch(url, { signal: controller.signal });
+    return await fetch(url, { ...init, signal: controller.signal });
   } finally {
     clearTimeout(timer);
   }

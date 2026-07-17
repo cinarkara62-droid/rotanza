@@ -29,6 +29,13 @@ export interface PointOfInterest {
   tags: InterestTag[];
   slot: "morning" | "afternoon" | "evening";
   emoji: string;
+  lat?: number;
+  lon?: number;
+  openingHours?: string;
+  phone?: string;
+  website?: string;
+  wikidataId?: string;
+  photoUrl?: string;
 }
 
 export interface Restaurant {

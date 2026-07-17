@@ -1,16 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { cities, getCity } from "@/lib/mock-data/cities";
-import { generateItineraryFromPois, ItineraryDay } from "@/lib/planner";
+import { generateItineraryFromPois, ItineraryDay, ItineraryStop } from "@/lib/planner";
 import { BudgetLevel, InterestTag, PointOfInterest } from "@/lib/types";
 import { PageHeader } from "@/components/PageHeader";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
+import { PlaceDetailPanel } from "@/components/PlaceDetailPanel";
+import { BudgetPanel } from "@/components/BudgetPanel";
 import { getPoisForCity } from "@/lib/mock-data/pois";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
+
+const RouteMap = dynamic(() => import("@/components/RouteMap").then((m) => m.RouteMap), { ssr: false });
 
 const INTEREST_OPTIONS: InterestTag[] = ["history", "food", "nature", "nightlife", "shopping", "art"];
 const BUDGET_OPTIONS: BudgetLevel[] = ["economy", "standard", "luxury"];
@@ -40,7 +45,9 @@ export function PlannerClient({ locale }: { locale: Locale }) {
   const [days, setDays] = useState(initialDays);
   const [interests, setInterests] = useState<InterestTag[]>(["history", "food"]);
   const [budgetLevel, setBudgetLevel] = useState<BudgetLevel>("standard");
+  const [budgetAmount, setBudgetAmount] = useState("");
   const [itinerary, setItinerary] = useState<ItineraryDay[] | null>(null);
+  const [selectedStop, setSelectedStop] = useState<ItineraryStop | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const [destinationLabel, setDestinationLabel] = useState(
@@ -53,12 +60,41 @@ export function PlannerClient({ locale }: { locale: Locale }) {
     setInterests((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]));
   }
 
+  async function tryAiThenFallback(candidatePois: PointOfInterest[], destination: string) {
+    setSelectedStop(null);
+    try {
+      const res = await fetchWithTimeout("/api/itinerary/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          destination,
+          days,
+          interests,
+          budgetLevel,
+          pois: candidatePois,
+          locale,
+        }),
+      }, 28000);
+      if (!res.ok) throw new Error("ai_unavailable");
+      const data = await res.json();
+      if (!data.itinerary?.length) throw new Error("ai_empty");
+      setItinerary(data.itinerary);
+    } catch {
+      setItinerary(generateItineraryFromPois(candidatePois, days, interests));
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoadError(false);
 
     if (cityId) {
-      setItinerary(generateItineraryFromPois(getPoisForCity(cityId), days, interests));
+      setLoading(true);
+      try {
+        await tryAiThenFallback(getPoisForCity(cityId), destinationLabel);
+      } finally {
+        setLoading(false);
+      }
       return;
     }
 
@@ -68,7 +104,21 @@ export function PlannerClient({ locale }: { locale: Locale }) {
         const res = await fetchWithTimeout(`/api/attractions?lat=${customCity.lat}&lon=${customCity.lon}`);
         const data = await res.json();
         const livePois: PointOfInterest[] = (data.results ?? []).map(
-          (a: { osmId: number; name: string; categories: InterestTag[]; emoji: string }, i: number) => ({
+          (
+            a: {
+              osmId: number;
+              name: string;
+              categories: InterestTag[];
+              emoji: string;
+              lat: number;
+              lon: number;
+              openingHours?: string;
+              phone?: string;
+              website?: string;
+              wikidataId?: string;
+            },
+            i: number
+          ) => ({
             id: `live-${a.osmId}`,
             cityId: "custom",
             nameTr: a.name,
@@ -78,13 +128,19 @@ export function PlannerClient({ locale }: { locale: Locale }) {
             tags: a.categories,
             slot: slotFor(a.categories, i),
             emoji: a.emoji,
+            lat: a.lat,
+            lon: a.lon,
+            openingHours: a.openingHours,
+            phone: a.phone,
+            website: a.website,
+            wikidataId: a.wikidataId,
           })
         );
         if (livePois.length === 0) {
           setLoadError(true);
           setItinerary(null);
         } else {
-          setItinerary(generateItineraryFromPois(livePois, days, interests));
+          await tryAiThenFallback(livePois, destinationLabel);
         }
       } catch {
         setLoadError(true);
@@ -174,6 +230,18 @@ export function PlannerClient({ locale }: { locale: Locale }) {
           </div>
         </div>
 
+        <label className="flex flex-col gap-2 text-sm font-medium text-brand-950 sm:col-span-2">
+          {isTr ? "Toplam bütçeniz (opsiyonel)" : "Your total budget (optional)"}
+          <input
+            type="number"
+            min={0}
+            value={budgetAmount}
+            onChange={(e) => setBudgetAmount(e.target.value)}
+            placeholder={isTr ? "ör. 500" : "e.g. 500"}
+            className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
+          />
+        </label>
+
         <div className="sm:col-span-2">
           <button
             type="submit"
@@ -192,7 +260,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
         </div>
       </form>
 
-      <div className="mx-auto mt-12 max-w-3xl">
+      <div className={`mx-auto mt-12 ${itinerary ? "max-w-6xl" : "max-w-3xl"}`}>
         {!itinerary && !loadError && (
           <p className="text-center text-sm text-brand-950/50">{dict.planner.emptyState}</p>
         )}
@@ -209,37 +277,86 @@ export function PlannerClient({ locale }: { locale: Locale }) {
             <h2 className="text-xl font-bold text-brand-950">
               {dict.planner.resultTitle} — {destinationLabel}
             </h2>
-            <div className="mt-6 space-y-6">
-              {itinerary.map((dayEntry) => (
-                <div key={dayEntry.day} className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-                  <div className="text-sm font-bold uppercase tracking-wide text-brand-500">
-                    {dict.planner.dayLabel} {dayEntry.day}
-                  </div>
-                  <div className="mt-4 space-y-4">
-                    {(["morning", "afternoon", "evening"] as const).map((slot) => {
-                      const poi = dayEntry[slot];
-                      if (!poi) return null;
-                      return (
-                        <div key={slot} className="flex gap-4">
-                          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-xl">
-                            {poi.emoji}
-                          </div>
-                          <div>
-                            <div className="text-xs font-semibold uppercase tracking-wide text-brand-950/40">
-                              {dict.planner.slotLabels[slot]}
-                            </div>
-                            <div className="text-sm font-semibold text-brand-950">
-                              {isTr ? poi.nameTr : poi.nameEn}
-                            </div>
-                            <p className="mt-0.5 text-sm text-brand-950/60">{isTr ? poi.descTr : poi.descEn}</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
+
+            <div className="mt-6">
+              <RouteMap
+                itinerary={itinerary}
+                selectedStopId={selectedStop?.id ?? null}
+                onSelectStop={(stop) => setSelectedStop(stop)}
+                destination={destinationLabel}
+                locale={locale}
+              />
             </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
+              <div className={`space-y-6 ${selectedStop || budgetAmount ? "lg:col-span-2" : "lg:col-span-3"}`}>
+                {itinerary.map((dayEntry) => (
+                  <div key={dayEntry.day} className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
+                    <div className="text-sm font-bold uppercase tracking-wide text-brand-500">
+                      {dict.planner.dayLabel} {dayEntry.day}
+                    </div>
+                    <div className="mt-4 space-y-4">
+                      {(["morning", "afternoon", "evening"] as const).map((slot) => {
+                        const poi = dayEntry[slot];
+                        if (!poi) return null;
+                        return (
+                          <button
+                            key={slot}
+                            type="button"
+                            onClick={() => setSelectedStop(poi)}
+                            className={`flex w-full gap-4 rounded-xl p-1 text-start transition-colors hover:bg-sand-50 ${
+                              selectedStop?.id === poi.id ? "bg-sand-50 ring-1 ring-brand-300" : ""
+                            }`}
+                          >
+                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-xl">
+                              {poi.emoji}
+                            </div>
+                            <div>
+                              <div className="text-xs font-semibold uppercase tracking-wide text-brand-950/40">
+                                {dict.planner.slotLabels[slot]}
+                              </div>
+                              <div className="text-sm font-semibold text-brand-950">
+                                {isTr ? poi.nameTr : poi.nameEn}
+                              </div>
+                              <p className="mt-0.5 text-sm text-brand-950/60">{isTr ? poi.descTr : poi.descEn}</p>
+                              {poi.aiTip && (
+                                <div className="mt-2 rounded-xl bg-brand-50 px-3 py-2 text-xs text-brand-700">
+                                  {poi.bestVisitTime && (
+                                    <span className="font-semibold">
+                                      {isTr ? "En iyi zaman" : "Best time"}: {poi.bestVisitTime} ·{" "}
+                                    </span>
+                                  )}
+                                  {poi.aiTip}
+                                </div>
+                              )}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {(selectedStop || budgetAmount) && (
+                <div className="space-y-6 lg:col-span-1">
+                  {budgetAmount && Number(budgetAmount) > 0 && (
+                    <BudgetPanel
+                      budgetAmount={Number(budgetAmount)}
+                      currency={city?.currency ?? (isTr ? "TRY" : "USD")}
+                      days={days}
+                      budgetLevel={budgetLevel}
+                      dailyCostIndex={city?.dailyCostIndex ?? 1}
+                      isTr={isTr}
+                    />
+                  )}
+                  {selectedStop && (
+                    <PlaceDetailPanel stop={selectedStop} locale={locale} onClose={() => setSelectedStop(null)} />
+                  )}
+                </div>
+              )}
+            </div>
+
             <p className="mt-6 text-center text-xs text-brand-950/40">
               {city ? dict.planner.disclaimer : isTr ? "Bu şehir için gerçek zamanlı OpenStreetMap verisiyle oluşturuldu." : "Generated from real-time OpenStreetMap data for this city."}
             </p>

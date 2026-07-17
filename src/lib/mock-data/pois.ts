@@ -46,6 +46,8 @@ function buildCityPois(cityId: string): PointOfInterest[] {
     tags: a.categories,
     slot: slotFor(a.categories, i),
     emoji: a.emoji,
+    lat: a.lat,
+    lon: a.lon,
   }));
 
   const cityRestaurants = restaurants.filter((r) => r.cityId === cityId).slice(0, 20);
