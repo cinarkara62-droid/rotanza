@@ -1,6 +1,7 @@
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { notFound, redirect } from "next/navigation";
 import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 import { ReservationsClient } from "./ReservationsClient";
 
 export default async function ReservationsPage({
@@ -15,5 +16,8 @@ export default async function ReservationsPage({
   const session = await auth();
   if (!session?.user?.id) redirect(`/${l}/login`);
 
-  return <ReservationsClient locale={l} />;
+  const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+  if (!user) redirect(`/${l}/login`);
+
+  return <ReservationsClient locale={l} plan={user.plan} />;
 }

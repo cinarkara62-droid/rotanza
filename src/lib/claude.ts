@@ -1,5 +1,4 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { COMPARE_CATEGORIES, type DestinationComparison } from "@/lib/compare-categories";
 
 // Lazily constructed so the app still builds/runs without a Claude key —
 // only the AI itinerary/compare routes need this, and they fall back to the
@@ -163,56 +162,3 @@ export async function generateViewpointInsight(params: {
   return JSON.parse(block.text) as ViewpointInsight;
 }
 
-const COMPARE_SCHEMA = {
-  type: "object" as const,
-  properties: {
-    ...Object.fromEntries(
-      COMPARE_CATEGORIES.map((cat) => [
-        cat,
-        {
-          type: "object",
-          properties: { a: { type: "string" }, b: { type: "string" } },
-          required: ["a", "b"],
-          additionalProperties: false,
-        },
-      ])
-    ),
-    recommendation: { type: "string" },
-  },
-  required: [...COMPARE_CATEGORIES, "recommendation"],
-  additionalProperties: false,
-};
-
-export async function generateDestinationComparison(params: {
-  destinationA: string;
-  destinationB: string;
-  preferences?: string;
-  locale: string;
-}): Promise<DestinationComparison> {
-  const client = getClaude();
-  const isTr = params.locale === "tr";
-
-  const response = await client.messages.create({
-    model: MODEL,
-    max_tokens: 2048,
-    output_config: { format: { type: "json_schema", schema: COMPARE_SCHEMA } },
-    messages: [
-      {
-        role: "user",
-        content: `Compare these two travel destinations for a traveler deciding between them: "${params.destinationA}" vs "${params.destinationB}".${
-          params.preferences ? ` The traveler's stated preferences: ${params.preferences}.` : ""
-        }
-
-For each category below, write a short phrase (a few words) describing destination A and destination B respectively: best time to visit (bestTime), culture, nightlife, transport, food, price level, safety, family-friendliness, suitability for couples, suitability for solo travel, walkability, and public transit quality.
-
-Then write a short "recommendation" paragraph (2-4 sentences) saying which destination you'd recommend and why, tailored to the traveler's stated preferences if given, otherwise a balanced general take.
-
-Write everything in ${isTr ? "Turkish" : "English"}.`,
-      },
-    ],
-  });
-
-  const block = response.content.find((b) => b.type === "text");
-  if (!block || block.type !== "text") throw new Error("Claude returned no text content");
-  return JSON.parse(block.text) as DestinationComparison;
-}
