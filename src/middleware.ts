@@ -1,18 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { defaultLocale, locales } from "@/lib/i18n/config";
 
+// Browser Accept-Language is intentionally NOT used here — the site should
+// always land on English for a first-time visitor regardless of their
+// browser/OS language, and only switch once they explicitly pick a language
+// (which sets this cookie via LanguageSwitcher/LanguageStrip).
 function detectLocale(request: NextRequest): string {
   const cookieLocale = request.cookies.get("locale")?.value;
   if (cookieLocale && (locales as readonly string[]).includes(cookieLocale)) {
     return cookieLocale;
-  }
-  const acceptLanguage = request.headers.get("accept-language")?.toLowerCase() ?? "";
-  for (const locale of locales) {
-    if (acceptLanguage.startsWith(locale)) return locale;
-  }
-  // fall back to scanning secondary preferences, e.g. "fr-FR,fr;q=0.9,en;q=0.8"
-  for (const locale of locales) {
-    if (acceptLanguage.includes(`,${locale}`) || acceptLanguage.includes(`${locale};`)) return locale;
   }
   return defaultLocale;
 }
