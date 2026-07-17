@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import "../globals.css";
 import { isLocale, isRtl, locales, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -39,6 +40,25 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={isRtl(locale as Locale) ? "rtl" : "ltr"}>
+      <head>
+        <Script
+          id="travelpayouts-drive"
+          strategy="afterInteractive"
+          data-noptimize="1"
+          data-cfasync="false"
+          data-wpfc-render="false"
+          seraph-accel-crit="1"
+          data-no-defer="1"
+          dangerouslySetInnerHTML={{
+            __html: `(function () {
+  var script = document.createElement("script");
+  script.async = 1;
+  script.src = 'https://tpembars.com/NTUxNjl5.js?t=551629';
+  document.head.appendChild(script);
+})();`,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
         <Providers session={session}>
           <Navbar locale={locale as Locale} dict={dict} />
