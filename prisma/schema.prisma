@@ -21,13 +21,6 @@ model User {
   subscriptionStatus   String? // Stripe subscription status, e.g. "active", "canceled", "past_due"
   currentPeriodEnd     DateTime?
 
-  // Smart Travel Notifications preferences (Pro/Max only). Freeform keys:
-  // "checkin" | "boarding" | "transfer" | "hotelCheckin" | "delay" | "gate"
-  // | "weather" | "localTransport" -> boolean. Only the first four are
-  // currently acted on by the reminders cron (see reservation-notifications
-  // route) — the rest have no real data source wired up yet.
-  notificationPrefs Json @default("{}")
-
   priceAlerts  PriceAlert[]
   reservations Reservation[]
 }
@@ -66,13 +59,6 @@ model Reservation {
   notes        String?
 
   reminderSentAt DateTime?
-
-  // Idempotency guards for Smart Travel Notifications — one per reminder
-  // type so the cron never emails the same reminder twice.
-  checkinNotifiedAt       DateTime?
-  boardingNotifiedAt      DateTime?
-  transferNotifiedAt      DateTime?
-  hotelCheckinNotifiedAt  DateTime?
 
   createdAt DateTime @default(now())
 
