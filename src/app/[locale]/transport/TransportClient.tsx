@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Script from "next/script";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { cities, getCity } from "@/lib/mock-data/cities";
@@ -69,6 +70,22 @@ export function TransportClient({ locale }: { locale: Locale }) {
   return (
     <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
       <PageHeader eyebrow={dict.transport.eyebrow} title={dict.transport.title} subtitle={dict.transport.subtitle} />
+
+      <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-brand-950">
+          {isTr ? "Havalimanı transferi ayırt" : "Book an airport transfer"}
+        </h3>
+        <p className="mt-1 text-xs text-brand-950/40">
+          {isTr ? "Kiwitaxi ile güvenilir transfer rezervasyonu" : "Reliable transfer booking via Kiwitaxi"}
+        </p>
+        <div className="mt-4">
+          <Script
+            strategy="afterInteractive"
+            src="https://tpscr.com/content?currency=USD&trs=551629&shmarker=752331&locale=en&powered_by=true&transfer_options_limit=10&transfer_options=MCR&disable_currency_selector=true&hide_form_extras=true&hide_external_links=true&campaign_id=1&promo_id=3879"
+            charSet="utf-8"
+          />
+        </div>
+      </div>
 
       <div className="mx-auto mt-10 max-w-sm">
         <CitySearchInput
