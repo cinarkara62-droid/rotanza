@@ -69,7 +69,7 @@ function Cup({ x, y }: { x: number; y: number }) {
 
 export function RestaurantsPageBackground() {
   return (
-    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#fdf3ee] via-[#faf6f0] to-[#fdf0ec]">
+    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#171018] via-[#1c1520] to-[#14101a]">
       <svg
         viewBox="0 0 1000 500"
         className="absolute inset-0 h-full w-full opacity-[0.05]"

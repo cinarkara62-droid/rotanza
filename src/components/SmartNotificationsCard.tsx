@@ -117,14 +117,14 @@ export function SmartNotificationsCard({ locale, plan }: { locale: Locale; plan:
   }
 
   return (
-    <div className="relative mt-12 overflow-hidden rounded-3xl border border-black/5 bg-white p-6 shadow-sm sm:p-8">
+    <div className="relative mt-12 overflow-hidden rounded-3xl border border-white/10 bg-sand-100 p-6 shadow-sm sm:p-8">
       <div className="flex items-center gap-2">
         <span className="text-xl">🔔</span>
-        <h2 className="text-lg font-bold text-brand-950">
+        <h2 className="text-lg font-bold text-brand-50">
           {isTr ? "Akıllı Seyahat Bildirimleri" : "Smart Travel Notifications"}
         </h2>
       </div>
-      <p className="mt-1.5 text-sm text-brand-950/60">
+      <p className="mt-1.5 text-sm text-brand-50/60">
         {isTr
           ? "Yolculuğunuz öncesinde ve sırasında akıllı hatırlatmalar alın."
           : "Receive intelligent reminders before and during your journey."}
@@ -138,14 +138,14 @@ export function SmartNotificationsCard({ locale, plan }: { locale: Locale; plan:
           >
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-brand-950">{isTr ? opt.titleTr : opt.titleEn}</span>
+                <span className="text-sm font-semibold text-brand-50">{isTr ? opt.titleTr : opt.titleEn}</span>
                 {!opt.implemented && (
-                  <span className="shrink-0 rounded-full bg-black/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-950/40">
+                  <span className="shrink-0 rounded-full bg-black/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-50/40">
                     {isTr ? "Yakında" : "Coming soon"}
                   </span>
                 )}
               </div>
-              <div className="mt-0.5 text-xs text-brand-950/50">{isTr ? opt.descTr : opt.descEn}</div>
+              <div className="mt-0.5 text-xs text-brand-50/50">{isTr ? opt.descTr : opt.descEn}</div>
             </div>
             <ToggleSwitch
               checked={!!prefs[opt.key]}
@@ -158,8 +158,8 @@ export function SmartNotificationsCard({ locale, plan }: { locale: Locale; plan:
       </div>
 
       {!isPremium && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white/60 backdrop-blur-sm">
-          <div className="mx-4 flex flex-col items-center rounded-2xl border border-black/5 bg-white px-8 py-7 text-center shadow-lg">
+        <div className="absolute inset-0 flex items-center justify-center bg-sand-50/70 backdrop-blur-sm">
+          <div className="mx-4 flex flex-col items-center rounded-2xl border border-white/10 bg-sand-100 px-8 py-7 text-center shadow-lg">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-2xl">🔒</div>
             <span className="mt-3 rounded-full bg-brand-500/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-700">
               {isTr ? "Pro ve Max ile kullanılabilir" : "Available with Pro & Max"}

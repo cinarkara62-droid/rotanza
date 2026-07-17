@@ -42,31 +42,31 @@ export function BudgetPanel({
   const remaining = budgetAmount - result.total;
 
   return (
-    <div className="animate-card-in rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
-      <div className="text-xs font-bold uppercase tracking-wide text-brand-950/40">
+    <div className="animate-card-in rounded-2xl border border-white/10 bg-sand-100 p-5 shadow-sm">
+      <div className="text-xs font-bold uppercase tracking-wide text-brand-50/40">
         {isTr ? "Bütçe" : "Budget"}
       </div>
       <div className="mt-3 space-y-2 text-sm">
         <div className="flex justify-between">
-          <span className="text-brand-950/60">{isTr ? "Toplam bütçe" : "Total budget"}</span>
-          <span className="font-semibold text-brand-950">
+          <span className="text-brand-50/60">{isTr ? "Toplam bütçe" : "Total budget"}</span>
+          <span className="font-semibold text-brand-50">
             {budgetAmount.toLocaleString()} {currency}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-brand-950/60">{isTr ? "Tahmini harcanan" : "Estimated spent"}</span>
-          <span className="font-semibold text-brand-950">
+          <span className="text-brand-50/60">{isTr ? "Tahmini harcanan" : "Estimated spent"}</span>
+          <span className="font-semibold text-brand-50">
             {result.total.toLocaleString()} {currency}
           </span>
         </div>
-        <div className="flex justify-between border-t border-black/5 pt-2">
-          <span className="text-brand-950/60">{isTr ? "Kalan bütçe" : "Remaining"}</span>
+        <div className="flex justify-between border-t border-white/10 pt-2">
+          <span className="text-brand-50/60">{isTr ? "Kalan bütçe" : "Remaining"}</span>
           <span className={`font-bold ${remaining < 0 ? "text-coral-600" : "text-brand-600"}`}>
             {remaining.toLocaleString()} {currency}
           </span>
         </div>
       </div>
-      <p className="mt-3 text-[11px] leading-relaxed text-brand-950/40">
+      <p className="mt-3 text-[11px] leading-relaxed text-brand-50/40">
         {isTr
           ? "Tahmini harcama; konaklama, yemek, ulaşım ve aktivite için kaba bir yaklaşımdır, gerçek fiyat kaynağına bağlı değildir."
           : "Estimated spend is a rough approximation across accommodation, food, transport and activities — not sourced from real pricing."}

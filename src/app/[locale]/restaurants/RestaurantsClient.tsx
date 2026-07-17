@@ -104,12 +104,12 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
           }}
         />
 
-        <label className="flex flex-1 flex-col gap-2 text-sm font-medium text-brand-950">
+        <label className="flex flex-1 flex-col gap-2 text-sm font-medium text-brand-50">
           {dict.restaurants.filterCuisine}
           <select
             value={cuisine}
             onChange={(e) => setCuisine(e.target.value)}
-            className="rounded-xl border border-black/10 bg-white px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
+            className="rounded-xl border border-white/15 bg-sand-100 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
           >
             <option value="all">{dict.restaurants.filterAll}</option>
             {cuisines.map((c) => (
@@ -122,14 +122,14 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
       </div>
 
       {customCity && (
-        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-brand-950/40">
+        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-brand-50/40">
           {isTr
             ? `"${customCity.name}" için OpenStreetMap üzerinden canlı sonuçlar gösteriliyor.`
             : `Showing live OpenStreetMap results for "${customCity.name}".`}
         </p>
       )}
       {!customCity && city && (
-        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-brand-950/40">
+        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-brand-50/40">
           {isTr
             ? `${city.cityTr} için OpenStreetMap'ten alınan gerçek işletme verileri.`
             : `Real business data for ${city.cityEn}, sourced from OpenStreetMap.`}
@@ -138,12 +138,12 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
 
       <div className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-5 sm:grid-cols-2">
         {liveLoading && (
-          <p className="col-span-2 text-center text-sm text-brand-950/50">
+          <p className="col-span-2 text-center text-sm text-brand-50/50">
             {isTr ? "Yükleniyor… küçük şehirlerde biraz uzun sürebilir." : "Loading… this can take a bit longer for smaller cities."}
           </p>
         )}
         {liveError && (
-          <p className="col-span-2 text-center text-sm text-brand-950/50">
+          <p className="col-span-2 text-center text-sm text-brand-50/50">
             {isTr
               ? "Canlı veri şu anda alınamadı, lütfen daha sonra tekrar deneyin."
               : "Couldn't fetch live data right now — please try again shortly."}
@@ -151,15 +151,15 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
         )}
         {!liveLoading &&
           filtered.map((r) => (
-            <div key={r.id} className="rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
+            <div key={r.id} className="rounded-2xl border border-white/10 bg-sand-100 p-5 shadow-sm">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-xl">
                     {r.emoji}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-brand-950">{r.name}</div>
-                    <div className="text-xs text-brand-950/50">{isTr ? r.cuisineTr : r.cuisineEn}</div>
+                    <div className="text-sm font-semibold text-brand-50">{r.name}</div>
+                    <div className="text-xs text-brand-50/50">{isTr ? r.cuisineTr : r.cuisineEn}</div>
                   </div>
                 </div>
                 <a
@@ -171,11 +171,11 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
                   {isTr ? "Haritada gör" : "View on map"}
                 </a>
               </div>
-              {r.address && <p className="mt-3 text-sm leading-relaxed text-brand-950/60">{r.address}</p>}
+              {r.address && <p className="mt-3 text-sm leading-relaxed text-brand-50/60">{r.address}</p>}
             </div>
           ))}
         {!liveLoading && !liveError && filtered.length === 0 && (
-          <p className="col-span-2 text-center text-sm text-brand-950/50">{dict.restaurants.noResults}</p>
+          <p className="col-span-2 text-center text-sm text-brand-50/50">{dict.restaurants.noResults}</p>
         )}
       </div>
     </div>

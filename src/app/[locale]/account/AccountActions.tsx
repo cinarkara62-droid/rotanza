@@ -54,7 +54,7 @@ export function UpgradeButtons({
       </button>
       <a
         href={`/${locale}/pricing`}
-        className="rounded-full border border-black/10 px-5 py-2.5 text-center text-sm font-semibold text-brand-950/70"
+        className="rounded-full border border-white/15 px-5 py-2.5 text-center text-sm font-semibold text-brand-50/70"
       >
         {viewPlansLabel}
       </a>
@@ -92,7 +92,7 @@ export function ManageBillingButton({ locale, label }: { locale: Locale; label: 
     <button
       onClick={manage}
       disabled={loading}
-      className="rounded-full border border-black/10 px-5 py-2.5 text-sm font-semibold text-brand-950/70 disabled:opacity-60"
+      className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-brand-50/70 disabled:opacity-60"
     >
       {loading ? "…" : label}
     </button>

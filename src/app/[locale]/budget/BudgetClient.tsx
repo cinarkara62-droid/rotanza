@@ -41,7 +41,7 @@ function PillGroup<T extends string>({
           className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
             value === opt
               ? "border-brand-500 bg-brand-500 text-white"
-              : "border-black/10 bg-white text-brand-950/70 hover:border-brand-300"
+              : "border-white/15 bg-sand-100 text-brand-50/70 hover:border-brand-300"
           }`}
         >
           {labels[opt]}
@@ -93,7 +93,7 @@ export function BudgetClient({ locale }: { locale: Locale }) {
   return (
     <div className="relative z-10 mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       <PageBackground
-        gradientClassName="bg-gradient-to-br from-[#fdf6ec] via-[#faf7f0] to-[#fdf1ea]"
+        gradientClassName="bg-gradient-to-br from-[#171018] via-[#1c1520] to-[#14101a]"
         dotColor="#f2632f"
         dotSeedA={23}
         dotSeedB={37}
@@ -108,7 +108,7 @@ export function BudgetClient({ locale }: { locale: Locale }) {
       <PageHeader eyebrow={dict.budget.eyebrow} title={dict.budget.title} subtitle={dict.budget.subtitle} />
 
       <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-8 lg:grid-cols-5">
-        <div className="space-y-6 rounded-3xl border border-black/5 bg-white p-6 shadow-sm lg:col-span-3 sm:p-8">
+        <div className="space-y-6 rounded-3xl border border-white/10 bg-sand-100 p-6 shadow-sm lg:col-span-3 sm:p-8">
           <CitySearchInput
             locale={locale}
             label={dict.budget.form.city}
@@ -125,7 +125,7 @@ export function BudgetClient({ locale }: { locale: Locale }) {
             }}
           />
           {customCity && (
-            <p className="-mt-3 text-xs text-brand-950/40">
+            <p className="-mt-3 text-xs text-brand-50/40">
               {isTr
                 ? "Bu şehir için ortalama bir maliyet endeksi kullanılıyor (tahmini)."
                 : "Using an average cost index for this city (estimated)."}
@@ -133,7 +133,7 @@ export function BudgetClient({ locale }: { locale: Locale }) {
           )}
 
           <div className="grid grid-cols-2 gap-4">
-            <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
+            <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
               {dict.budget.form.travelers}
               <input
                 type="number"
@@ -141,10 +141,10 @@ export function BudgetClient({ locale }: { locale: Locale }) {
                 max={12}
                 value={travelers}
                 onChange={(e) => setTravelers(Math.min(12, Math.max(1, Number(e.target.value) || 1)))}
-                className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
+                className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
               />
             </label>
-            <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
+            <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
               {dict.budget.form.days}
               <input
                 type="number"
@@ -152,25 +152,25 @@ export function BudgetClient({ locale }: { locale: Locale }) {
                 max={30}
                 value={days}
                 onChange={(e) => setDays(Math.min(30, Math.max(1, Number(e.target.value) || 1)))}
-                className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
+                className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
               />
             </label>
           </div>
 
           <div>
-            <div className="mb-2 text-sm font-medium text-brand-950">{dict.budget.form.accommodation}</div>
+            <div className="mb-2 text-sm font-medium text-brand-50">{dict.budget.form.accommodation}</div>
             <PillGroup options={ACCOMMODATION_OPTIONS} value={accommodation} onChange={setAccommodation} labels={dict.budget.accommodationLabels} />
           </div>
           <div>
-            <div className="mb-2 text-sm font-medium text-brand-950">{dict.budget.form.meals}</div>
+            <div className="mb-2 text-sm font-medium text-brand-50">{dict.budget.form.meals}</div>
             <PillGroup options={MEALS_OPTIONS} value={meals} onChange={setMeals} labels={dict.budget.mealsLabels} />
           </div>
           <div>
-            <div className="mb-2 text-sm font-medium text-brand-950">{dict.budget.form.transportStyle}</div>
+            <div className="mb-2 text-sm font-medium text-brand-50">{dict.budget.form.transportStyle}</div>
             <PillGroup options={TRANSPORT_OPTIONS} value={transportStyle} onChange={setTransportStyle} labels={dict.budget.transportLabels} />
           </div>
           <div>
-            <div className="mb-2 text-sm font-medium text-brand-950">{dict.budget.form.activities}</div>
+            <div className="mb-2 text-sm font-medium text-brand-50">{dict.budget.form.activities}</div>
             <PillGroup options={ACTIVITIES_OPTIONS} value={activities} onChange={setActivities} labels={dict.budget.activitiesLabels} />
           </div>
         </div>

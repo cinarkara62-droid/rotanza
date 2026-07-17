@@ -31,7 +31,7 @@ export function HeroQuickSearch({
 
   return (
     <div className="mt-8 max-w-md">
-      <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-brand-950">
+      <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-brand-50">
         <span aria-hidden>✈️</span>
         {label}
       </p>

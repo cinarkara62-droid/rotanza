@@ -104,32 +104,32 @@ export function TransportClient({ locale }: { locale: Locale }) {
 
       <PageHeader eyebrow={dict.transport.eyebrow} title={dict.transport.title} subtitle={dict.transport.subtitle} />
 
-      <div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-2xl border border-black/5 bg-gradient-to-br from-white via-white to-brand-50/60 p-6 shadow-sm">
+      <div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white via-white to-brand-50/60 p-6 shadow-sm">
         <div className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-500/15 text-lg">
             🧭
           </div>
-          <h3 className="text-sm font-semibold text-brand-950">{isTr ? "Rota ara" : "Search a route"}</h3>
+          <h3 className="text-sm font-semibold text-brand-50">{isTr ? "Rota ara" : "Search a route"}</h3>
         </div>
         <form onSubmit={handleRouteSearch} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
             {isTr ? "Nereden" : "From"}
             <input
               value={routeFrom}
               onChange={(e) => setRouteFrom(e.target.value)}
               placeholder={isTr ? "ör. Havalimanı" : "e.g. Airport"}
               required
-              className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
             />
           </label>
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
             {isTr ? "Nereye" : "To"}
             <input
               value={routeTo}
               onChange={(e) => setRouteTo(e.target.value)}
               placeholder={isTr ? "ör. Şehir Merkezi" : "e.g. City Center"}
               required
-              className="rounded-xl border border-black/10 bg-sand-50 px-3 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
             />
           </label>
           <button
@@ -145,10 +145,10 @@ export function TransportClient({ locale }: { locale: Locale }) {
           className="mt-5 flex flex-col items-start justify-between gap-3 rounded-2xl border-l-4 border-coral-400 bg-sand-50/70 p-4 sm:flex-row sm:items-center"
         >
           <div>
-            <div className="text-sm font-semibold text-brand-950">
+            <div className="text-sm font-semibold text-brand-50">
               🚖 {isTr ? "Özel transfere mi ihtiyacın var?" : "Need a private transfer?"}
             </div>
-            <p className="mt-0.5 text-xs text-brand-950/50">
+            <p className="mt-0.5 text-xs text-brand-50/50">
               {isTr
                 ? "KiwiTaxi ile güvenilir havalimanı transferi ayırt."
                 : "Book a reliable airport transfer with KiwiTaxi."}
@@ -157,7 +157,7 @@ export function TransportClient({ locale }: { locale: Locale }) {
           <button
             type="button"
             onClick={() => setShowKiwiWidget((v) => !v)}
-            className="shrink-0 rounded-full border border-black/10 bg-white px-5 py-2 text-sm font-semibold text-brand-950 transition-colors hover:border-brand-300"
+            className="shrink-0 rounded-full border border-white/15 bg-sand-100 px-5 py-2 text-sm font-semibold text-brand-50 transition-colors hover:border-brand-300"
           >
             {isTr ? "KiwiTaxi ile Ayırt" : "Book with KiwiTaxi"}
           </button>
@@ -172,7 +172,7 @@ export function TransportClient({ locale }: { locale: Locale }) {
 
       {estimate && (
         <div className="mx-auto mt-14 max-w-5xl">
-          <h2 className="text-center text-2xl font-bold tracking-tight text-brand-950 sm:text-3xl">
+          <h2 className="text-center text-2xl font-bold tracking-tight text-brand-50 sm:text-3xl">
             {isTr ? "Oraya Ulaşmanın En İyi Yolları" : "Best Ways to Get There"}
           </h2>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -216,7 +216,7 @@ export function TransportClient({ locale }: { locale: Locale }) {
               }}
             />
           </div>
-          <p className="mt-6 text-center text-[11px] text-brand-950/35">
+          <p className="mt-6 text-center text-[11px] text-brand-50/35">
             {isTr
               ? "Süre ve fiyatlar genel tahminlerdir, gerçek zamanlı veri değildir."
               : "Durations and prices are general estimates, not real-time data."}
@@ -244,13 +244,13 @@ export function TransportClient({ locale }: { locale: Locale }) {
       </div>
 
       {liveLoading && (
-        <p className="mt-8 text-center text-sm text-brand-950/50">
+        <p className="mt-8 text-center text-sm text-brand-50/50">
           {isTr ? "Hat verisi aranıyor… bu biraz sürebilir." : "Looking up transit lines… this can take a moment."}
         </p>
       )}
 
       {liveNotFound && !liveLoading && (
-        <p className="mt-8 text-center text-sm text-brand-950/50">
+        <p className="mt-8 text-center text-sm text-brand-50/50">
           {isTr
             ? "Bu şehir için OpenStreetMap'te metro/hafif raylı hat verisi bulunamadı (ya sistem yok ya da haritalanmamış)."
             : "No metro/light-rail line data was found for this city in OpenStreetMap (either it doesn't have one, or it isn't mapped)."}
@@ -261,15 +261,15 @@ export function TransportClient({ locale }: { locale: Locale }) {
         <div className="mt-10 space-y-8">
           <div
             id="metro-map-section"
-            className="overflow-hidden rounded-2xl border border-black/5 border-t-4 border-t-brand-500 bg-white p-6 shadow-sm"
+            className="overflow-hidden rounded-2xl border border-white/10 border-t-4 border-t-brand-500 bg-sand-100 p-6 shadow-sm"
           >
             <div className="flex items-center gap-2.5">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-500/15 text-lg">
                 🚇
               </div>
-              <h2 className="text-base font-semibold text-brand-950">{systemLabel}</h2>
+              <h2 className="text-base font-semibold text-brand-50">{systemLabel}</h2>
             </div>
-            <p className="mt-1 text-xs text-brand-950/40">
+            <p className="mt-1 text-xs text-brand-50/40">
               {city ? `${city.emoji} ${isTr ? city.cityTr : city.cityEn}` : ""}
               {city ? " · " : ""}
               {isTr ? `${activeLines.length} hat gösteriliyor` : `${activeLines.length} lines shown`}
@@ -277,7 +277,7 @@ export function TransportClient({ locale }: { locale: Locale }) {
             <div className="mt-5 overflow-x-auto">
               <MetroSchematic lines={activeLines} locale={locale} />
             </div>
-            <p className="mt-4 text-[11px] text-brand-950/35">
+            <p className="mt-4 text-[11px] text-brand-50/35">
               {isTr
                 ? "Bu, hatların gerçek isim, durak ve konum bilgileriyle çizilmiş özgün bir şemadır — resmi ulaşım haritası değildir. Güncel sefer bilgisi için resmi ulaşım uygulamasını kullanın."
                 : "This is an original schematic drawn from each line's real name, stations, and coordinates — not an official transit map. Check the official transit app for live schedules."}
@@ -286,20 +286,20 @@ export function TransportClient({ locale }: { locale: Locale }) {
 
           {transport && !customCity && (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-                <h3 className="text-sm font-semibold text-brand-950">{dict.transport.tipsTitle}</h3>
+              <div className="rounded-2xl border border-white/10 bg-sand-100 p-6 shadow-sm">
+                <h3 className="text-sm font-semibold text-brand-50">{dict.transport.tipsTitle}</h3>
                 <ul className="mt-3 space-y-2.5">
                   {(isTr ? transport.tipsTr : transport.tipsEn).map((tip) => (
-                    <li key={tip} className="flex gap-2 text-sm leading-relaxed text-brand-950/60">
+                    <li key={tip} className="flex gap-2 text-sm leading-relaxed text-brand-50/60">
                       <span className="text-brand-500">•</span>
                       {tip}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-                <h3 className="text-sm font-semibold text-brand-950">{dict.transport.ticketTitle}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-brand-950/60">
+              <div className="rounded-2xl border border-white/10 bg-sand-100 p-6 shadow-sm">
+                <h3 className="text-sm font-semibold text-brand-50">{dict.transport.ticketTitle}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-brand-50/60">
                   {isTr ? transport.ticketTr : transport.ticketEn}
                 </p>
               </div>

@@ -52,8 +52,8 @@ export function PricingClient({ locale }: { locale: Locale }) {
   return (
     <div className="relative z-10 mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
       <PageBackground
-        gradientClassName="bg-gradient-to-br from-[#eaf6f2] via-[#f6f5f0] to-[#fdf3ee]"
-        dotColor="#0a6f5d"
+        gradientClassName="bg-gradient-to-br from-[#0a1a2e] via-[#141826] to-[#171018]"
+        dotColor="#34acf7"
         dotSeedA={29}
         dotSeedB={11}
         blobs={[
@@ -66,11 +66,11 @@ export function PricingClient({ locale }: { locale: Locale }) {
       <PageHeader eyebrow={dict.pricing.eyebrow} title={dict.pricing.title} subtitle={dict.pricing.subtitle} />
 
       <div className="mt-8 flex justify-center">
-        <div className="inline-flex items-center rounded-full border border-black/10 bg-white p-1">
+        <div className="inline-flex items-center rounded-full border border-white/15 bg-sand-100 p-1">
           <button
             onClick={() => setYearly(false)}
             className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-              !yearly ? "bg-brand-950 text-white" : "text-brand-950/60"
+              !yearly ? "bg-brand-950 text-white" : "text-brand-50/60"
             }`}
           >
             {dict.pricing.monthly}
@@ -78,7 +78,7 @@ export function PricingClient({ locale }: { locale: Locale }) {
           <button
             onClick={() => setYearly(true)}
             className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-              yearly ? "bg-brand-950 text-white" : "text-brand-950/60"
+              yearly ? "bg-brand-950 text-white" : "text-brand-50/60"
             }`}
           >
             {dict.pricing.yearly}
@@ -91,13 +91,13 @@ export function PricingClient({ locale }: { locale: Locale }) {
 
       <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
         {/* FREE */}
-        <div className="rounded-3xl border border-black/5 bg-white p-7">
-          <h3 className="text-lg font-bold text-brand-950">{free.name}</h3>
-          <p className="mt-1 text-sm text-brand-950/50">{free.tagline}</p>
-          <div className="mt-5 text-3xl font-extrabold text-brand-950">$0</div>
+        <div className="rounded-3xl border border-white/10 bg-sand-100 p-7">
+          <h3 className="text-lg font-bold text-brand-50">{free.name}</h3>
+          <p className="mt-1 text-sm text-brand-50/50">{free.tagline}</p>
+          <div className="mt-5 text-3xl font-extrabold text-brand-50">$0</div>
           <ul className="mt-6 space-y-3">
             {free.features.map((f) => (
-              <li key={f} className="flex gap-2 text-sm text-brand-950/70">
+              <li key={f} className="flex gap-2 text-sm text-brand-50/70">
                 <span className="text-brand-500">✓</span>
                 {f}
               </li>
@@ -105,26 +105,26 @@ export function PricingClient({ locale }: { locale: Locale }) {
           </ul>
           <button
             onClick={() => router.push(`/${locale}/signup`)}
-            className="mt-8 w-full rounded-full border border-black/10 py-3 text-sm font-semibold text-brand-950"
+            className="mt-8 w-full rounded-full border border-white/15 py-3 text-sm font-semibold text-brand-50"
           >
             {free.cta}
           </button>
         </div>
 
         {/* PRO */}
-        <div className="relative rounded-3xl border-2 border-brand-500 bg-white p-7 shadow-xl shadow-brand-500/10 md:scale-[1.03]">
+        <div className="relative rounded-3xl border-2 border-brand-500 bg-sand-100 p-7 shadow-xl shadow-brand-500/10 md:scale-[1.03]">
           <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white">
             {dict.pricing.mostPopular}
           </span>
-          <h3 className="text-lg font-bold text-brand-950">{pro.name}</h3>
-          <p className="mt-1 text-sm text-brand-950/50">{pro.tagline}</p>
+          <h3 className="text-lg font-bold text-brand-50">{pro.name}</h3>
+          <p className="mt-1 text-sm text-brand-50/50">{pro.tagline}</p>
           <div className="mt-5 flex items-baseline gap-1">
-            <span className="text-3xl font-extrabold text-brand-950">${proPrice}</span>
-            <span className="text-sm text-brand-950/50">{dict.pricing.perMonth}</span>
+            <span className="text-3xl font-extrabold text-brand-50">${proPrice}</span>
+            <span className="text-sm text-brand-50/50">{dict.pricing.perMonth}</span>
           </div>
           <ul className="mt-6 space-y-3">
             {pro.features.map((f) => (
-              <li key={f} className="flex gap-2 text-sm text-brand-950/70">
+              <li key={f} className="flex gap-2 text-sm text-brand-50/70">
                 <span className="text-brand-500">✓</span>
                 {f}
               </li>
@@ -140,7 +140,7 @@ export function PricingClient({ locale }: { locale: Locale }) {
         </div>
 
         {/* MAX */}
-        <div className="rounded-3xl border border-black/5 bg-brand-950 p-7 text-white">
+        <div className="rounded-3xl border border-white/10 bg-brand-950 p-7 text-white">
           <h3 className="text-lg font-bold">{max.name}</h3>
           <p className="mt-1 text-sm text-white/50">{max.tagline}</p>
           <div className="mt-5 flex items-baseline gap-1">
@@ -158,7 +158,7 @@ export function PricingClient({ locale }: { locale: Locale }) {
           <button
             onClick={() => handleUpgrade("max")}
             disabled={loadingPlan !== null}
-            className="mt-8 w-full rounded-full bg-white py-3 text-sm font-semibold text-brand-950 disabled:opacity-60"
+            className="mt-8 w-full rounded-full bg-sand-100 py-3 text-sm font-semibold text-brand-50 disabled:opacity-60"
           >
             {loadingPlan === "max" ? "…" : max.cta}
           </button>
@@ -166,17 +166,17 @@ export function PricingClient({ locale }: { locale: Locale }) {
       </div>
 
       <div className="mx-auto mt-20 max-w-2xl">
-        <h2 className="text-center text-2xl font-bold text-brand-950">{dict.pricing.faq.title}</h2>
+        <h2 className="text-center text-2xl font-bold text-brand-50">{dict.pricing.faq.title}</h2>
         <div className="mt-6 space-y-3">
           {dict.pricing.faq.items.map((item) => (
-            <details key={item.q} className="group rounded-2xl border border-black/5 bg-white p-5">
-              <summary className="cursor-pointer list-none text-sm font-semibold text-brand-950 marker:content-none">
+            <details key={item.q} className="group rounded-2xl border border-white/10 bg-sand-100 p-5">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-brand-50 marker:content-none">
                 <span className="flex items-center justify-between">
                   {item.q}
-                  <span className="ml-4 text-brand-950/40 transition-transform group-open:rotate-45">+</span>
+                  <span className="ml-4 text-brand-50/40 transition-transform group-open:rotate-45">+</span>
                 </span>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-brand-950/60">{item.a}</p>
+              <p className="mt-3 text-sm leading-relaxed text-brand-50/60">{item.a}</p>
             </details>
           ))}
         </div>

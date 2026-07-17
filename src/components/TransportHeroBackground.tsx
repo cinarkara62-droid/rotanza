@@ -63,7 +63,7 @@ const POINTS = Object.fromEntries(CITIES.map((c) => [c.name, project(c.lon, c.la
 
 export function TransportHeroBackground() {
   return (
-    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#e8f5f1] via-[#f2f7f6] to-[#e9f1f5]">
+    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#0a1a2e] via-[#0d2136] to-[#0a1830]">
       <div className="absolute left-1/2 top-16 h-96 w-96 -translate-x-1/2 rounded-full bg-gradient-to-br from-brand-300/30 via-white/0 to-white/0 blur-3xl" />
 
       <svg
@@ -72,7 +72,7 @@ export function TransportHeroBackground() {
         preserveAspectRatio="xMidYMid slice"
       >
         {DOTS.map((d, i) => (
-          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill="#0a6f5d" />
+          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill="#34acf7" />
         ))}
       </svg>
 
@@ -91,8 +91,8 @@ export function TransportHeroBackground() {
           const d = arcPath(POINTS[a], POINTS[b]);
           return (
             <g key={`${a}-${b}`}>
-              <path d={d} stroke="#35c8a2" strokeWidth={0.6} fill="none" opacity={0.18} />
-              <circle r={2.1} fill="#35c8a2" opacity={0.75} filter="url(#transport-hero-glow)">
+              <path d={d} stroke="#34acf7" strokeWidth={0.6} fill="none" opacity={0.18} />
+              <circle r={2.1} fill="#34acf7" opacity={0.75} filter="url(#transport-hero-glow)">
                 <animateMotion dur={`${9 + i * 1.7}s`} repeatCount="indefinite" path={d} />
               </circle>
             </g>
@@ -107,7 +107,7 @@ export function TransportHeroBackground() {
               cx={p.x}
               cy={p.y}
               r={2}
-              fill="#14ab89"
+              fill="#12a0ef"
               opacity={0.45}
               filter="url(#transport-hero-glow)"
             />

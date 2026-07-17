@@ -89,7 +89,7 @@ function ViewpointMarker({ point, destination, locale }: { point: Viewpoint; des
       <Popup>
         <div className="text-sm">
           <div className="font-semibold">{point.name}</div>
-          {loading && <div className="mt-1 text-xs text-brand-950/50">{isTr ? "Yükleniyor…" : "Loading…"}</div>}
+          {loading && <div className="mt-1 text-xs text-brand-50/50">{isTr ? "Yükleniyor…" : "Loading…"}</div>}
           {insight && (
             <div className="mt-1 space-y-1 text-xs">
               <div>{insight.reason}</div>
@@ -149,7 +149,7 @@ export function RouteMap({
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-black/5 shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-white/10 shadow-sm">
       <MapContainer center={center} zoom={13} style={{ height: "420px", width: "100%" }} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

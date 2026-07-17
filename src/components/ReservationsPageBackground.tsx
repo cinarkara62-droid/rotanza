@@ -18,10 +18,10 @@ const TICKETS = [
 
 function TicketStub({ x, y, r }: { x: number; y: number; r: number }) {
   return (
-    <g transform={`translate(${x} ${y}) rotate(${r})`} stroke="#0a6f5d" strokeWidth={1.3} fill="none">
+    <g transform={`translate(${x} ${y}) rotate(${r})`} stroke="#34acf7" strokeWidth={1.3} fill="none">
       <rect x={-24} y={-14} width={48} height={28} rx={4} />
-      <circle cx={0} cy={-14} r={2.4} fill="#0a6f5d" stroke="none" />
-      <circle cx={0} cy={14} r={2.4} fill="#0a6f5d" stroke="none" />
+      <circle cx={0} cy={-14} r={2.4} fill="#34acf7" stroke="none" />
+      <circle cx={0} cy={14} r={2.4} fill="#34acf7" stroke="none" />
       <line x1={0} y1={-9} x2={0} y2={9} strokeDasharray="2 3" />
     </g>
   );
@@ -36,14 +36,14 @@ const GLOW_BLOBS = [
 
 export function ReservationsPageBackground() {
   return (
-    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#e9f6f1] via-[#f4f8f6] to-[#eaf1f5]">
+    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#0a1a2e] via-[#0d2136] to-[#0a1830]">
       <svg
         viewBox="0 0 1000 500"
         className="absolute inset-0 h-full w-full opacity-[0.05]"
         preserveAspectRatio="xMidYMid slice"
       >
         {DOTS.map((d, i) => (
-          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill="#0a6f5d" />
+          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill="#34acf7" />
         ))}
       </svg>
 
