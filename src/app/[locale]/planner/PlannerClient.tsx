@@ -164,7 +164,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
           {isTr ? "Aviasales ile en uygun uçuşları bul" : "Find the best flights via Aviasales"}
         </p>
         <div className="mt-4">
-          <AffiliateWidget src="https://tpscr.com/content?currency=usd&trs=551629&shmarker=752331&color_button=%23FF0000&target_host=www.aviasales.com%2Fsearch&locale=en&powered_by=true&origin=LON&destination=BKK&with_fallback=false&non_direct_flights=true&min_lines=5&border_radius=0&color_background=%23FFFFFF&color_text=%23000000&color_border=%23FFFFFF&promo_id=2811&campaign_id=100" />
+          <AffiliateWidget src="https://tpscr.com/content?currency=usd&trs=551629&shmarker=752331&show_hotels=true&powered_by=true&locale=en&searchUrl=www.aviasales.com%2Fsearch&primary_override=%2332a8dd&color_button=%2332a8dd&color_icons=%2332a8dd&dark=%23262626&light=%23FFFFFF&secondary=%23FFFFFF&special=%23C4C4C4&color_focused=%2332a8dd&border_radius=0&plain=false&promo_id=7879&campaign_id=100" />
         </div>
       </div>
 
