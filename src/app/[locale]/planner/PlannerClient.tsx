@@ -12,6 +12,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
 import { PlaceDetailPanel } from "@/components/PlaceDetailPanel";
 import { BudgetPanel } from "@/components/BudgetPanel";
+import { AffiliateWidget } from "@/components/AffiliateWidget";
 import { getPoisForCity } from "@/lib/mock-data/pois";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
@@ -154,6 +155,18 @@ export function PlannerClient({ locale }: { locale: Locale }) {
   return (
     <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       <PageHeader eyebrow={dict.planner.eyebrow} title={dict.planner.title} subtitle={dict.planner.subtitle} />
+
+      <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-brand-950">
+          {isTr ? "Uçuş ara" : "Search flights"}
+        </h3>
+        <p className="mt-1 text-xs text-brand-950/40">
+          {isTr ? "Aviasales ile en uygun uçuşları bul" : "Find the best flights via Aviasales"}
+        </p>
+        <div className="mt-4">
+          <AffiliateWidget src="https://tpscr.com/content?currency=usd&trs=551629&shmarker=752331&color_button=%23FF0000&target_host=www.aviasales.com%2Fsearch&locale=en&powered_by=true&origin=LON&destination=BKK&with_fallback=false&non_direct_flights=true&min_lines=5&border_radius=0&color_background=%23FFFFFF&color_text=%23000000&color_border=%23FFFFFF&promo_id=2811&campaign_id=100" />
+        </div>
+      </div>
 
       <form
         onSubmit={handleSubmit}

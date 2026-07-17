@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Script from "next/script";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { cities, getCity } from "@/lib/mock-data/cities";
@@ -10,6 +9,7 @@ import { MetroLine } from "@/lib/types";
 import { PageHeader } from "@/components/PageHeader";
 import { MetroSchematic } from "@/components/MetroSchematic";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
+import { AffiliateWidget } from "@/components/AffiliateWidget";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 export function TransportClient({ locale }: { locale: Locale }) {
@@ -79,11 +79,7 @@ export function TransportClient({ locale }: { locale: Locale }) {
           {isTr ? "Kiwitaxi ile güvenilir transfer rezervasyonu" : "Reliable transfer booking via Kiwitaxi"}
         </p>
         <div className="mt-4">
-          <Script
-            strategy="afterInteractive"
-            src="https://tpscr.com/content?currency=USD&trs=551629&shmarker=752331&locale=en&powered_by=true&transfer_options_limit=10&transfer_options=MCR&disable_currency_selector=true&hide_form_extras=true&hide_external_links=true&campaign_id=1&promo_id=3879"
-            charSet="utf-8"
-          />
+          <AffiliateWidget src="https://tpscr.com/content?currency=USD&trs=551629&shmarker=752331&locale=en&powered_by=true&transfer_options_limit=10&transfer_options=MCR&disable_currency_selector=true&hide_form_extras=true&hide_external_links=true&campaign_id=1&promo_id=3879" />
         </div>
       </div>
 
