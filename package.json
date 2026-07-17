@@ -12,6 +12,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.111.0",
     "@prisma/client": "^6.19.3",
+    "@vercel/analytics": "^2.0.1",
     "bcryptjs": "^3.0.3",
     "leaflet": "^1.9.4",
     "next": "16.2.10",

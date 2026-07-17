@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import { isLocale, isRtl, locales, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -65,6 +66,7 @@ export default async function LocaleLayout({
           <main>{children}</main>
           <Footer locale={locale as Locale} dict={dict} />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
