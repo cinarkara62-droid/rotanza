@@ -99,13 +99,10 @@ export function TransportClient({ locale }: { locale: Locale }) {
       : "";
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-      <div className="relative -mx-4 overflow-hidden sm:-mx-6 lg:-mx-8">
-        <TransportHeroBackground />
-        <div className="relative z-10 px-4 sm:px-6 lg:px-8">
-          <PageHeader eyebrow={dict.transport.eyebrow} title={dict.transport.title} subtitle={dict.transport.subtitle} />
-        </div>
-      </div>
+    <div className="relative z-10 mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+      <TransportHeroBackground />
+
+      <PageHeader eyebrow={dict.transport.eyebrow} title={dict.transport.title} subtitle={dict.transport.subtitle} />
 
       <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
         <h3 className="text-sm font-semibold text-brand-950">{isTr ? "Rota ara" : "Search a route"}</h3>

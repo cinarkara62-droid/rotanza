@@ -1,7 +1,8 @@
-// Purely decorative — absolutely positioned behind the transport page's
-// hero (PageHeader), non-interactive, and kept extremely subtle per spec
-// (3-6% world map opacity, faint routes, small glow). Dot positions are
-// deterministic (no Math.random at render) so server/client markup match.
+import { AmbientBackground } from "@/components/AmbientBackground";
+
+// Purely decorative, full-page ambient background for the transport page.
+// Dot positions are deterministic (no Math.random at render) so
+// server/client markup match.
 function continentDots(): { x: number; y: number }[] {
   const regions: Array<{ x0: number; x1: number; y0: number; y1: number; count: number }> = [
     { x0: 90, x1: 260, y0: 90, y1: 210, count: 26 }, // North America
@@ -62,14 +63,12 @@ const POINTS = Object.fromEntries(CITIES.map((c) => [c.name, project(c.lon, c.la
 
 export function TransportHeroBackground() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#eef3f8] to-white" />
-
-      <div className="absolute left-1/2 top-16 h-72 w-72 -translate-x-1/2 rounded-full bg-gradient-to-br from-brand-300/25 via-white/0 to-white/0 blur-3xl" />
+    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#e8f5f1] via-[#f2f7f6] to-[#e9f1f5]">
+      <div className="absolute left-1/2 top-16 h-96 w-96 -translate-x-1/2 rounded-full bg-gradient-to-br from-brand-300/30 via-white/0 to-white/0 blur-3xl" />
 
       <svg
         viewBox="0 0 1000 500"
-        className="absolute inset-0 h-full w-full opacity-[0.05]"
+        className="absolute inset-0 h-full w-full opacity-[0.07]"
         preserveAspectRatio="xMidYMid slice"
       >
         {DOTS.map((d, i) => (
@@ -92,7 +91,7 @@ export function TransportHeroBackground() {
           const d = arcPath(POINTS[a], POINTS[b]);
           return (
             <g key={`${a}-${b}`}>
-              <path d={d} stroke="#35c8a2" strokeWidth={0.6} fill="none" opacity={0.16} />
+              <path d={d} stroke="#35c8a2" strokeWidth={0.6} fill="none" opacity={0.18} />
               <circle r={2.1} fill="#35c8a2" opacity={0.75} filter="url(#transport-hero-glow)">
                 <animateMotion dur={`${9 + i * 1.7}s`} repeatCount="indefinite" path={d} />
               </circle>
@@ -109,12 +108,12 @@ export function TransportHeroBackground() {
               cy={p.y}
               r={2}
               fill="#14ab89"
-              opacity={0.4}
+              opacity={0.45}
               filter="url(#transport-hero-glow)"
             />
           );
         })}
       </svg>
-    </div>
+    </AmbientBackground>
   );
 }

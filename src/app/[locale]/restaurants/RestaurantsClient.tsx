@@ -7,6 +7,7 @@ import { cities, getCity } from "@/lib/mock-data/cities";
 import { getRestaurantsForCity } from "@/lib/mock-data/restaurants";
 import { PageHeader } from "@/components/PageHeader";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
+import { RestaurantsPageBackground } from "@/components/RestaurantsPageBackground";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 interface LivePlace {
@@ -79,7 +80,8 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
     cuisine === "all" ? activeList : activeList.filter((r) => (isTr ? r.cuisineTr : r.cuisineEn) === cuisine);
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="relative z-10 mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+      <RestaurantsPageBackground />
       <PageHeader eyebrow={dict.restaurants.eyebrow} title={dict.restaurants.title} subtitle={dict.restaurants.subtitle} />
 
       <div className="mx-auto mt-10 flex max-w-3xl flex-col gap-4 sm:flex-row sm:items-end">
