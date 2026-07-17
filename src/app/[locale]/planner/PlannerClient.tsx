@@ -12,6 +12,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
 import { PlaceDetailPanel } from "@/components/PlaceDetailPanel";
 import { BudgetPanel } from "@/components/BudgetPanel";
+import { PageBackground } from "@/components/PageBackground";
 import { getPoisForCity } from "@/lib/mock-data/pois";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
@@ -152,7 +153,20 @@ export function PlannerClient({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="relative z-10 mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+      <PageBackground
+        gradientClassName="bg-gradient-to-br from-[#eaf6f2] via-[#f4f7f6] to-[#e9f2f5]"
+        dotColor="#0a6f5d"
+        dotSeedA={41}
+        dotSeedB={13}
+        blobs={[
+          { x: "8%", y: "10%", size: 260, delay: "0s", duration: "17s" },
+          { x: "85%", y: "14%", size: 220, delay: "2s", duration: "15s" },
+          { x: "80%", y: "70%", size: 240, delay: "1.5s", duration: "18s" },
+          { x: "10%", y: "68%", size: 200, delay: "3s", duration: "16s" },
+        ]}
+        blobColorClass="from-brand-300/25 via-brand-300/5 to-white/0"
+      />
       <PageHeader eyebrow={dict.planner.eyebrow} title={dict.planner.title} subtitle={dict.planner.subtitle} />
 
       <form

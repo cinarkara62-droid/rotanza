@@ -59,3 +59,42 @@ export async function sendReservationReminder(params: {
     html,
   });
 }
+
+export async function sendTravelNotification(params: {
+  to: string;
+  emoji: string;
+  headlineTr: string;
+  headlineEn: string;
+  bodyTr: string;
+  bodyEn: string;
+  title: string;
+  date: string;
+  time: string | null;
+  locale: string;
+}) {
+  const resend = getResend();
+  const isTr = params.locale === "tr";
+
+  const subject = `${params.emoji} ${isTr ? params.headlineTr : params.headlineEn}`;
+
+  const html = `
+    <div style="font-family: -apple-system, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">
+      <h2 style="color: #042a24;">${params.emoji} ${isTr ? params.headlineTr : params.headlineEn}</h2>
+      <p style="color: #10201c; font-size: 15px; line-height: 1.5;">${isTr ? params.bodyTr : params.bodyEn}</p>
+      <div style="background: #f4f0e6; border-radius: 12px; padding: 16px; margin: 16px 0;">
+        <div style="font-size: 16px; font-weight: 600; color: #042a24;">${params.title}</div>
+        <div style="font-size: 14px; color: #6b7d78; margin-top: 4px;">
+          ${params.date}${params.time ? " · " + params.time : ""}
+        </div>
+      </div>
+      <p style="color: #6b7d78; font-size: 13px;">Rotanza</p>
+    </div>
+  `;
+
+  await resend.emails.send({
+    from: FROM_ADDRESS,
+    to: params.to,
+    subject,
+    html,
+  });
+}

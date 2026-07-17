@@ -11,6 +11,12 @@ interface NotificationOption {
   titleEn: string;
   descTr: string;
   descEn: string;
+  // Only "checkin" and "hotelCheckin" are wired to a real cron + email
+  // (src/app/api/cron/travel-notifications/route.ts). The rest need either
+  // a higher-frequency cron (boarding/transfer) or a real-time data source
+  // we don't have (delay/gate/weather/localTransport) — shown as
+  // "Coming soon" rather than a toggle that looks live but never fires.
+  implemented: boolean;
 }
 
 const OPTIONS: NotificationOption[] = [
@@ -20,20 +26,7 @@ const OPTIONS: NotificationOption[] = [
     titleEn: "Flight Check-in Reminder",
     descTr: "Online check-in açıldığında bildirim al.",
     descEn: "Get notified when online check-in opens.",
-  },
-  {
-    key: "boarding",
-    titleTr: "Biniş Hatırlatıcısı",
-    titleEn: "Boarding Reminder",
-    descTr: "Biniş saatini asla kaçırma.",
-    descEn: "Never miss your boarding time.",
-  },
-  {
-    key: "transfer",
-    titleTr: "Havalimanı Transfer Hatırlatıcısı",
-    titleEn: "Airport Transfer Reminder",
-    descTr: "Taksiye çıkma zamanı geldiğinde hatırlatma al.",
-    descEn: "Receive a reminder when it's time to leave for your taxi.",
+    implemented: true,
   },
   {
     key: "hotelCheckin",
@@ -41,6 +34,23 @@ const OPTIONS: NotificationOption[] = [
     titleEn: "Hotel Check-in Reminder",
     descTr: "Otel check-in'inden önce bildirim al.",
     descEn: "Get notified before hotel check-in.",
+    implemented: true,
+  },
+  {
+    key: "boarding",
+    titleTr: "Biniş Hatırlatıcısı",
+    titleEn: "Boarding Reminder",
+    descTr: "Biniş saatini asla kaçırma.",
+    descEn: "Never miss your boarding time.",
+    implemented: false,
+  },
+  {
+    key: "transfer",
+    titleTr: "Havalimanı Transfer Hatırlatıcısı",
+    titleEn: "Airport Transfer Reminder",
+    descTr: "Taksiye çıkma zamanı geldiğinde hatırlatma al.",
+    descEn: "Receive a reminder when it's time to leave for your taxi.",
+    implemented: false,
   },
   {
     key: "delay",
@@ -48,6 +58,7 @@ const OPTIONS: NotificationOption[] = [
     titleEn: "Flight Delay Alerts",
     descTr: "Uçuşunuz gecikirse anında uyarı alın.",
     descEn: "Instant alerts if your flight is delayed.",
+    implemented: false,
   },
   {
     key: "gate",
@@ -55,6 +66,7 @@ const OPTIONS: NotificationOption[] = [
     titleEn: "Gate Change Alerts",
     descTr: "Kalkış kapınız değişirse hemen haberdar olun.",
     descEn: "Be notified immediately if your departure gate changes.",
+    implemented: false,
   },
   {
     key: "weather",
@@ -62,6 +74,7 @@ const OPTIONS: NotificationOption[] = [
     titleEn: "Weather Alerts",
     descTr: "Varıştan önce hedef şehrin hava durumunu öğrenin.",
     descEn: "Receive destination weather updates before arrival.",
+    implemented: false,
   },
   {
     key: "localTransport",
@@ -69,38 +82,45 @@ const OPTIONS: NotificationOption[] = [
     titleEn: "Local Transportation Alerts",
     descTr: "Metro aksaklıkları veya ulaşım sorunlarından haberdar olun.",
     descEn: "Know about metro disruptions or transportation issues.",
+    implemented: false,
   },
 ];
-
-const STORAGE_KEY = "rotanza:notification-prefs";
 
 export function SmartNotificationsCard({ locale, plan }: { locale: Locale; plan: string }) {
   const isTr = locale === "tr";
   const isPremium = plan === "pro" || plan === "max";
 
   const [prefs, setPrefs] = useState<Record<string, boolean>>({});
+  const [saving, setSaving] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isPremium) return;
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrating from localStorage once on mount, not a render loop
-      if (raw) setPrefs(JSON.parse(raw));
-    } catch {
-      // ignore malformed/unavailable storage
-    }
+    let cancelled = false;
+    fetch("/api/notification-prefs")
+      .then((r) => r.json())
+      .then((data) => {
+        if (!cancelled && data.prefs) setPrefs(data.prefs);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
   }, [isPremium]);
 
-  function toggle(key: string, next: boolean) {
-    setPrefs((prev) => {
-      const updated = { ...prev, [key]: next };
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-      } catch {
-        // ignore storage write failures (private mode, quota, etc.)
-      }
-      return updated;
-    });
+  async function toggle(key: string, next: boolean) {
+    setPrefs((prev) => ({ ...prev, [key]: next }));
+    setSaving(key);
+    try {
+      await fetch("/api/notification-prefs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key, enabled: next }),
+      });
+    } catch {
+      // best-effort — a failed save just means the toggle resets on reload
+    } finally {
+      setSaving((s) => (s === key ? null : s));
+    }
   }
 
   return (
@@ -124,13 +144,20 @@ export function SmartNotificationsCard({ locale, plan }: { locale: Locale; plan:
             className="flex items-center justify-between gap-4 rounded-xl px-2 py-3 transition-colors hover:bg-sand-50"
           >
             <div className="min-w-0">
-              <div className="text-sm font-semibold text-brand-950">{isTr ? opt.titleTr : opt.titleEn}</div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-brand-950">{isTr ? opt.titleTr : opt.titleEn}</span>
+                {!opt.implemented && (
+                  <span className="shrink-0 rounded-full bg-black/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-950/40">
+                    {isTr ? "Yakında" : "Coming soon"}
+                  </span>
+                )}
+              </div>
               <div className="mt-0.5 text-xs text-brand-950/50">{isTr ? opt.descTr : opt.descEn}</div>
             </div>
             <ToggleSwitch
-              checked={!!prefs[opt.key]}
+              checked={opt.implemented && !!prefs[opt.key]}
               onChange={(next) => toggle(opt.key, next)}
-              disabled={!isPremium}
+              disabled={!isPremium || !opt.implemented || saving === opt.key}
               label={isTr ? opt.titleTr : opt.titleEn}
             />
           </div>

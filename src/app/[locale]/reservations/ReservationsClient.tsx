@@ -6,6 +6,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { PageHeader } from "@/components/PageHeader";
 import { AffiliateWidget } from "@/components/AffiliateWidget";
 import { SmartNotificationsCard } from "@/components/SmartNotificationsCard";
+import { ReservationsPageBackground } from "@/components/ReservationsPageBackground";
 
 const AVIASALES_SRC =
   "https://tpscr.com/content?currency=usd&trs=551629&shmarker=752331&show_hotels=true&powered_by=true&locale=en&searchUrl=www.aviasales.com%2Fsearch&primary_override=%2332a8dd&color_button=%2332a8dd&color_icons=%2332a8dd&dark=%23262626&light=%23FFFFFF&secondary=%23FFFFFF&special=%23C4C4C4&color_focused=%2332a8dd&border_radius=0&plain=false&promo_id=7879&campaign_id=100";
@@ -95,7 +96,8 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="relative z-10 mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+      <ReservationsPageBackground />
       <PageHeader eyebrow={dict.reservations.eyebrow} title={dict.reservations.title} subtitle={dict.reservations.subtitle} />
 
       <div className="mt-10">

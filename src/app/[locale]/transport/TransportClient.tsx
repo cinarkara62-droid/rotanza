@@ -104,8 +104,13 @@ export function TransportClient({ locale }: { locale: Locale }) {
 
       <PageHeader eyebrow={dict.transport.eyebrow} title={dict.transport.title} subtitle={dict.transport.subtitle} />
 
-      <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-brand-950">{isTr ? "Rota ara" : "Search a route"}</h3>
+      <div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-2xl border border-black/5 bg-gradient-to-br from-white via-white to-brand-50/60 p-6 shadow-sm">
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-500/15 text-lg">
+            🧭
+          </div>
+          <h3 className="text-sm font-semibold text-brand-950">{isTr ? "Rota ara" : "Search a route"}</h3>
+        </div>
         <form onSubmit={handleRouteSearch} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <label className="flex flex-col gap-2 text-sm font-medium text-brand-950">
             {isTr ? "Nereden" : "From"}
@@ -137,7 +142,7 @@ export function TransportClient({ locale }: { locale: Locale }) {
 
         <div
           id="kiwitaxi-section"
-          className="mt-5 flex flex-col items-start justify-between gap-3 rounded-2xl bg-sand-50/70 p-4 sm:flex-row sm:items-center"
+          className="mt-5 flex flex-col items-start justify-between gap-3 rounded-2xl border-l-4 border-coral-400 bg-sand-50/70 p-4 sm:flex-row sm:items-center"
         >
           <div>
             <div className="text-sm font-semibold text-brand-950">
@@ -254,8 +259,16 @@ export function TransportClient({ locale }: { locale: Locale }) {
 
       {activeLines && activeLines.length > 0 && (
         <div className="mt-10 space-y-8">
-          <div id="metro-map-section" className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-            <h2 className="text-base font-semibold text-brand-950">{systemLabel}</h2>
+          <div
+            id="metro-map-section"
+            className="overflow-hidden rounded-2xl border border-black/5 border-t-4 border-t-brand-500 bg-white p-6 shadow-sm"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-500/15 text-lg">
+                🚇
+              </div>
+              <h2 className="text-base font-semibold text-brand-950">{systemLabel}</h2>
+            </div>
             <p className="mt-1 text-xs text-brand-950/40">
               {city ? `${city.emoji} ${isTr ? city.cityTr : city.cityEn}` : ""}
               {city ? " · " : ""}

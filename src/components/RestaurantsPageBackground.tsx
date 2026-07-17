@@ -1,10 +1,10 @@
 import { AmbientBackground } from "@/components/AmbientBackground";
+import { scatterDots } from "@/lib/bg-pattern";
 
 // Warm, food-appropriate counterpart to TransportHeroBackground — same
 // ambient technique (fixed, full-page, pointer-events-none) but themed
-// around soft rising "steam" blobs and a warm coral tint instead of the
-// travel-route motif. Deterministic layout (no Math.random) so
-// server/client markup match.
+// around a scattered fork/plate/cup line-art pattern and softly rising
+// "steam" blobs instead of the travel-route motif.
 const STEAM_BLOBS = [
   { x: "12%", y: "18%", size: 220, delay: "0s", duration: "14s" },
   { x: "78%", y: "8%", size: 260, delay: "2.5s", duration: "17s" },
@@ -13,24 +13,59 @@ const STEAM_BLOBS = [
   { x: "45%", y: "38%", size: 180, delay: "3s", duration: "16s" },
 ];
 
-function scatterDots(): { x: number; y: number }[] {
-  const dots: { x: number; y: number }[] = [];
-  const cols = 14;
-  const rows = 8;
-  for (let row = 0; row < rows; row++) {
-    for (let col = 0; col < cols; col++) {
-      const jitterX = ((row * 31 + col * 17) % 9) - 4;
-      const jitterY = ((row * 13 + col * 29) % 9) - 4;
-      dots.push({
-        x: (col / (cols - 1)) * 1000 + jitterX,
-        y: (row / (rows - 1)) * 500 + jitterY,
-      });
-    }
-  }
-  return dots;
+const DOTS = scatterDots(14, 8, 31, 29);
+
+// Deterministic placements for the three line-art motifs, spread across
+// the canvas so no two overlap and the whole thing still reads as a loose
+// repeating pattern rather than a cluster.
+const FORKS = [
+  { x: 90, y: 70, r: -12 },
+  { x: 430, y: 260, r: 8 },
+  { x: 760, y: 90, r: -6 },
+  { x: 220, y: 400, r: 14 },
+  { x: 900, y: 340, r: -10 },
+];
+const PLATES = [
+  { x: 300, y: 120, r: 0 },
+  { x: 610, y: 380, r: 0 },
+  { x: 60, y: 300, r: 0 },
+  { x: 860, y: 150, r: 0 },
+];
+const CUPS = [
+  { x: 500, y: 60, r: 0 },
+  { x: 150, y: 200, r: 0 },
+  { x: 700, y: 430, r: 0 },
+  { x: 950, y: 230, r: 0 },
+];
+
+function Fork({ x, y, r }: { x: number; y: number; r: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r})`} stroke="#f2632f" strokeWidth={1.4} strokeLinecap="round" fill="none">
+      <line x1={-5} y1={-14} x2={-5} y2={-4} />
+      <line x1={0} y1={-14} x2={0} y2={-4} />
+      <line x1={5} y1={-14} x2={5} y2={-4} />
+      <path d="M -6 -4 Q 0 2 6 -4 L 0 18 Z" />
+    </g>
+  );
 }
 
-const DOTS = scatterDots();
+function Plate({ x, y }: { x: number; y: number }) {
+  return (
+    <g transform={`translate(${x} ${y})`} stroke="#f2632f" strokeWidth={1.4} fill="none">
+      <circle r={14} />
+      <circle r={9} />
+    </g>
+  );
+}
+
+function Cup({ x, y }: { x: number; y: number }) {
+  return (
+    <g transform={`translate(${x} ${y})`} stroke="#f2632f" strokeWidth={1.4} fill="none" strokeLinecap="round">
+      <path d="M -10 -8 L -9 10 Q -9 14 -5 14 L 5 14 Q 9 14 9 10 L 10 -8 Z" />
+      <path d="M 10 -4 Q 18 -4 18 3 Q 18 9 10 8" />
+    </g>
+  );
+}
 
 export function RestaurantsPageBackground() {
   return (
@@ -42,6 +77,22 @@ export function RestaurantsPageBackground() {
       >
         {DOTS.map((d, i) => (
           <circle key={i} cx={d.x} cy={d.y} r={1.3} fill="#f2632f" />
+        ))}
+      </svg>
+
+      <svg
+        viewBox="0 0 1000 500"
+        className="absolute inset-0 h-full w-full opacity-[0.09]"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        {FORKS.map((f, i) => (
+          <Fork key={`fork-${i}`} {...f} />
+        ))}
+        {PLATES.map((p, i) => (
+          <Plate key={`plate-${i}`} {...p} />
+        ))}
+        {CUPS.map((c, i) => (
+          <Cup key={`cup-${i}`} {...c} />
         ))}
       </svg>
 

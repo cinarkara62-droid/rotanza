@@ -4,6 +4,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { PageHeader } from "@/components/PageHeader";
+import { PageBackground } from "@/components/PageBackground";
 import { UpgradeButtons, ManageBillingButton } from "./AccountActions";
 
 const PLAN_LABEL: Record<string, string> = { free: "Free", pro: "Pro", max: "Max" };
@@ -28,7 +29,18 @@ export default async function AccountPage({
   const isFree = user.plan === "free";
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="relative z-10 mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:px-8">
+      <PageBackground
+        gradientClassName="bg-gradient-to-br from-[#f4f0e6] via-[#faf9f6] to-[#eef3f2]"
+        dotColor="#0a6f5d"
+        dotSeedA={7}
+        dotSeedB={19}
+        blobs={[
+          { x: "15%", y: "10%", size: 220, delay: "0s", duration: "17s" },
+          { x: "85%", y: "60%", size: 220, delay: "2s", duration: "16s" },
+        ]}
+        blobColorClass="from-brand-300/18 via-brand-300/5 to-white/0"
+      />
       <PageHeader eyebrow={dict.common.brand} title={dict.account.title} subtitle={dict.account.subtitle} />
 
       <div className="mt-8 rounded-3xl border border-black/5 bg-white p-6 shadow-sm sm:p-8">

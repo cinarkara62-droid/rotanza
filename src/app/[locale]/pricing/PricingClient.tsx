@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { PageHeader } from "@/components/PageHeader";
+import { PageBackground } from "@/components/PageBackground";
 import type { PlanId, BillingCycle } from "@/lib/stripe";
 
 export function PricingClient({ locale }: { locale: Locale }) {
@@ -49,7 +50,19 @@ export function PricingClient({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="relative z-10 mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+      <PageBackground
+        gradientClassName="bg-gradient-to-br from-[#eaf6f2] via-[#f6f5f0] to-[#fdf3ee]"
+        dotColor="#0a6f5d"
+        dotSeedA={29}
+        dotSeedB={11}
+        blobs={[
+          { x: "50%", y: "6%", size: 320, delay: "0s", duration: "18s" },
+          { x: "10%", y: "60%", size: 220, delay: "2s", duration: "16s" },
+          { x: "88%", y: "56%", size: 240, delay: "1.4s", duration: "17s" },
+        ]}
+        blobColorClass="from-brand-300/22 via-coral-400/8 to-white/0"
+      />
       <PageHeader eyebrow={dict.pricing.eyebrow} title={dict.pricing.title} subtitle={dict.pricing.subtitle} />
 
       <div className="mt-8 flex justify-center">

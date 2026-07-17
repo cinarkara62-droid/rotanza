@@ -13,6 +13,7 @@ import {
 } from "@/lib/budget";
 import { PageHeader } from "@/components/PageHeader";
 import { CitySearchInput, type CustomCity } from "@/components/CitySearchInput";
+import { PageBackground } from "@/components/PageBackground";
 
 const ACCOMMODATION_OPTIONS: AccommodationLevel[] = ["budget", "midrange", "luxury"];
 const MEALS_OPTIONS: MealsLevel[] = ["budget", "midrange", "luxury"];
@@ -90,7 +91,20 @@ export function BudgetClient({ locale }: { locale: Locale }) {
   const maxValue = Math.max(...breakdown.map((b) => b.value), 1);
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="relative z-10 mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+      <PageBackground
+        gradientClassName="bg-gradient-to-br from-[#fdf6ec] via-[#faf7f0] to-[#fdf1ea]"
+        dotColor="#f2632f"
+        dotSeedA={23}
+        dotSeedB={37}
+        blobs={[
+          { x: "10%", y: "14%", size: 240, delay: "0s", duration: "16s" },
+          { x: "84%", y: "10%", size: 220, delay: "2s", duration: "18s" },
+          { x: "80%", y: "66%", size: 220, delay: "1s", duration: "15s" },
+          { x: "8%", y: "72%", size: 200, delay: "3s", duration: "17s" },
+        ]}
+        blobColorClass="from-coral-400/20 via-coral-400/5 to-white/0"
+      />
       <PageHeader eyebrow={dict.budget.eyebrow} title={dict.budget.title} subtitle={dict.budget.subtitle} />
 
       <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-8 lg:grid-cols-5">

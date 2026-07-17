@@ -5,6 +5,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { PageHeader } from "@/components/PageHeader";
 import { HotelAutocomplete, type HotelSelection } from "@/components/HotelAutocomplete";
+import { PageBackground } from "@/components/PageBackground";
 
 interface Alert {
   id: string;
@@ -107,7 +108,20 @@ export function AlertsClient({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="relative z-10 mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+      <PageBackground
+        gradientClassName="bg-gradient-to-br from-[#fdf3ee] via-[#f6f8f7] to-[#eaf6f2]"
+        dotColor="#f2632f"
+        dotSeedA={17}
+        dotSeedB={53}
+        blobs={[
+          { x: "12%", y: "12%", size: 240, delay: "0s", duration: "16s" },
+          { x: "82%", y: "10%", size: 220, delay: "2.2s", duration: "18s" },
+          { x: "78%", y: "68%", size: 220, delay: "1.2s", duration: "15s" },
+          { x: "10%", y: "70%", size: 200, delay: "3.2s", duration: "17s" },
+        ]}
+        blobColorClass="from-coral-400/20 via-brand-300/10 to-white/0"
+      />
       <PageHeader eyebrow={dict.alerts.eyebrow} title={dict.alerts.title} subtitle={dict.alerts.subtitle} />
 
       <div className="mt-8 flex flex-col items-center gap-2">
