@@ -1,10 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
-import { findAttractionsNear } from "@/lib/osm-client";
+import { findAttractionsNear, type OsmPlace } from "@/lib/osm-client";
+import { findAttractionsGeoapify, isGeoapifyConfigured } from "@/lib/geoapify-client";
 import { categorizeAttraction, emojiForAttraction } from "@/lib/mock-data/attraction-map";
 
 // Overpass queries for this route can take longer than Vercel's 10s default
 // function timeout, which kills the request before Overpass even replies.
 export const maxDuration = 30;
+
+// Geoapify (paid, dedicated infrastructure) is tried first when configured
+// — same underlying OSM data as Overpass, but without the free shared
+// instance's unpredictable latency/rate-limiting. Falls back to the free
+// Overpass path if Geoapify isn't configured, or if it errors.
+async function fetchAttractions(lat: number, lon: number): Promise<OsmPlace[]> {
+  if (isGeoapifyConfigured()) {
+    try {
+      return await findAttractionsGeoapify(lat, lon);
+    } catch {
+      // fall through to Overpass
+    }
+  }
+  return findAttractionsNear(lat, lon);
+}
 
 export async function GET(req: NextRequest) {
   const lat = parseFloat(req.nextUrl.searchParams.get("lat") ?? "");
@@ -14,7 +30,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const places = await findAttractionsNear(lat, lon);
+    const places = await fetchAttractions(lat, lon);
     const results = places
       .map((p) => ({
         osmId: p.osmId,
