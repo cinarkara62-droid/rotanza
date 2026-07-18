@@ -222,24 +222,48 @@ out body qt;`;
   });
 }
 
-function attractionsQuery(lat: number, lon: number, radiusMeters: number, limit: number): string {
+// findPlacesNear's single-filter queries reliably answer in 1-2s; a single
+// query OR-ing 12 filters together (the original shape) measures as
+// "server too busy" on Overpass itself even for a data-rich city like
+// Paris — confirmed by querying Overpass directly. So this runs the same
+// filters as separate lightweight queries like findPlacesNear does, but
+// strictly one at a time (not in parallel — a burst of concurrent requests
+// is what triggered real rate-limiting from Overpass in an earlier version
+// of this function). A generous shared deadline across the whole loop
+// means one slow category doesn't necessarily sink the rest — whatever
+// completes in time gets returned, and a per-category failure/timeout is
+// skipped rather than aborting everything.
+const ATTRACTION_FILTERS = [
+  '["tourism"="museum"]',
+  '["tourism"="gallery"]',
+  '["tourism"="attraction"]',
+  '["historic"]',
+  '["leisure"="park"]',
+  '["natural"="beach"]',
+  '["amenity"="bar"]',
+  '["amenity"="nightclub"]',
+  '["shop"="mall"]',
+  '["amenity"="marketplace"]',
+];
+
+async function findAttractionsAtRadius(lat: number, lon: number, radiusMeters: number, limit: number, deadline: number): Promise<OsmPlace[]> {
   const around = `around:${radiusMeters},${lat},${lon}`;
-  return `[out:json][timeout:22];
-(
-  node["tourism"="museum"]["name"](${around});
-  node["tourism"="gallery"]["name"](${around});
-  node["tourism"="attraction"]["name"](${around});
-  node["tourism"="viewpoint"]["name"](${around});
-  node["historic"]["name"](${around});
-  node["leisure"="park"]["name"](${around});
-  node["natural"="beach"]["name"](${around});
-  node["amenity"="bar"]["name"](${around});
-  node["amenity"="pub"]["name"](${around});
-  node["amenity"="nightclub"]["name"](${around});
-  node["shop"="mall"]["name"](${around});
-  node["amenity"="marketplace"]["name"](${around});
-);
-out body ${limit};`;
+  const byId = new Map<number, OsmPlace>();
+  for (const filter of ATTRACTION_FILTERS) {
+    const remaining = deadline - Date.now();
+    if (remaining < 3000) break;
+    try {
+      const query = `[out:json][timeout:8];node${filter}["name"](${around});out body ${Math.ceil(limit / 2)};`;
+      const elements = await queryOverpass(query, Math.min(remaining, 9000));
+      for (const el of elements) {
+        if (!el.tags?.name || byId.has(el.id)) continue;
+        byId.set(el.id, { osmId: el.id, name: el.tags.name, lat: el.lat, lon: el.lon, tags: el.tags });
+      }
+    } catch {
+      // one category failing/timing out shouldn't sink the others
+    }
+  }
+  return [...byId.values()].slice(0, limit);
 }
 
 // A city's geocoded centroid (from Nominatim) doesn't always sit near where
@@ -248,9 +272,7 @@ out body ${limit};`;
 // boundaries. Rather than give up on the first empty result, widen the
 // search ring once before concluding "nothing here" — each radius is
 // cached under its own key so a later request for the same city doesn't
-// redo the widening. Single sequential request per attempt (see
-// queryOverpassRaw's comment on why not to fan out into parallel/multi-
-// mirror requests here).
+// redo the widening.
 export async function findAttractionsNear(
   lat: number,
   lon: number,
@@ -263,12 +285,7 @@ export async function findAttractionsNear(
     const key = `attractions:${lat.toFixed(3)}:${lon.toFixed(3)}:${r}`;
     const remaining = deadline - Date.now();
     if (remaining < 6000) break;
-    const results = await cachedFetch(key, async () => {
-      const elements = await queryOverpass(attractionsQuery(lat, lon, r, limit), remaining);
-      return elements
-        .filter((el) => el.tags?.name)
-        .map((el) => ({ osmId: el.id, name: el.tags!.name, lat: el.lat, lon: el.lon, tags: el.tags! }));
-    });
+    const results = await cachedFetch(key, () => findAttractionsAtRadius(lat, lon, r, limit, deadline));
     if (results.length > 0 || r === radii[radii.length - 1]) return results;
   }
   return [];
