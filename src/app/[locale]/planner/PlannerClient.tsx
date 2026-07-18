@@ -85,8 +85,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
     }
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function runSearch() {
     setLoadError(false);
 
     if (cityId) {
@@ -150,6 +149,11 @@ export function PlannerClient({ locale }: { locale: Locale }) {
         setLoading(false);
       }
     }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    await runSearch();
   }
 
   return (
@@ -282,11 +286,20 @@ export function PlannerClient({ locale }: { locale: Locale }) {
           <p className="text-center text-sm text-foreground/50">{dict.planner.emptyState}</p>
         )}
         {loadError && (
-          <p className="text-center text-sm text-foreground/50">
-            {isTr
-              ? "Bu şehir için yeterli gezilecek yer verisi bulunamadı. Farklı bir şehir deneyin."
-              : "Not enough points-of-interest data was found for this city. Try a different one."}
-          </p>
+          <div className="text-center">
+            <p className="text-sm text-foreground/50">
+              {isTr
+                ? "Bu şehir için gezilecek yer verisi şu an alınamadı — bu genelde ücretsiz harita veri servisinin anlık yoğunluğundan kaynaklanır, şehirle ilgili bir sorun değil. Birazdan tekrar deneyin."
+                : "Couldn't fetch points-of-interest for this city right now — this is usually the free map data service being briefly overloaded, not an issue with the city itself. Please try again shortly."}
+            </p>
+            <button
+              type="button"
+              onClick={() => runSearch()}
+              className="mt-3 rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-foreground/80 hover:bg-sand-50"
+            >
+              {isTr ? "Tekrar dene" : "Try again"}
+            </button>
+          </div>
         )}
 
         {itinerary && (
