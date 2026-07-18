@@ -96,44 +96,27 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Overpass is fair-use shared infrastructure with several independent public
-// mirrors. Relying on a single one (overpass-api.de) means its outages or
-// regional slowness directly become our outages — for less-popular cities
-// worldwide this was the single biggest cause of empty results. Trying each
-// mirror in turn (own timeout each) before giving up spreads that risk out.
-const OVERPASS_ENDPOINTS = [
-  "https://overpass-api.de/api/interpreter",
-  "https://overpass.kumi.systems/api/interpreter",
-  "https://overpass.openstreetmap.ru/api/interpreter",
-];
+// A brief, painful detour: this used to fan out across 3 public Overpass
+// mirrors and/or split one query into many parallel single-filter queries,
+// hoping to dodge slow/degraded mirrors. In production that made things
+// worse — firing many concurrent requests at Overpass's shared
+// infrastructure got the whole batch rate-limited (429) far more often
+// than a single sequential request ever did, silently producing empty
+// results. Back to one endpoint, one request at a time, with a genuinely
+// generous timeout on the first attempt (this is what "give slow Overpass
+// queries a real chance to finish" originally meant) and a single short
+// retry only for the near-instant 429/406 rejections.
+const OVERPASS_ENDPOINT = "https://overpass-api.de/api/interpreter";
 
-// The public Overpass instances are shared fair-use infrastructure — heavier
-// queries (many OR'd filters, like findAttractionsNear's) can legitimately
-// take 15-20s to answer even when the mirror is healthy. Splitting the
-// budget into small fixed chunks per mirror (an earlier version of this
-// function used a flat 12s first attempt) starves exactly those heavy
-// queries of the time they need and turns a slow-but-working query into a
-// hard failure — so instead, each mirror gets a fair *share* of whatever
-// budget remains (at least 9s if the budget allows it at all), and a mirror
-// is only abandoned early on a fast rejection (429/406/other non-2xx), not
-// cut off mid-flight. Vercel kills serverless functions after ~30s (every
-// route calling this sets maxDuration=30) — the per-mirror share shrinks as
-// budget is consumed, so the whole loop still respects that ceiling.
 async function queryOverpassRaw(query: string, totalBudgetMs = 26000): Promise<RawOverpassElement[]> {
   const deadline = Date.now() + totalBudgetMs;
-  let lastErr: unknown;
-
-  for (let i = 0; i < OVERPASS_ENDPOINTS.length; i++) {
-    const endpoint = OVERPASS_ENDPOINTS[i];
-    const remaining = deadline - Date.now();
-    const mirrorsLeft = OVERPASS_ENDPOINTS.length - i;
-    if (remaining < 5000) break; // not enough budget left to give another mirror a fair chance
-
-    const attemptTimeout = Math.min(Math.max(remaining / mirrorsLeft, 9000), remaining);
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const attemptTimeout = Math.min(attempt === 1 ? totalBudgetMs - 4000 : 4000, deadline - Date.now());
+    if (attemptTimeout < 2000) break;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), attemptTimeout);
     try {
-      const res = await fetch(endpoint, {
+      const res = await fetch(OVERPASS_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -143,38 +126,25 @@ async function queryOverpassRaw(query: string, totalBudgetMs = 26000): Promise<R
         body: "data=" + encodeURIComponent(query),
         signal: controller.signal,
       });
-      // 429/406 are near-instant rejections worth one quick retry against
-      // the same mirror before moving on. A 504 means Overpass itself gave
-      // up after already taking a long time — move straight to the next
-      // mirror rather than retrying the same overloaded one.
       if (res.status === 429 || res.status === 406) {
-        await sleep(1000);
-        const retryRes = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "*/*", "User-Agent": USER_AGENT },
-          body: "data=" + encodeURIComponent(query),
-          signal: controller.signal,
-        });
-        if (!retryRes.ok) {
-          lastErr = new Error(`Overpass busy: ${retryRes.status}`);
+        if (attempt === 1) {
+          await sleep(1500);
           continue;
         }
-        const data = (await retryRes.json()) as { elements: RawOverpassElement[] };
-        return data.elements;
+        throw new Error(`Overpass busy: ${res.status}`);
       }
-      if (!res.ok) {
-        lastErr = new Error(`Overpass query failed: ${res.status}`);
-        continue;
-      }
+      if (!res.ok) throw new Error(`Overpass query failed: ${res.status}`);
       const data = (await res.json()) as { elements: RawOverpassElement[] };
       return data.elements;
     } catch (err) {
-      lastErr = err;
+      if (attempt === 2) throw err;
+      if (err instanceof Error && err.name === "AbortError") throw err; // our own timeout — no point retrying short
+      await sleep(1500);
     } finally {
       clearTimeout(timer);
     }
   }
-  throw lastErr instanceof Error ? lastErr : new Error("All Overpass mirrors failed");
+  return [];
 }
 
 async function queryOverpass(
@@ -252,54 +222,35 @@ out body qt;`;
   });
 }
 
-// One filter per query, run in parallel — a single compound query OR-ing
-// all of these together (the previous approach) measured 20s+ even on a
-// healthy mirror, apparently because the value-less `historic` filter
-// forces a much more expensive scan; findPlacesNear's single-filter queries
-// consistently answer in 1-2s, so splitting into that same shape (and
-// merging the results) is both faster overall and far more resilient —
-// a slow/failing filter no longer blocks every other category.
-const ATTRACTION_FILTERS = [
-  '["tourism"="museum"]',
-  '["tourism"="gallery"]',
-  '["tourism"="attraction"]',
-  '["tourism"="viewpoint"]',
-  '["historic"]',
-  '["leisure"="park"]',
-  '["natural"="beach"]',
-  '["amenity"="bar"]',
-  '["amenity"="pub"]',
-  '["amenity"="nightclub"]',
-  '["shop"="mall"]',
-  '["amenity"="marketplace"]',
-];
-
-async function findAttractionsAtRadius(lat: number, lon: number, radiusMeters: number, limit: number, budgetMs: number): Promise<OsmPlace[]> {
+function attractionsQuery(lat: number, lon: number, radiusMeters: number, limit: number): string {
   const around = `around:${radiusMeters},${lat},${lon}`;
-  const perFilterBudget = Math.max(budgetMs, 9000);
-  const settled = await Promise.allSettled(
-    ATTRACTION_FILTERS.map((filter) => {
-      const query = `[out:json][timeout:15];node${filter}["name"](${around});out body ${Math.ceil(limit / 3)};`;
-      return queryOverpass(query, perFilterBudget);
-    })
-  );
-  const byId = new Map<number, OsmPlace>();
-  for (const result of settled) {
-    if (result.status !== "fulfilled") continue;
-    for (const el of result.value) {
-      if (!el.tags?.name || byId.has(el.id)) continue;
-      byId.set(el.id, { osmId: el.id, name: el.tags.name, lat: el.lat, lon: el.lon, tags: el.tags });
-    }
-  }
-  return [...byId.values()].slice(0, limit);
+  return `[out:json][timeout:22];
+(
+  node["tourism"="museum"]["name"](${around});
+  node["tourism"="gallery"]["name"](${around});
+  node["tourism"="attraction"]["name"](${around});
+  node["tourism"="viewpoint"]["name"](${around});
+  node["historic"]["name"](${around});
+  node["leisure"="park"]["name"](${around});
+  node["natural"="beach"]["name"](${around});
+  node["amenity"="bar"]["name"](${around});
+  node["amenity"="pub"]["name"](${around});
+  node["amenity"="nightclub"]["name"](${around});
+  node["shop"="mall"]["name"](${around});
+  node["amenity"="marketplace"]["name"](${around});
+);
+out body ${limit};`;
 }
 
 // A city's geocoded centroid (from Nominatim) doesn't always sit near where
 // OSM contributors have actually tagged points of interest — this is
 // especially common for less-mapped towns and cities with sprawling admin
 // boundaries. Rather than give up on the first empty result, widen the
-// search ring before concluding "nothing here" — each radius is cached
-// under its own key so a later request for the same city doesn't redo it.
+// search ring once before concluding "nothing here" — each radius is
+// cached under its own key so a later request for the same city doesn't
+// redo the widening. Single sequential request per attempt (see
+// queryOverpassRaw's comment on why not to fan out into parallel/multi-
+// mirror requests here).
 export async function findAttractionsNear(
   lat: number,
   lon: number,
@@ -311,8 +262,13 @@ export async function findAttractionsNear(
   for (const r of radii) {
     const key = `attractions:${lat.toFixed(3)}:${lon.toFixed(3)}:${r}`;
     const remaining = deadline - Date.now();
-    if (remaining < 9000) break;
-    const results = await cachedFetch(key, () => findAttractionsAtRadius(lat, lon, r, limit, remaining));
+    if (remaining < 6000) break;
+    const results = await cachedFetch(key, async () => {
+      const elements = await queryOverpass(attractionsQuery(lat, lon, r, limit), remaining);
+      return elements
+        .filter((el) => el.tags?.name)
+        .map((el) => ({ osmId: el.id, name: el.tags!.name, lat: el.lat, lon: el.lon, tags: el.tags! }));
+    });
     if (results.length > 0 || r === radii[radii.length - 1]) return results;
   }
   return [];
