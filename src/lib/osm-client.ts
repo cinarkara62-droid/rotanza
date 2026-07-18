@@ -239,8 +239,12 @@ const ATTRACTION_FILTERS = [
   '["shop"="mall"]',
 ];
 
+async function runAttractionFilter(filter: string, lat: number, lon: number, radiusMeters: number, limit: number, budgetMs: number) {
+  const query = `[out:json][timeout:20];node${filter}["name"](around:${radiusMeters},${lat},${lon});out body ${Math.ceil(limit / 2)};`;
+  return queryOverpass(query, budgetMs);
+}
+
 async function findAttractionsAtRadius(lat: number, lon: number, radiusMeters: number, limit: number, deadline: number): Promise<OsmPlace[]> {
-  const around = `around:${radiusMeters},${lat},${lon}`;
   const byId = new Map<number, OsmPlace>();
   let anySucceeded = false;
   for (let i = 0; i < ATTRACTION_FILTERS.length; i++) {
@@ -250,9 +254,23 @@ async function findAttractionsAtRadius(lat: number, lon: number, radiusMeters: n
     if (remaining < 3000) break;
     const share = Math.max(remaining / filtersLeft, 3500);
     try {
-      const query = `[out:json][timeout:20];node${filter}["name"](${around});out body ${Math.ceil(limit / 2)};`;
-      const elements = await queryOverpass(query, Math.min(share, remaining));
+      let elements = await runAttractionFilter(filter, lat, lon, radiusMeters, limit, Math.min(share, remaining));
       anySucceeded = true;
+      // A city's geocoded centroid doesn't always sit near where this
+      // category is actually tagged (confirmed directly against Overpass:
+      // a small town had zero "historic" nodes at 2200m but 6 at 8800m) —
+      // if there's budget left over from this filter's share, spend it on
+      // one wider retry before moving to the next category.
+      if (elements.length === 0) {
+        const leftover = deadline - Date.now();
+        if (leftover > 4000) {
+          try {
+            elements = await runAttractionFilter(filter, lat, lon, radiusMeters * 5, limit, Math.min(leftover, 8000));
+          } catch {
+            // keep the (empty) base-radius result rather than failing the whole category
+          }
+        }
+      }
       for (const el of elements) {
         if (!el.tags?.name || byId.has(el.id)) continue;
         byId.set(el.id, { osmId: el.id, name: el.tags.name, lat: el.lat, lon: el.lon, tags: el.tags });
@@ -269,13 +287,6 @@ async function findAttractionsAtRadius(lat: number, lon: number, radiusMeters: n
   return [...byId.values()].slice(0, limit);
 }
 
-// A city's geocoded centroid (from Nominatim) doesn't always sit near where
-// OSM contributors have actually tagged points of interest — this is
-// especially common for less-mapped towns and cities with sprawling admin
-// boundaries. No radius widening here (unlike findPlacesNear) — each
-// category attempt already needs as much of the budget as it can get on an
-// unpredictable shared server, so a second full pass at a wider radius
-// isn't affordable within maxDuration=30.
 export async function findAttractionsNear(
   lat: number,
   lon: number,
