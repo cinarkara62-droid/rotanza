@@ -324,7 +324,7 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
                     </span>
                     <span
                       className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                        r.confirmation ? "bg-brand-500/15 text-brand-700" : "bg-black/5 text-brand-50/40"
+                        r.confirmation ? "bg-brand-500/15 text-brand-300" : "bg-black/5 text-brand-50/40"
                       }`}
                     >
                       {r.confirmation

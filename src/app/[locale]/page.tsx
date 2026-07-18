@@ -162,7 +162,7 @@ export default async function HomePage({
               <thead>
                 <tr className="border-b border-white/10 bg-sand-50/60">
                   <th className="px-5 py-3 font-semibold text-brand-50">{dict.home.why.headerFeature}</th>
-                  <th className="px-5 py-3 text-center font-semibold text-brand-700">{dict.home.why.headerUs}</th>
+                  <th className="px-5 py-3 text-center font-semibold text-brand-300">{dict.home.why.headerUs}</th>
                   <th className="px-5 py-3 text-center font-semibold text-brand-50/50">{dict.home.why.headerOthers}</th>
                 </tr>
               </thead>

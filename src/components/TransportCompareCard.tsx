@@ -24,7 +24,7 @@ export function TransportCompareCard({
   href?: string;
 }) {
   const badgeClass =
-    badgeTone === "brand" ? "bg-brand-500/15 text-brand-700" : "bg-coral-500/15 text-coral-600";
+    badgeTone === "brand" ? "bg-brand-500/15 text-brand-300" : "bg-coral-500/15 text-coral-600";
 
   return (
     <div className="rounded-2xl border border-white/10 bg-sand-100 p-6 shadow-sm transition-shadow hover:shadow-md">

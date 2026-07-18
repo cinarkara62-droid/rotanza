@@ -61,7 +61,7 @@ export function BudgetPanel({
         </div>
         <div className="flex justify-between border-t border-white/10 pt-2">
           <span className="text-brand-50/60">{isTr ? "Kalan bütçe" : "Remaining"}</span>
-          <span className={`font-bold ${remaining < 0 ? "text-coral-600" : "text-brand-600"}`}>
+          <span className={`font-bold ${remaining < 0 ? "text-coral-600" : "text-brand-400"}`}>
             {remaining.toLocaleString()} {currency}
           </span>
         </div>

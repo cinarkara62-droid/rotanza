@@ -70,7 +70,7 @@ export function LoginClient({ locale }: { locale: Locale }) {
 
         <p className="text-center text-sm text-brand-50/50">
           {dict.auth.switchToSignup}{" "}
-          <Link href={`/${locale}/signup`} className="font-semibold text-brand-700">
+          <Link href={`/${locale}/signup`} className="font-semibold text-brand-300">
             {dict.auth.switchToSignupLink}
           </Link>
         </p>

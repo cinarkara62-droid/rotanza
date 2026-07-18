@@ -70,7 +70,7 @@ export function PlaceDetailPanel({
             {stop.website && (
               <div>
                 <span className="font-semibold">{isTr ? "Web sitesi" : "Website"}:</span>{" "}
-                <a href={stop.website} target="_blank" rel="noreferrer" className="text-brand-600 underline">
+                <a href={stop.website} target="_blank" rel="noreferrer" className="text-brand-400 underline">
                   {stop.website}
                 </a>
               </div>

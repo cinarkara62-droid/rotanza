@@ -161,7 +161,7 @@ export function SmartNotificationsCard({ locale, plan }: { locale: Locale; plan:
         <div className="absolute inset-0 flex items-center justify-center bg-sand-50/70 backdrop-blur-sm">
           <div className="mx-4 flex flex-col items-center rounded-2xl border border-white/10 bg-sand-100 px-8 py-7 text-center shadow-lg">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-2xl">🔒</div>
-            <span className="mt-3 rounded-full bg-brand-500/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-700">
+            <span className="mt-3 rounded-full bg-brand-500/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-300">
               {isTr ? "Pro ve Max ile kullanılabilir" : "Available with Pro & Max"}
             </span>
             <Link

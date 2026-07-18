@@ -246,7 +246,7 @@ export function AlertsClient({ locale }: { locale: Locale }) {
                     </div>
                   </div>
                   {dropped ? (
-                    <span className="shrink-0 rounded-full bg-brand-500/15 px-2.5 py-1 text-xs font-bold text-brand-700">
+                    <span className="shrink-0 rounded-full bg-brand-500/15 px-2.5 py-1 text-xs font-bold text-brand-300">
                       ↓ {pct}%
                     </span>
                   ) : (
@@ -267,7 +267,7 @@ export function AlertsClient({ locale }: { locale: Locale }) {
                       <span className="text-xl font-bold text-brand-50">${a.currentPrice.toLocaleString()}</span>
                     </div>
                     {dropped && (
-                      <div className="text-xs font-medium text-brand-600">
+                      <div className="text-xs font-medium text-brand-400">
                         {dict.alerts.savings}: ${(a.previousPrice - a.currentPrice).toLocaleString()}
                       </div>
                     )}

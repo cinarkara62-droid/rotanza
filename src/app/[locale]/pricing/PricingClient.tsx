@@ -82,7 +82,7 @@ export function PricingClient({ locale }: { locale: Locale }) {
             }`}
           >
             {dict.pricing.yearly}
-            <span className="rounded-full bg-brand-500/20 px-1.5 py-0.5 text-[10px] font-bold text-brand-700">
+            <span className="rounded-full bg-brand-500/20 px-1.5 py-0.5 text-[10px] font-bold text-brand-300">
               {dict.pricing.yearlyBadge}
             </span>
           </button>
