@@ -89,7 +89,7 @@ function ViewpointMarker({ point, destination, locale }: { point: Viewpoint; des
       <Popup>
         <div className="text-sm">
           <div className="font-semibold">{point.name}</div>
-          {loading && <div className="mt-1 text-xs text-brand-50/50">{isTr ? "Yükleniyor…" : "Loading…"}</div>}
+          {loading && <div className="mt-1 text-xs text-foreground/50">{isTr ? "Yükleniyor…" : "Loading…"}</div>}
           {insight && (
             <div className="mt-1 space-y-1 text-xs">
               <div>{insight.reason}</div>

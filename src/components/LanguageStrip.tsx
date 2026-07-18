@@ -19,7 +19,7 @@ export function LanguageStrip({ locale, label }: { locale: Locale; label: string
 
   return (
     <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-2 gap-y-2 px-4 text-center">
-      <span className="text-xs font-semibold uppercase tracking-wide text-brand-50/40">
+      <span className="text-xs font-semibold uppercase tracking-wide text-foreground/40">
         🌐 {label}:
       </span>
       {locales.map((l) => (
@@ -29,7 +29,7 @@ export function LanguageStrip({ locale, label }: { locale: Locale; label: string
           className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
             l === locale
               ? "border-brand-500 bg-brand-500 text-white"
-              : "border-white/15 bg-sand-100 text-brand-50/70 hover:border-brand-300"
+              : "border-white/15 bg-sand-100 text-foreground/70 hover:border-brand-300"
           }`}
         >
           {localeNames[l]}

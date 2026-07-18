@@ -104,12 +104,12 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
           }}
         />
 
-        <label className="flex flex-1 flex-col gap-2 text-sm font-medium text-brand-50">
+        <label className="flex flex-1 flex-col gap-2 text-sm font-medium text-foreground">
           {dict.restaurants.filterCuisine}
           <select
             value={cuisine}
             onChange={(e) => setCuisine(e.target.value)}
-            className="rounded-xl border border-white/15 bg-sand-100 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+            className="rounded-xl border border-white/15 bg-sand-100 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
           >
             <option value="all">{dict.restaurants.filterAll}</option>
             {cuisines.map((c) => (
@@ -122,14 +122,14 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
       </div>
 
       {customCity && (
-        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-brand-50/40">
+        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-foreground/40">
           {isTr
             ? `"${customCity.name}" için OpenStreetMap üzerinden canlı sonuçlar gösteriliyor.`
             : `Showing live OpenStreetMap results for "${customCity.name}".`}
         </p>
       )}
       {!customCity && city && (
-        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-brand-50/40">
+        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-foreground/40">
           {isTr
             ? `${city.cityTr} için OpenStreetMap'ten alınan gerçek işletme verileri.`
             : `Real business data for ${city.cityEn}, sourced from OpenStreetMap.`}
@@ -138,12 +138,12 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
 
       <div className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-5 sm:grid-cols-2">
         {liveLoading && (
-          <p className="col-span-2 text-center text-sm text-brand-50/50">
+          <p className="col-span-2 text-center text-sm text-foreground/50">
             {isTr ? "Yükleniyor… küçük şehirlerde biraz uzun sürebilir." : "Loading… this can take a bit longer for smaller cities."}
           </p>
         )}
         {liveError && (
-          <p className="col-span-2 text-center text-sm text-brand-50/50">
+          <p className="col-span-2 text-center text-sm text-foreground/50">
             {isTr
               ? "Canlı veri şu anda alınamadı, lütfen daha sonra tekrar deneyin."
               : "Couldn't fetch live data right now — please try again shortly."}
@@ -158,8 +158,8 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
                     {r.emoji}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-brand-50">{r.name}</div>
-                    <div className="text-xs text-brand-50/50">{isTr ? r.cuisineTr : r.cuisineEn}</div>
+                    <div className="text-sm font-semibold text-foreground">{r.name}</div>
+                    <div className="text-xs text-foreground/50">{isTr ? r.cuisineTr : r.cuisineEn}</div>
                   </div>
                 </div>
                 <a
@@ -171,11 +171,11 @@ export function RestaurantsClient({ locale }: { locale: Locale }) {
                   {isTr ? "Haritada gör" : "View on map"}
                 </a>
               </div>
-              {r.address && <p className="mt-3 text-sm leading-relaxed text-brand-50/60">{r.address}</p>}
+              {r.address && <p className="mt-3 text-sm leading-relaxed text-foreground/60">{r.address}</p>}
             </div>
           ))}
         {!liveLoading && !liveError && filtered.length === 0 && (
-          <p className="col-span-2 text-center text-sm text-brand-50/50">{dict.restaurants.noResults}</p>
+          <p className="col-span-2 text-center text-sm text-foreground/50">{dict.restaurants.noResults}</p>
         )}
       </div>
     </div>

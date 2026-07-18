@@ -59,25 +59,25 @@ export function SignupClient({ locale }: { locale: Locale }) {
       <PageHeader eyebrow={dict.common.brand} title={dict.auth.signupTitle} subtitle={dict.auth.signupSubtitle} />
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-4 rounded-3xl border border-white/10 bg-sand-100 p-6 shadow-sm sm:p-8">
-        <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+        <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
           {dict.auth.nameLabel}
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
           />
         </label>
-        <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+        <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
           {dict.auth.emailLabel}
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
           />
         </label>
-        <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+        <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
           {dict.auth.passwordLabel}
           <input
             type="password"
@@ -85,7 +85,7 @@ export function SignupClient({ locale }: { locale: Locale }) {
             minLength={8}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
           />
         </label>
 
@@ -99,7 +99,7 @@ export function SignupClient({ locale }: { locale: Locale }) {
           {dict.auth.signupCta}
         </button>
 
-        <p className="text-center text-sm text-brand-50/50">
+        <p className="text-center text-sm text-foreground/50">
           {dict.auth.switchToLogin}{" "}
           <Link href={`/${locale}/login`} className="font-semibold text-brand-300">
             {dict.auth.switchToLoginLink}

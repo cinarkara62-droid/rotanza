@@ -33,7 +33,7 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
     <div ref={rootRef} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 rounded-full border border-white/15 bg-sand-100 px-3 py-1.5 text-xs font-semibold text-brand-50 shadow-sm"
+        className="flex items-center gap-1.5 rounded-full border border-white/15 bg-sand-100 px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm"
         aria-expanded={open}
       >
         <span aria-hidden>🌐</span>
@@ -48,12 +48,12 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
               key={l}
               onClick={() => switchTo(l)}
               className={`flex w-full items-center justify-between px-3.5 py-2 text-start text-sm transition-colors ${
-                l === locale ? "bg-brand-50 font-semibold text-brand-700" : "text-brand-50/70 hover:bg-sand-50"
+                l === locale ? "bg-brand-50 font-semibold text-brand-700" : "text-foreground/70 hover:bg-sand-50"
               }`}
               aria-current={l === locale}
             >
               {localeNames[l]}
-              <span className="text-[10px] uppercase text-brand-50/40">{l}</span>
+              <span className="text-[10px] uppercase text-foreground/40">{l}</span>
             </button>
           ))}
         </div>

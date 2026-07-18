@@ -49,21 +49,21 @@ export default async function AccountPage({
       <div className="mt-8 rounded-3xl border border-white/10 bg-sand-100 p-6 shadow-sm sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wide text-brand-50/40">
+            <div className="text-xs font-semibold uppercase tracking-wide text-foreground/40">
               {dict.account.currentPlan}
             </div>
-            <div className="mt-1 text-2xl font-bold text-brand-50">{PLAN_LABEL[user.plan] ?? user.plan}</div>
+            <div className="mt-1 text-2xl font-bold text-foreground">{PLAN_LABEL[user.plan] ?? user.plan}</div>
             {user.billingCycle && (
-              <div className="mt-0.5 text-xs text-brand-50/40">
+              <div className="mt-0.5 text-xs text-foreground/40">
                 {user.billingCycle === "monthly" ? dict.account.billingMonthly : dict.account.billingYearly}
               </div>
             )}
           </div>
           <div className="text-right">
-            <div className="text-xs font-semibold uppercase tracking-wide text-brand-50/40">
+            <div className="text-xs font-semibold uppercase tracking-wide text-foreground/40">
               {dict.account.memberSince}
             </div>
-            <div className="mt-1 text-sm text-brand-50/70">
+            <div className="mt-1 text-sm text-foreground/70">
               {new Date(user.createdAt).toLocaleDateString(isTr ? "tr-TR" : "en-US")}
             </div>
           </div>
@@ -72,7 +72,7 @@ export default async function AccountPage({
         <div className="mt-6 border-t border-white/10 pt-6">
           {isFree ? (
             <>
-              <p className="mb-4 text-sm text-brand-50/60">{dict.account.freePlanNote}</p>
+              <p className="mb-4 text-sm text-foreground/60">{dict.account.freePlanNote}</p>
               <UpgradeButtons locale={l} viewPlansLabel={dict.account.viewPlans} />
             </>
           ) : (

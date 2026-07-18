@@ -120,11 +120,11 @@ export function SmartNotificationsCard({ locale, plan }: { locale: Locale; plan:
     <div className="relative mt-12 overflow-hidden rounded-3xl border border-white/10 bg-sand-100 p-6 shadow-sm sm:p-8">
       <div className="flex items-center gap-2">
         <span className="text-xl">🔔</span>
-        <h2 className="text-lg font-bold text-brand-50">
+        <h2 className="text-lg font-bold text-foreground">
           {isTr ? "Akıllı Seyahat Bildirimleri" : "Smart Travel Notifications"}
         </h2>
       </div>
-      <p className="mt-1.5 text-sm text-brand-50/60">
+      <p className="mt-1.5 text-sm text-foreground/60">
         {isTr
           ? "Yolculuğunuz öncesinde ve sırasında akıllı hatırlatmalar alın."
           : "Receive intelligent reminders before and during your journey."}
@@ -138,14 +138,14 @@ export function SmartNotificationsCard({ locale, plan }: { locale: Locale; plan:
           >
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-brand-50">{isTr ? opt.titleTr : opt.titleEn}</span>
+                <span className="text-sm font-semibold text-foreground">{isTr ? opt.titleTr : opt.titleEn}</span>
                 {!opt.implemented && (
-                  <span className="shrink-0 rounded-full bg-black/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-50/40">
+                  <span className="shrink-0 rounded-full bg-black/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-foreground/40">
                     {isTr ? "Yakında" : "Coming soon"}
                   </span>
                 )}
               </div>
-              <div className="mt-0.5 text-xs text-brand-50/50">{isTr ? opt.descTr : opt.descEn}</div>
+              <div className="mt-0.5 text-xs text-foreground/50">{isTr ? opt.descTr : opt.descEn}</div>
             </div>
             <ToggleSwitch
               checked={!!prefs[opt.key]}

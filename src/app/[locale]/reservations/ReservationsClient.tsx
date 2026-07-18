@@ -151,17 +151,17 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
                   {service.emoji}
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-brand-50">
+                  <div className="text-sm font-semibold text-foreground">
                     {isTr ? service.titleTr : service.titleEn}
                   </div>
-                  <div className="text-xs text-brand-50/40">{isTr ? service.descTr : service.descEn}</div>
+                  <div className="text-xs text-foreground/40">{isTr ? service.descTr : service.descEn}</div>
                 </div>
               </div>
               <button
                 type="button"
                 disabled={!service.available}
                 onClick={() => setExpandedService((prev) => (prev === service.key ? null : service.key))}
-                className="mt-4 w-full rounded-full border border-white/15 py-2.5 text-sm font-semibold text-brand-50 transition-colors hover:border-brand-300 hover:bg-sand-50 disabled:cursor-not-allowed disabled:opacity-40"
+                className="mt-4 w-full rounded-full border border-white/15 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-brand-300 hover:bg-sand-50 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {!service.available
                   ? isTr
@@ -207,12 +207,12 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
           onSubmit={handleSave}
           className="mx-auto mt-6 grid grid-cols-1 gap-4 rounded-3xl border border-white/10 bg-sand-100 p-6 shadow-sm sm:grid-cols-2 sm:p-8"
         >
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {dict.reservations.form.type}
             <select
               value={type}
               onChange={(e) => setType(e.target.value as Reservation["type"])}
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
             >
               {TYPES.map((t) => (
                 <option key={t} value={t}>
@@ -222,58 +222,58 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
             </select>
           </label>
 
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {dict.reservations.form.title}
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={dict.reservations.form.titlePlaceholder}
               required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
             />
           </label>
 
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {dict.reservations.form.date}
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
             />
           </label>
 
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {dict.reservations.form.time}
             <input
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
             />
           </label>
 
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {dict.reservations.form.confirmation}
             <input
               value={confirmation}
               onChange={(e) => setConfirmation(e.target.value)}
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
             />
           </label>
 
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50 sm:col-span-2">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground sm:col-span-2">
             {dict.reservations.form.notes}
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={2}
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
             />
           </label>
 
-          <p className="text-xs leading-relaxed text-brand-50/40 sm:col-span-2">
+          <p className="text-xs leading-relaxed text-foreground/40 sm:col-span-2">
             {isTr
               ? "Rezervasyon tarihi yaklaştığında hesabınızın e-posta adresine otomatik bir hatırlatma gönderilir."
               : "You'll get an automatic email reminder to your account address as the reservation date approaches."}
@@ -293,7 +293,7 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
                 resetForm();
                 setShowForm(false);
               }}
-              className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-semibold text-brand-50/70"
+              className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-semibold text-foreground/70"
             >
               {dict.reservations.form.cancel}
             </button>
@@ -301,12 +301,12 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
         </form>
       )}
 
-      {loading && <p className="mt-10 text-center text-sm text-brand-50/50">{isTr ? "Yükleniyor…" : "Loading…"}</p>}
+      {loading && <p className="mt-10 text-center text-sm text-foreground/50">{isTr ? "Yükleniyor…" : "Loading…"}</p>}
 
       {!loading && (
         <div className="mt-10 space-y-3">
           {reservations.length === 0 && !showForm && (
-            <p className="text-center text-sm text-brand-50/50">{dict.reservations.empty}</p>
+            <p className="text-center text-sm text-foreground/50">{dict.reservations.empty}</p>
           )}
           {reservations.map((r) => (
             <div
@@ -324,7 +324,7 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
                     </span>
                     <span
                       className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                        r.confirmation ? "bg-brand-500/15 text-brand-300" : "bg-black/5 text-brand-50/40"
+                        r.confirmation ? "bg-brand-500/15 text-brand-300" : "bg-black/5 text-foreground/40"
                       }`}
                     >
                       {r.confirmation
@@ -336,13 +336,13 @@ export function ReservationsClient({ locale, plan }: { locale: Locale; plan: str
                           : "Pending"}
                     </span>
                   </div>
-                  <div className="mt-0.5 text-sm font-semibold text-brand-50">{r.title}</div>
-                  <div className="mt-0.5 text-xs text-brand-50/50">
+                  <div className="mt-0.5 text-sm font-semibold text-foreground">{r.title}</div>
+                  <div className="mt-0.5 text-xs text-foreground/50">
                     {new Date(r.date).toLocaleDateString(isTr ? "tr-TR" : "en-US")}
                     {r.time ? ` · ${r.time}` : ""}
                     {r.confirmation ? ` · #${r.confirmation}` : ""}
                   </div>
-                  {r.notes && <p className="mt-1 text-xs text-brand-50/50">{r.notes}</p>}
+                  {r.notes && <p className="mt-1 text-xs text-foreground/50">{r.notes}</p>}
                 </div>
               </div>
               <button

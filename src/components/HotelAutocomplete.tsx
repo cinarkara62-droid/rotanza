@@ -102,7 +102,7 @@ export function HotelAutocomplete({
         }}
         onFocus={() => setOpen(true)}
         placeholder={placeholder}
-        className="w-full rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+        className="w-full rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
         // Free text alone can't be submitted — see the "no selection yet" hint below.
         autoComplete="off"
       />
@@ -111,7 +111,7 @@ export function HotelAutocomplete({
         <div className="absolute top-full z-50 mt-1 max-h-72 w-full overflow-y-auto rounded-2xl border border-white/10 bg-sand-100 py-2 shadow-xl">
           {curatedMatches.length > 0 && (
             <div>
-              <div className="px-3.5 pb-1 pt-1 text-[10px] font-bold uppercase tracking-wide text-brand-50/40">
+              <div className="px-3.5 pb-1 pt-1 text-[10px] font-bold uppercase tracking-wide text-foreground/40">
                 {isTr ? "Bilinen oteller" : "Known hotels"}
               </div>
               {curatedMatches.map((h) => {
@@ -124,8 +124,8 @@ export function HotelAutocomplete({
                     className="flex w-full items-center gap-2 px-3.5 py-2 text-start text-sm hover:bg-sand-50"
                   >
                     <span className="min-w-0">
-                      <span className="block truncate font-medium text-brand-50">🏨 {h.name}</span>
-                      <span className="block truncate text-xs text-brand-50/40">
+                      <span className="block truncate font-medium text-foreground">🏨 {h.name}</span>
+                      <span className="block truncate text-xs text-foreground/40">
                         {city ? (isTr ? city.cityTr : city.cityEn) : ""}
                       </span>
                     </span>
@@ -135,7 +135,7 @@ export function HotelAutocomplete({
             </div>
           )}
           <div>
-            <div className="border-t border-white/10 px-3.5 pb-1 pt-2 text-[10px] font-bold uppercase tracking-wide text-brand-50/40">
+            <div className="border-t border-white/10 px-3.5 pb-1 pt-2 text-[10px] font-bold uppercase tracking-wide text-foreground/40">
               {isTr ? "Canlı arama sonuçları" : "Live search results"} {loading && "…"}
             </div>
             {liveResults.map((r) => (
@@ -145,12 +145,12 @@ export function HotelAutocomplete({
                 onClick={() => pickLive(r)}
                 className="flex w-full flex-col px-3.5 py-2 text-start text-sm hover:bg-sand-50"
               >
-                <span className="truncate font-medium text-brand-50">📍 {r.name}</span>
-                <span className="truncate text-xs text-brand-50/40">{r.displayName}</span>
+                <span className="truncate font-medium text-foreground">📍 {r.name}</span>
+                <span className="truncate text-xs text-foreground/40">{r.displayName}</span>
               </button>
             ))}
             {!loading && liveResults.length === 0 && curatedMatches.length === 0 && (
-              <div className="px-3.5 py-2 text-sm text-brand-50/40">
+              <div className="px-3.5 py-2 text-sm text-foreground/40">
                 {isTr ? "Sonuç yok, yazmaya devam edin…" : "No matches yet, keep typing…"}
               </div>
             )}

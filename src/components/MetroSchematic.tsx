@@ -70,7 +70,7 @@ export function MetroSchematic({ lines, locale }: { lines: MetroLine[]; locale: 
 
   if (projected.length === 0) {
     return (
-      <p className="text-sm text-brand-50/50">
+      <p className="text-sm text-foreground/50">
         {isTr ? "Bu hatlar için konum verisi bulunamadı." : "No coordinate data found for these lines."}
       </p>
     );
@@ -124,7 +124,7 @@ export function MetroSchematic({ lines, locale }: { lines: MetroLine[]; locale: 
             y={l.ly}
             fontSize="9"
             textAnchor={l.anchor}
-            className="fill-brand-50/70 font-sans"
+            className="fill-foreground/70 font-sans"
             fontWeight={l.bold ? 700 : 400}
           >
             {l.name}
@@ -139,14 +139,14 @@ export function MetroSchematic({ lines, locale }: { lines: MetroLine[]; locale: 
             <div key={line.ref + i} className="flex items-start gap-2.5">
               <span className="mt-1 h-3 w-3 shrink-0 rounded-full" style={{ backgroundColor: color }} aria-hidden />
               <div className="min-w-0">
-                <div className="text-sm font-semibold text-brand-50">
+                <div className="text-sm font-semibold text-foreground">
                   {line.ref}
                   {line.name && line.name !== line.ref ? ` — ${line.name}` : ""}
-                  <span className="ms-2 text-xs font-normal text-brand-50/40">
+                  <span className="ms-2 text-xs font-normal text-foreground/40">
                     {line.stations.length} {isTr ? "istasyon" : "stations"}
                   </span>
                 </div>
-                <p className="mt-0.5 text-xs leading-relaxed text-brand-50/50">
+                <p className="mt-0.5 text-xs leading-relaxed text-foreground/50">
                   {line.stations.map((s) => s.name).join(" · ")}
                 </p>
               </div>

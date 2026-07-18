@@ -45,18 +45,18 @@ export function PlaceDetailPanel({
       )}
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-2 text-lg font-bold text-brand-50">
+          <div className="flex items-center gap-2 text-lg font-bold text-foreground">
             <span className="text-xl">{stop.emoji}</span>
             {isTr ? stop.nameTr : stop.nameEn}
           </div>
-          <button onClick={onClose} className="text-sm text-brand-50/40 hover:text-brand-50/70">
+          <button onClick={onClose} className="text-sm text-foreground/40 hover:text-foreground/70">
             ✕
           </button>
         </div>
-        <p className="mt-1 text-sm text-brand-50/60">{isTr ? stop.descTr : stop.descEn}</p>
+        <p className="mt-1 text-sm text-foreground/60">{isTr ? stop.descTr : stop.descEn}</p>
 
         {(stop.openingHours || stop.phone || stop.website) && (
-          <div className="mt-3 space-y-1 text-xs text-brand-50/70">
+          <div className="mt-3 space-y-1 text-xs text-foreground/70">
             {stop.openingHours && (
               <div>
                 <span className="font-semibold">{isTr ? "Açılış saatleri" : "Opening hours"}:</span> {stop.openingHours}
@@ -80,7 +80,7 @@ export function PlaceDetailPanel({
 
         {(stop.aiTip || stop.bestVisitTime || stop.crowdNote) && (
           <div className="mt-4 rounded-xl bg-brand-50 p-3 text-xs text-brand-700">
-            <div className="mb-1 text-[10px] font-bold uppercase tracking-wide text-brand-50/40">
+            <div className="mb-1 text-[10px] font-bold uppercase tracking-wide text-foreground/40">
               {isTr ? "Yapay zekâ tavsiyesi (genel tahmin)" : "AI advice (general estimate)"}
             </div>
             {stop.bestVisitTime && (

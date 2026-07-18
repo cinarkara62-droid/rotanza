@@ -102,7 +102,7 @@ export function CitySearchInput({
   }
 
   return (
-    <div ref={rootRef} className="relative flex flex-1 flex-col gap-2 text-sm font-medium text-brand-50">
+    <div ref={rootRef} className="relative flex flex-1 flex-col gap-2 text-sm font-medium text-foreground">
       {label}
       <input
         value={query}
@@ -112,13 +112,13 @@ export function CitySearchInput({
         }}
         onFocus={() => setOpen(true)}
         placeholder={isTr ? "Bir şehir ara..." : "Search a city..."}
-        className="rounded-xl border border-white/15 bg-sand-100 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+        className="rounded-xl border border-white/15 bg-sand-100 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
       />
       {open && (
         <div className="absolute top-full z-50 mt-1 max-h-80 w-full overflow-y-auto rounded-2xl border border-white/10 bg-sand-100 py-2 shadow-xl">
           {curatedMatches.length > 0 && (
             <div>
-              <div className="px-3.5 pb-1 pt-1 text-[10px] font-bold uppercase tracking-wide text-brand-50/40">
+              <div className="px-3.5 pb-1 pt-1 text-[10px] font-bold uppercase tracking-wide text-foreground/40">
                 {curatedLabel}
               </div>
               {curatedMatches.map((c) => (
@@ -126,11 +126,11 @@ export function CitySearchInput({
                   key={c.id}
                   type="button"
                   onClick={() => selectCurated(c.id)}
-                  className="flex w-full items-center gap-2 px-3.5 py-2 text-start text-sm text-brand-50/80 hover:bg-sand-50"
+                  className="flex w-full items-center gap-2 px-3.5 py-2 text-start text-sm text-foreground/80 hover:bg-sand-50"
                 >
                   <span>{c.emoji}</span>
                   {isTr ? c.cityTr : c.cityEn}
-                  <span className="text-xs text-brand-50/40">{isTr ? c.countryTr : c.countryEn}</span>
+                  <span className="text-xs text-foreground/40">{isTr ? c.countryTr : c.countryEn}</span>
                 </button>
               ))}
             </div>
@@ -138,7 +138,7 @@ export function CitySearchInput({
 
           {query.trim().length >= 2 && (
             <div>
-              <div className="border-t border-white/10 px-3.5 pb-1 pt-2 text-[10px] font-bold uppercase tracking-wide text-brand-50/40">
+              <div className="border-t border-white/10 px-3.5 pb-1 pt-2 text-[10px] font-bold uppercase tracking-wide text-foreground/40">
                 {otherLabel} {loading && "…"}
               </div>
               {liveResults
@@ -148,14 +148,14 @@ export function CitySearchInput({
                     key={r.osmId}
                     type="button"
                     onClick={() => selectCustom(r)}
-                    className="flex w-full flex-col px-3.5 py-2 text-start text-sm text-brand-50/80 hover:bg-sand-50"
+                    className="flex w-full flex-col px-3.5 py-2 text-start text-sm text-foreground/80 hover:bg-sand-50"
                   >
                     <span>📍 {r.name}</span>
-                    <span className="truncate text-xs text-brand-50/40">{r.displayName}</span>
+                    <span className="truncate text-xs text-foreground/40">{r.displayName}</span>
                   </button>
                 ))}
               {!loading && liveResults.length === 0 && curatedMatches.length === 0 && (
-                <div className="px-3.5 py-2 text-sm text-brand-50/40">{noResultsLabel}</div>
+                <div className="px-3.5 py-2 text-sm text-foreground/40">{noResultsLabel}</div>
               )}
             </div>
           )}

@@ -195,7 +195,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
           }}
         />
 
-        <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+        <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
           {dict.planner.form.days}
           <input
             type="number"
@@ -203,12 +203,12 @@ export function PlannerClient({ locale }: { locale: Locale }) {
             max={7}
             value={days}
             onChange={(e) => setDays(Math.min(7, Math.max(1, Number(e.target.value) || 1)))}
-            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
           />
         </label>
 
         <div className="sm:col-span-2">
-          <div className="mb-2 text-sm font-medium text-brand-50">{dict.planner.form.interests}</div>
+          <div className="mb-2 text-sm font-medium text-foreground">{dict.planner.form.interests}</div>
           <div className="flex flex-wrap gap-2">
             {INTEREST_OPTIONS.map((tag) => (
               <button
@@ -218,7 +218,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
                 className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
                   interests.includes(tag)
                     ? "border-brand-500 bg-brand-500 text-white"
-                    : "border-white/15 bg-sand-100 text-brand-50/70 hover:border-brand-300"
+                    : "border-white/15 bg-sand-100 text-foreground/70 hover:border-brand-300"
                 }`}
               >
                 {dict.planner.interestLabels[tag]}
@@ -228,7 +228,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
         </div>
 
         <div className="sm:col-span-2">
-          <div className="mb-2 text-sm font-medium text-brand-50">{dict.planner.form.budgetLevel}</div>
+          <div className="mb-2 text-sm font-medium text-foreground">{dict.planner.form.budgetLevel}</div>
           <div className="flex flex-wrap gap-2">
             {BUDGET_OPTIONS.map((level) => (
               <button
@@ -238,7 +238,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
                 className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
                   budgetLevel === level
                     ? "border-brand-950 bg-brand-950 text-white"
-                    : "border-white/15 bg-sand-100 text-brand-50/70 hover:border-brand-300"
+                    : "border-white/15 bg-sand-100 text-foreground/70 hover:border-brand-300"
                 }`}
               >
                 {dict.planner.budgetLabels[level]}
@@ -247,7 +247,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <label className="flex flex-col gap-2 text-sm font-medium text-brand-50 sm:col-span-2">
+        <label className="flex flex-col gap-2 text-sm font-medium text-foreground sm:col-span-2">
           {isTr ? "Toplam bütçeniz (opsiyonel)" : "Your total budget (optional)"}
           <input
             type="number"
@@ -255,7 +255,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
             value={budgetAmount}
             onChange={(e) => setBudgetAmount(e.target.value)}
             placeholder={isTr ? "ör. 500" : "e.g. 500"}
-            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+            className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
           />
         </label>
 
@@ -267,7 +267,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
           >
             {loading ? (isTr ? "Yükleniyor…" : "Loading…") : itinerary ? dict.planner.form.regenerate : dict.planner.form.submit}
           </button>
-          <p className="mt-3 text-xs text-brand-50/40">
+          <p className="mt-3 text-xs text-foreground/40">
             {loading && customCity
               ? isTr
                 ? "Küçük şehirlerde bu biraz uzun sürebilir…"
@@ -279,10 +279,10 @@ export function PlannerClient({ locale }: { locale: Locale }) {
 
       <div className={`mx-auto mt-12 ${itinerary ? "max-w-6xl" : "max-w-3xl"}`}>
         {!itinerary && !loadError && (
-          <p className="text-center text-sm text-brand-50/50">{dict.planner.emptyState}</p>
+          <p className="text-center text-sm text-foreground/50">{dict.planner.emptyState}</p>
         )}
         {loadError && (
-          <p className="text-center text-sm text-brand-50/50">
+          <p className="text-center text-sm text-foreground/50">
             {isTr
               ? "Bu şehir için yeterli gezilecek yer verisi bulunamadı. Farklı bir şehir deneyin."
               : "Not enough points-of-interest data was found for this city. Try a different one."}
@@ -291,7 +291,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
 
         {itinerary && (
           <>
-            <h2 className="text-xl font-bold text-brand-50">
+            <h2 className="text-xl font-bold text-foreground">
               {dict.planner.resultTitle} — {destinationLabel}
             </h2>
 
@@ -329,13 +329,13 @@ export function PlannerClient({ locale }: { locale: Locale }) {
                               {poi.emoji}
                             </div>
                             <div>
-                              <div className="text-xs font-semibold uppercase tracking-wide text-brand-50/40">
+                              <div className="text-xs font-semibold uppercase tracking-wide text-foreground/40">
                                 {dict.planner.slotLabels[slot]}
                               </div>
-                              <div className="text-sm font-semibold text-brand-50">
+                              <div className="text-sm font-semibold text-foreground">
                                 {isTr ? poi.nameTr : poi.nameEn}
                               </div>
-                              <p className="mt-0.5 text-sm text-brand-50/60">{isTr ? poi.descTr : poi.descEn}</p>
+                              <p className="mt-0.5 text-sm text-foreground/60">{isTr ? poi.descTr : poi.descEn}</p>
                               {poi.aiTip && (
                                 <div className="mt-2 rounded-xl bg-brand-50 px-3 py-2 text-xs text-brand-700">
                                   {poi.bestVisitTime && (
@@ -374,7 +374,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
               )}
             </div>
 
-            <p className="mt-6 text-center text-xs text-brand-50/40">
+            <p className="mt-6 text-center text-xs text-foreground/40">
               {city ? dict.planner.disclaimer : isTr ? "Bu şehir için gerçek zamanlı OpenStreetMap verisiyle oluşturuldu." : "Generated from real-time OpenStreetMap data for this city."}
             </p>
           </>

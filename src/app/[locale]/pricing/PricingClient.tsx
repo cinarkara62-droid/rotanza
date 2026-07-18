@@ -73,7 +73,7 @@ export function PricingClient({ locale }: { locale: Locale }) {
           <button
             onClick={() => setYearly(false)}
             className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-              !yearly ? "bg-brand-950 text-white" : "text-brand-50/60"
+              !yearly ? "bg-brand-950 text-white" : "text-foreground/60"
             }`}
           >
             {dict.pricing.monthly}
@@ -81,7 +81,7 @@ export function PricingClient({ locale }: { locale: Locale }) {
           <button
             onClick={() => setYearly(true)}
             className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-              yearly ? "bg-brand-950 text-white" : "text-brand-50/60"
+              yearly ? "bg-brand-950 text-white" : "text-foreground/60"
             }`}
           >
             {dict.pricing.yearly}
@@ -95,12 +95,12 @@ export function PricingClient({ locale }: { locale: Locale }) {
       <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
         {/* FREE */}
         <div className="rounded-3xl border border-white/10 bg-sand-100 p-7">
-          <h3 className="text-lg font-bold text-brand-50">{free.name}</h3>
-          <p className="mt-1 text-sm text-brand-50/50">{free.tagline}</p>
-          <div className="mt-5 text-3xl font-extrabold text-brand-50">$0</div>
+          <h3 className="text-lg font-bold text-foreground">{free.name}</h3>
+          <p className="mt-1 text-sm text-foreground/50">{free.tagline}</p>
+          <div className="mt-5 text-3xl font-extrabold text-foreground">$0</div>
           <ul className="mt-6 space-y-3">
             {free.features.map((f) => (
-              <li key={f} className="flex gap-2 text-sm text-brand-50/70">
+              <li key={f} className="flex gap-2 text-sm text-foreground/70">
                 <span className="text-brand-500">✓</span>
                 {f}
               </li>
@@ -108,7 +108,7 @@ export function PricingClient({ locale }: { locale: Locale }) {
           </ul>
           <button
             onClick={() => router.push(`/${locale}/signup`)}
-            className="mt-8 w-full rounded-full border border-white/15 py-3 text-sm font-semibold text-brand-50"
+            className="mt-8 w-full rounded-full border border-white/15 py-3 text-sm font-semibold text-foreground"
           >
             {free.cta}
           </button>
@@ -119,15 +119,15 @@ export function PricingClient({ locale }: { locale: Locale }) {
           <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white">
             {dict.pricing.mostPopular}
           </span>
-          <h3 className="text-lg font-bold text-brand-50">{pro.name}</h3>
-          <p className="mt-1 text-sm text-brand-50/50">{pro.tagline}</p>
+          <h3 className="text-lg font-bold text-foreground">{pro.name}</h3>
+          <p className="mt-1 text-sm text-foreground/50">{pro.tagline}</p>
           <div className="mt-5 flex items-baseline gap-1">
-            <span className="text-3xl font-extrabold text-brand-50">${proPrice}</span>
-            <span className="text-sm text-brand-50/50">{dict.pricing.perMonth}</span>
+            <span className="text-3xl font-extrabold text-foreground">${proPrice}</span>
+            <span className="text-sm text-foreground/50">{dict.pricing.perMonth}</span>
           </div>
           <ul className="mt-6 space-y-3">
             {pro.features.map((f) => (
-              <li key={f} className="flex gap-2 text-sm text-brand-50/70">
+              <li key={f} className="flex gap-2 text-sm text-foreground/70">
                 <span className="text-brand-500">✓</span>
                 {f}
               </li>
@@ -161,7 +161,7 @@ export function PricingClient({ locale }: { locale: Locale }) {
           <button
             onClick={() => handleUpgrade("max")}
             disabled={loadingPlan !== null}
-            className="mt-8 w-full rounded-full bg-sand-100 py-3 text-sm font-semibold text-brand-50 disabled:opacity-60"
+            className="mt-8 w-full rounded-full bg-sand-100 py-3 text-sm font-semibold text-foreground disabled:opacity-60"
           >
             {loadingPlan === "max" ? "…" : max.cta}
           </button>
@@ -169,17 +169,17 @@ export function PricingClient({ locale }: { locale: Locale }) {
       </div>
 
       <div className="mx-auto mt-20 max-w-2xl">
-        <h2 className="text-center text-2xl font-bold text-brand-50">{dict.pricing.faq.title}</h2>
+        <h2 className="text-center text-2xl font-bold text-foreground">{dict.pricing.faq.title}</h2>
         <div className="mt-6 space-y-3">
           {dict.pricing.faq.items.map((item) => (
             <details key={item.q} className="group rounded-2xl border border-white/10 bg-sand-100 p-5">
-              <summary className="cursor-pointer list-none text-sm font-semibold text-brand-50 marker:content-none">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-foreground marker:content-none">
                 <span className="flex items-center justify-between">
                   {item.q}
-                  <span className="ml-4 text-brand-50/40 transition-transform group-open:rotate-45">+</span>
+                  <span className="ml-4 text-foreground/40 transition-transform group-open:rotate-45">+</span>
                 </span>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-brand-50/60">{item.a}</p>
+              <p className="mt-3 text-sm leading-relaxed text-foreground/60">{item.a}</p>
             </details>
           ))}
         </div>

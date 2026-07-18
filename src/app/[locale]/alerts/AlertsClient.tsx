@@ -144,7 +144,7 @@ export function AlertsClient({ locale }: { locale: Locale }) {
             + {dict.alerts.addNew}
           </button>
         )}
-        <p className="text-xs text-brand-50/40">{dict.alerts.limitNote}</p>
+        <p className="text-xs text-foreground/40">{dict.alerts.limitNote}</p>
       </div>
 
       {showForm && (
@@ -152,13 +152,13 @@ export function AlertsClient({ locale }: { locale: Locale }) {
           onSubmit={handleSave}
           className="mx-auto mt-6 grid max-w-xl grid-cols-1 gap-4 rounded-3xl border border-white/10 bg-sand-100 p-6 shadow-sm sm:grid-cols-2 sm:p-8"
         >
-          <p className="text-xs leading-relaxed text-brand-50/50 sm:col-span-2">
+          <p className="text-xs leading-relaxed text-foreground/50 sm:col-span-2">
             {isTr
               ? "✈️ Şu an sadece uçuş fiyat alarmı oluşturabilirsiniz — Amadeus üzerinden gerçek fiyatlarla. Otel fiyat takibi, gerçek bir fiyat kaynağı bağlanana kadar kapalı."
               : "✈️ Only flight price alerts can be created right now — backed by real Amadeus pricing. Hotel price tracking is disabled until a real pricing source is connected."}
           </p>
 
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {isTr ? "Kalkış (havalimanı kodu)" : "Origin (airport code)"}
             <input
               value={originIata}
@@ -166,10 +166,10 @@ export function AlertsClient({ locale }: { locale: Locale }) {
               placeholder="IST"
               maxLength={3}
               required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-foreground outline-none focus:border-brand-400"
             />
           </label>
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {isTr ? "Varış (havalimanı kodu)" : "Destination (airport code)"}
             <input
               value={destinationIata}
@@ -177,20 +177,20 @@ export function AlertsClient({ locale }: { locale: Locale }) {
               placeholder="CDG"
               maxLength={3}
               required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-foreground outline-none focus:border-brand-400"
             />
           </label>
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {isTr ? "Kalkış tarihi" : "Departure date"}
             <input
               type="date"
               value={departureDate}
               onChange={(e) => setDepartureDate(e.target.value)}
               required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
             />
           </label>
-          <label className="flex flex-col gap-2 text-sm font-medium text-brand-50">
+          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {dict.alerts.form.targetPrice}
             <input
               type="number"
@@ -198,7 +198,7 @@ export function AlertsClient({ locale }: { locale: Locale }) {
               value={targetPrice}
               onChange={(e) => setTargetPrice(e.target.value)}
               required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-brand-50 outline-none focus:border-brand-400"
+              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
             />
           </label>
 
@@ -218,7 +218,7 @@ export function AlertsClient({ locale }: { locale: Locale }) {
                 resetForm();
                 setShowForm(false);
               }}
-              className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-semibold text-brand-50/70"
+              className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-semibold text-foreground/70"
             >
               {dict.alerts.form.cancel}
             </button>
@@ -226,7 +226,7 @@ export function AlertsClient({ locale }: { locale: Locale }) {
         </form>
       )}
 
-      {loading && <p className="mt-10 text-center text-sm text-brand-50/50">{isTr ? "Yükleniyor…" : "Loading…"}</p>}
+      {loading && <p className="mt-10 text-center text-sm text-foreground/50">{isTr ? "Yükleniyor…" : "Loading…"}</p>}
 
       {!loading && (
         <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -244,8 +244,8 @@ export function AlertsClient({ locale }: { locale: Locale }) {
                       {TYPE_EMOJI[a.type]}
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-brand-50">{a.name}</div>
-                      <div className="text-xs text-brand-50/50">{a.location}</div>
+                      <div className="text-sm font-semibold text-foreground">{a.name}</div>
+                      <div className="text-xs text-foreground/50">{a.location}</div>
                     </div>
                   </div>
                   {dropped ? (
@@ -253,7 +253,7 @@ export function AlertsClient({ locale }: { locale: Locale }) {
                       ↓ {pct}%
                     </span>
                   ) : (
-                    <span className="shrink-0 rounded-full bg-black/5 px-2.5 py-1 text-xs font-medium text-brand-50/40">
+                    <span className="shrink-0 rounded-full bg-black/5 px-2.5 py-1 text-xs font-medium text-foreground/40">
                       {dict.alerts.noChange}
                     </span>
                   )}
@@ -263,11 +263,11 @@ export function AlertsClient({ locale }: { locale: Locale }) {
                   <div>
                     <div className="flex items-baseline gap-2">
                       {dropped && (
-                        <span className="text-sm text-brand-50/40 line-through">
+                        <span className="text-sm text-foreground/40 line-through">
                           ${a.previousPrice.toLocaleString()}
                         </span>
                       )}
-                      <span className="text-xl font-bold text-brand-50">${a.currentPrice.toLocaleString()}</span>
+                      <span className="text-xl font-bold text-foreground">${a.currentPrice.toLocaleString()}</span>
                     </div>
                     {dropped && (
                       <div className="text-xs font-medium text-brand-400">
@@ -291,7 +291,7 @@ export function AlertsClient({ locale }: { locale: Locale }) {
       )}
 
       {!loading && alerts.length === 0 && (
-        <p className="mt-10 text-center text-sm text-brand-50/50">{dict.alerts.empty}</p>
+        <p className="mt-10 text-center text-sm text-foreground/50">{dict.alerts.empty}</p>
       )}
     </div>
   );
