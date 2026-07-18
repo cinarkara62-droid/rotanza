@@ -107,63 +107,71 @@ const OVERPASS_ENDPOINTS = [
   "https://overpass.openstreetmap.ru/api/interpreter",
 ];
 
-// The public Overpass instances are shared fair-use infrastructure — under
-// load they can take well over 10s to answer even a simple query, so the
-// *first* attempt against each mirror gets a generous budget rather than
-// failing fast. A 429/406 (instant rejection, not genuine slowness) is
-// retried immediately against the same mirror once before moving on.
-// Vercel kills serverless functions after ~30s (we set maxDuration=30 on
-// every route that calls this) — the mirror loop below stops as soon as one
-// attempt exceeds the remaining budget, so it always stays under that
-// ceiling regardless of how many mirrors it has to try.
+// The public Overpass instances are shared fair-use infrastructure — heavier
+// queries (many OR'd filters, like findAttractionsNear's) can legitimately
+// take 15-20s to answer even when the mirror is healthy. Splitting the
+// budget into small fixed chunks per mirror (an earlier version of this
+// function used a flat 12s first attempt) starves exactly those heavy
+// queries of the time they need and turns a slow-but-working query into a
+// hard failure — so instead, each mirror gets a fair *share* of whatever
+// budget remains (at least 9s if the budget allows it at all), and a mirror
+// is only abandoned early on a fast rejection (429/406/other non-2xx), not
+// cut off mid-flight. Vercel kills serverless functions after ~30s (every
+// route calling this sets maxDuration=30) — the per-mirror share shrinks as
+// budget is consumed, so the whole loop still respects that ceiling.
 async function queryOverpassRaw(query: string, totalBudgetMs = 26000): Promise<RawOverpassElement[]> {
   const deadline = Date.now() + totalBudgetMs;
   let lastErr: unknown;
 
-  for (const endpoint of OVERPASS_ENDPOINTS) {
+  for (let i = 0; i < OVERPASS_ENDPOINTS.length; i++) {
+    const endpoint = OVERPASS_ENDPOINTS[i];
     const remaining = deadline - Date.now();
-    if (remaining < 4000) break; // not enough budget left to try another mirror
+    const mirrorsLeft = OVERPASS_ENDPOINTS.length - i;
+    if (remaining < 5000) break; // not enough budget left to give another mirror a fair chance
 
-    for (let attempt = 1; attempt <= 2; attempt++) {
-      const attemptTimeout = Math.min(attempt === 1 ? 12000 : 6000, deadline - Date.now());
-      if (attemptTimeout < 2000) break;
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), attemptTimeout);
-      try {
-        const res = await fetch(endpoint, {
+    const attemptTimeout = Math.min(Math.max(remaining / mirrorsLeft, 9000), remaining);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), attemptTimeout);
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Accept: "*/*",
+          "User-Agent": USER_AGENT,
+        },
+        body: "data=" + encodeURIComponent(query),
+        signal: controller.signal,
+      });
+      // 429/406 are near-instant rejections worth one quick retry against
+      // the same mirror before moving on. A 504 means Overpass itself gave
+      // up after already taking a long time — move straight to the next
+      // mirror rather than retrying the same overloaded one.
+      if (res.status === 429 || res.status === 406) {
+        await sleep(1000);
+        const retryRes = await fetch(endpoint, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Accept: "*/*",
-            "User-Agent": USER_AGENT,
-          },
+          headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "*/*", "User-Agent": USER_AGENT },
           body: "data=" + encodeURIComponent(query),
           signal: controller.signal,
         });
-        // 429/406 are near-instant rejections worth one quick retry against
-        // the same mirror. A 504 means it timed out after already taking a
-        // long time — move on to the next mirror instead of retrying here.
-        if (res.status === 429 || res.status === 406) {
-          if (attempt === 1) {
-            await sleep(1000);
-            continue;
-          }
-          lastErr = new Error(`Overpass busy: ${res.status}`);
-          break;
+        if (!retryRes.ok) {
+          lastErr = new Error(`Overpass busy: ${retryRes.status}`);
+          continue;
         }
-        if (!res.ok) {
-          lastErr = new Error(`Overpass query failed: ${res.status}`);
-          break;
-        }
-        const data = (await res.json()) as { elements: RawOverpassElement[] };
+        const data = (await retryRes.json()) as { elements: RawOverpassElement[] };
         return data.elements;
-      } catch (err) {
-        lastErr = err;
-        if (err instanceof Error && err.name === "AbortError") break; // this mirror timed out — try the next one
-        await sleep(1000);
-      } finally {
-        clearTimeout(timer);
       }
+      if (!res.ok) {
+        lastErr = new Error(`Overpass query failed: ${res.status}`);
+        continue;
+      }
+      const data = (await res.json()) as { elements: RawOverpassElement[] };
+      return data.elements;
+    } catch (err) {
+      lastErr = err;
+    } finally {
+      clearTimeout(timer);
     }
   }
   throw lastErr instanceof Error ? lastErr : new Error("All Overpass mirrors failed");
@@ -277,12 +285,17 @@ export async function findAttractionsNear(
   radiusMeters = 2200,
   limit = 40
 ): Promise<OsmPlace[]> {
-  const radii = [radiusMeters, radiusMeters * 3, radiusMeters * 8];
-  const deadline = Date.now() + 23000; // shared across every radius so the whole widening chain stays under maxDuration=30
+  // Only two steps here (not three, unlike findPlacesNear) — this query has
+  // 12 OR'd filters and is inherently much heavier than a single-filter
+  // places query, so each attempt needs a large chunk of the budget to
+  // finish; widening three times would starve every attempt of the time it
+  // actually needs.
+  const radii = [radiusMeters, radiusMeters * 4];
+  const deadline = Date.now() + 27000; // shared across both radii, just under maxDuration=30 and the client's 28s timeout
   for (const r of radii) {
     const key = `attractions:${lat.toFixed(3)}:${lon.toFixed(3)}:${r}`;
     const remaining = deadline - Date.now();
-    if (remaining < 3000) break;
+    if (remaining < 5000) break;
     const results = await cachedFetch(key, async () => {
       const elements = await queryOverpass(attractionsQuery(lat, lon, r, limit), remaining);
       return elements

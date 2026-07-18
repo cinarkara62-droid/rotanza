@@ -102,7 +102,7 @@ export function PlannerClient({ locale }: { locale: Locale }) {
     if (customCity) {
       setLoading(true);
       try {
-        const res = await fetchWithTimeout(`/api/attractions?lat=${customCity.lat}&lon=${customCity.lon}`);
+        const res = await fetchWithTimeout(`/api/attractions?lat=${customCity.lat}&lon=${customCity.lon}`, undefined, 29000);
         const data = await res.json();
         const livePois: PointOfInterest[] = (data.results ?? []).map(
           (
