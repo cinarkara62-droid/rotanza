@@ -252,56 +252,67 @@ out body qt;`;
   });
 }
 
-function attractionsQuery(lat: number, lon: number, radiusMeters: number, limit: number): string {
+// One filter per query, run in parallel — a single compound query OR-ing
+// all of these together (the previous approach) measured 20s+ even on a
+// healthy mirror, apparently because the value-less `historic` filter
+// forces a much more expensive scan; findPlacesNear's single-filter queries
+// consistently answer in 1-2s, so splitting into that same shape (and
+// merging the results) is both faster overall and far more resilient —
+// a slow/failing filter no longer blocks every other category.
+const ATTRACTION_FILTERS = [
+  '["tourism"="museum"]',
+  '["tourism"="gallery"]',
+  '["tourism"="attraction"]',
+  '["tourism"="viewpoint"]',
+  '["historic"]',
+  '["leisure"="park"]',
+  '["natural"="beach"]',
+  '["amenity"="bar"]',
+  '["amenity"="pub"]',
+  '["amenity"="nightclub"]',
+  '["shop"="mall"]',
+  '["amenity"="marketplace"]',
+];
+
+async function findAttractionsAtRadius(lat: number, lon: number, radiusMeters: number, limit: number, budgetMs: number): Promise<OsmPlace[]> {
   const around = `around:${radiusMeters},${lat},${lon}`;
-  return `[out:json][timeout:22];
-(
-  node["tourism"="museum"]["name"](${around});
-  node["tourism"="gallery"]["name"](${around});
-  node["tourism"="attraction"]["name"](${around});
-  node["tourism"="viewpoint"]["name"](${around});
-  node["historic"]["name"](${around});
-  node["leisure"="park"]["name"](${around});
-  node["natural"="beach"]["name"](${around});
-  node["amenity"="bar"]["name"](${around});
-  node["amenity"="pub"]["name"](${around});
-  node["amenity"="nightclub"]["name"](${around});
-  node["shop"="mall"]["name"](${around});
-  node["amenity"="marketplace"]["name"](${around});
-);
-out body ${limit};`;
+  const perFilterBudget = Math.max(budgetMs, 9000);
+  const settled = await Promise.allSettled(
+    ATTRACTION_FILTERS.map((filter) => {
+      const query = `[out:json][timeout:15];node${filter}["name"](${around});out body ${Math.ceil(limit / 3)};`;
+      return queryOverpass(query, perFilterBudget);
+    })
+  );
+  const byId = new Map<number, OsmPlace>();
+  for (const result of settled) {
+    if (result.status !== "fulfilled") continue;
+    for (const el of result.value) {
+      if (!el.tags?.name || byId.has(el.id)) continue;
+      byId.set(el.id, { osmId: el.id, name: el.tags.name, lat: el.lat, lon: el.lon, tags: el.tags });
+    }
+  }
+  return [...byId.values()].slice(0, limit);
 }
 
 // A city's geocoded centroid (from Nominatim) doesn't always sit near where
 // OSM contributors have actually tagged points of interest — this is
 // especially common for less-mapped towns and cities with sprawling admin
 // boundaries. Rather than give up on the first empty result, widen the
-// search ring a couple of times before concluding "nothing here" — each
-// radius is cached under its own key so a later request for the same city
-// doesn't redo the widening.
+// search ring before concluding "nothing here" — each radius is cached
+// under its own key so a later request for the same city doesn't redo it.
 export async function findAttractionsNear(
   lat: number,
   lon: number,
   radiusMeters = 2200,
   limit = 40
 ): Promise<OsmPlace[]> {
-  // Only two steps here (not three, unlike findPlacesNear) — this query has
-  // 12 OR'd filters and is inherently much heavier than a single-filter
-  // places query, so each attempt needs a large chunk of the budget to
-  // finish; widening three times would starve every attempt of the time it
-  // actually needs.
   const radii = [radiusMeters, radiusMeters * 4];
-  const deadline = Date.now() + 27000; // shared across both radii, just under maxDuration=30 and the client's 28s timeout
+  const deadline = Date.now() + 27000; // shared across both radii, just under maxDuration=30 and the client's 29s timeout
   for (const r of radii) {
     const key = `attractions:${lat.toFixed(3)}:${lon.toFixed(3)}:${r}`;
     const remaining = deadline - Date.now();
-    if (remaining < 5000) break;
-    const results = await cachedFetch(key, async () => {
-      const elements = await queryOverpass(attractionsQuery(lat, lon, r, limit), remaining);
-      return elements
-        .filter((el) => el.tags?.name)
-        .map((el) => ({ osmId: el.id, name: el.tags!.name, lat: el.lat, lon: el.lon, tags: el.tags! }));
-    });
+    if (remaining < 9000) break;
+    const results = await cachedFetch(key, () => findAttractionsAtRadius(lat, lon, r, limit, remaining));
     if (results.length > 0 || r === radii[radii.length - 1]) return results;
   }
   return [];
