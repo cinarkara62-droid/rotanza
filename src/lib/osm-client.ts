@@ -222,39 +222,37 @@ out body qt;`;
   });
 }
 
-// findPlacesNear's single-filter queries reliably answer in 1-2s; a single
-// query OR-ing 12 filters together (the original shape) measures as
-// "server too busy" on Overpass itself even for a data-rich city like
-// Paris — confirmed by querying Overpass directly. So this runs the same
-// filters as separate lightweight queries like findPlacesNear does, but
-// strictly one at a time (not in parallel — a burst of concurrent requests
-// is what triggered real rate-limiting from Overpass in an earlier version
-// of this function). A generous shared deadline across the whole loop
-// means one slow category doesn't necessarily sink the rest — whatever
-// completes in time gets returned, and a per-category failure/timeout is
-// skipped rather than aborting everything.
+// Direct testing against Overpass (the free, shared public instance) shows
+// its per-request latency is simply unpredictable right now — a plain
+// single-filter "museum" query measured 14s while a "historic" query on
+// the same coordinates a moment later answered in 1.3s. There's no query
+// shape that reliably dodges this; it's the shared instance being under
+// variable load, not something fixable purely in our request pattern. The
+// only lever left is to try fewer categories so each one can get a real
+// (double-digit-second) chance within our budget, one at a time — never in
+// parallel, which previously triggered genuine rate-limiting.
 const ATTRACTION_FILTERS = [
   '["tourism"="museum"]',
-  '["tourism"="gallery"]',
   '["tourism"="attraction"]',
   '["historic"]',
   '["leisure"="park"]',
-  '["natural"="beach"]',
-  '["amenity"="bar"]',
-  '["amenity"="nightclub"]',
   '["shop"="mall"]',
-  '["amenity"="marketplace"]',
 ];
 
 async function findAttractionsAtRadius(lat: number, lon: number, radiusMeters: number, limit: number, deadline: number): Promise<OsmPlace[]> {
   const around = `around:${radiusMeters},${lat},${lon}`;
   const byId = new Map<number, OsmPlace>();
-  for (const filter of ATTRACTION_FILTERS) {
+  let anySucceeded = false;
+  for (let i = 0; i < ATTRACTION_FILTERS.length; i++) {
+    const filter = ATTRACTION_FILTERS[i];
     const remaining = deadline - Date.now();
+    const filtersLeft = ATTRACTION_FILTERS.length - i;
     if (remaining < 3000) break;
+    const share = Math.max(remaining / filtersLeft, 3500);
     try {
-      const query = `[out:json][timeout:8];node${filter}["name"](${around});out body ${Math.ceil(limit / 2)};`;
-      const elements = await queryOverpass(query, Math.min(remaining, 9000));
+      const query = `[out:json][timeout:20];node${filter}["name"](${around});out body ${Math.ceil(limit / 2)};`;
+      const elements = await queryOverpass(query, Math.min(share, remaining));
+      anySucceeded = true;
       for (const el of elements) {
         if (!el.tags?.name || byId.has(el.id)) continue;
         byId.set(el.id, { osmId: el.id, name: el.tags.name, lat: el.lat, lon: el.lon, tags: el.tags });
@@ -263,32 +261,30 @@ async function findAttractionsAtRadius(lat: number, lon: number, radiusMeters: n
       // one category failing/timing out shouldn't sink the others
     }
   }
+  // If every single category failed/timed out, this almost certainly means
+  // Overpass was struggling at that moment, not that the area genuinely has
+  // zero attractions — don't let that get cached as a confident "empty"
+  // result for 6 hours (see cachedFetch's short failure-TTL path instead).
+  if (!anySucceeded) throw new Error("All attraction category queries failed");
   return [...byId.values()].slice(0, limit);
 }
 
 // A city's geocoded centroid (from Nominatim) doesn't always sit near where
 // OSM contributors have actually tagged points of interest — this is
 // especially common for less-mapped towns and cities with sprawling admin
-// boundaries. Rather than give up on the first empty result, widen the
-// search ring once before concluding "nothing here" — each radius is
-// cached under its own key so a later request for the same city doesn't
-// redo the widening.
+// boundaries. No radius widening here (unlike findPlacesNear) — each
+// category attempt already needs as much of the budget as it can get on an
+// unpredictable shared server, so a second full pass at a wider radius
+// isn't affordable within maxDuration=30.
 export async function findAttractionsNear(
   lat: number,
   lon: number,
   radiusMeters = 2200,
   limit = 40
 ): Promise<OsmPlace[]> {
-  const radii = [radiusMeters, radiusMeters * 4];
-  const deadline = Date.now() + 27000; // shared across both radii, just under maxDuration=30 and the client's 29s timeout
-  for (const r of radii) {
-    const key = `attractions:${lat.toFixed(3)}:${lon.toFixed(3)}:${r}`;
-    const remaining = deadline - Date.now();
-    if (remaining < 6000) break;
-    const results = await cachedFetch(key, () => findAttractionsAtRadius(lat, lon, r, limit, deadline));
-    if (results.length > 0 || r === radii[radii.length - 1]) return results;
-  }
-  return [];
+  const key = `attractions:${lat.toFixed(3)}:${lon.toFixed(3)}:${radiusMeters}`;
+  const deadline = Date.now() + 27000; // just under maxDuration=30 and the client's 29s timeout
+  return cachedFetch(key, () => findAttractionsAtRadius(lat, lon, radiusMeters, limit, deadline));
 }
 
 const PLACE_FILTERS: Record<"restaurant" | "hotel" | "viewpoint", string> = {
