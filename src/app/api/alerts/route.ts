@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { searchFlightOffers } from "@/lib/amadeus";
+import { searchFlightOffers, searchHotelOffers } from "@/lib/amadeus";
 
 const PLAN_LIMITS: Record<string, number> = { free: 1, pro: 10, max: Infinity };
 const IATA_RE = /^[A-Z]{3}$/;
@@ -17,31 +17,26 @@ export async function GET() {
   return NextResponse.json({ alerts });
 }
 
-// Hotel price alerts are not accepted anymore — there is no real hotel
-// pricing source connected yet (Hotellook is pending Travelpayouts
-// approval), and freezing the alert at the user's own target price was
-// misleading (it could never actually detect a real price drop). Flights
-// are backed by a real Amadeus flight-offer search.
+// Both alert types are backed by real Amadeus pricing (same free
+// self-service API key as flights): flights use flight-offers search,
+// hotels use the by-city hotel list + hotel-offers search, tracking the
+// cheapest available room in that city for the given date range.
 export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session?.user?.id) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   const body = (await req.json()) as {
+    type?: "flight" | "hotel";
     originIata?: string;
     destinationIata?: string;
     departureDate?: string;
+    cityIata?: string;
+    cityName?: string;
+    checkInDate?: string;
+    checkOutDate?: string;
     targetPrice?: number;
   };
-  const originIata = body.originIata?.trim().toUpperCase();
-  const destinationIata = body.destinationIata?.trim().toUpperCase();
-  const { departureDate, targetPrice } = body;
-
-  if (!originIata || !IATA_RE.test(originIata) || !destinationIata || !IATA_RE.test(destinationIata)) {
-    return NextResponse.json({ error: "invalid_airport_code" }, { status: 400 });
-  }
-  if (!departureDate || Number.isNaN(new Date(departureDate).getTime())) {
-    return NextResponse.json({ error: "invalid_date" }, { status: 400 });
-  }
+  const { targetPrice } = body;
   if (!targetPrice || targetPrice <= 0) {
     return NextResponse.json({ error: "invalid_input" }, { status: 400 });
   }
@@ -53,6 +48,59 @@ export async function POST(req: NextRequest) {
   const currentCount = await prisma.priceAlert.count({ where: { userId: user.id } });
   if (currentCount >= limit) {
     return NextResponse.json({ error: "plan_limit_reached" }, { status: 403 });
+  }
+
+  if (body.type === "hotel") {
+    const cityIata = body.cityIata?.trim().toUpperCase();
+    const { checkInDate, checkOutDate, cityName } = body;
+    if (!cityIata || !IATA_RE.test(cityIata)) {
+      return NextResponse.json({ error: "invalid_city_code" }, { status: 400 });
+    }
+    if (!checkInDate || Number.isNaN(new Date(checkInDate).getTime()) || !checkOutDate || Number.isNaN(new Date(checkOutDate).getTime())) {
+      return NextResponse.json({ error: "invalid_date" }, { status: 400 });
+    }
+    if (new Date(checkOutDate) <= new Date(checkInDate)) {
+      return NextResponse.json({ error: "invalid_date" }, { status: 400 });
+    }
+
+    let currentPrice: number;
+    let hotelName: string;
+    try {
+      const offers = await searchHotelOffers({ cityIata, checkInDate, checkOutDate });
+      if (offers.length === 0) return NextResponse.json({ error: "no_hotels_found" }, { status: 404 });
+      const cheapest = offers.reduce((min, o) => (o.price < min.price ? o : min), offers[0]);
+      currentPrice = cheapest.price;
+      hotelName = cheapest.hotelName;
+    } catch {
+      return NextResponse.json({ error: "hotel_pricing_unavailable" }, { status: 503 });
+    }
+
+    const alert = await prisma.priceAlert.create({
+      data: {
+        userId: user.id,
+        type: "hotel",
+        name: cityName ? `${cityName} — ${hotelName}` : hotelName,
+        location: `${checkInDate} → ${checkOutDate}`,
+        entityId: `hotel:${cityIata}:${checkInDate}:${checkOutDate}`,
+        currentPrice,
+        previousPrice: currentPrice,
+        targetPrice,
+        lowestPrice: currentPrice,
+        priceHistory: [currentPrice],
+      },
+    });
+    return NextResponse.json({ alert });
+  }
+
+  const originIata = body.originIata?.trim().toUpperCase();
+  const destinationIata = body.destinationIata?.trim().toUpperCase();
+  const { departureDate } = body;
+
+  if (!originIata || !IATA_RE.test(originIata) || !destinationIata || !IATA_RE.test(destinationIata)) {
+    return NextResponse.json({ error: "invalid_airport_code" }, { status: 400 });
+  }
+  if (!departureDate || Number.isNaN(new Date(departureDate).getTime())) {
+    return NextResponse.json({ error: "invalid_date" }, { status: 400 });
   }
 
   let currentPrice: number;

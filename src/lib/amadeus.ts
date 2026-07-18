@@ -76,3 +76,57 @@ export async function searchFlightOffers(params: {
     };
   });
 }
+
+export interface HotelOffer {
+  hotelId: string;
+  hotelName: string;
+  price: number;
+  currency: string;
+}
+
+// Amadeus's hotel pricing is two calls: first resolve which hotels exist in
+// a city (by IATA city code), then ask for actual offers on a batch of
+// them. The by-city list can run to hundreds of hotels for a big city, so
+// this caps the batch — cheap-enough hotels to matter for a price alert are
+// almost always among the first page anyway, and Amadeus's hotel-offers
+// endpoint rejects overly large hotelIds batches.
+export async function searchHotelOffers(params: {
+  cityIata: string;
+  checkInDate: string;
+  checkOutDate: string;
+  adults?: number;
+}): Promise<HotelOffer[]> {
+  const token = await getAccessToken();
+
+  const listUrl = new URL("https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city");
+  listUrl.searchParams.set("cityCode", params.cityIata);
+  const listRes = await fetch(listUrl, { headers: { Authorization: `Bearer ${token}` } });
+  if (!listRes.ok) throw new Error(`Amadeus hotel list failed: ${listRes.status}`);
+  const listData = (await listRes.json()) as { data: Array<{ hotelId: string; name: string }> };
+  if (listData.data.length === 0) return [];
+
+  const hotelIds = listData.data.slice(0, 60).map((h) => h.hotelId);
+  const nameById = new Map(listData.data.map((h) => [h.hotelId, h.name]));
+
+  const offersUrl = new URL("https://test.api.amadeus.com/v3/shopping/hotel-offers");
+  offersUrl.searchParams.set("hotelIds", hotelIds.join(","));
+  offersUrl.searchParams.set("checkInDate", params.checkInDate);
+  offersUrl.searchParams.set("checkOutDate", params.checkOutDate);
+  offersUrl.searchParams.set("adults", String(params.adults ?? 1));
+  offersUrl.searchParams.set("bestRateOnly", "true");
+
+  const offersRes = await fetch(offersUrl, { headers: { Authorization: `Bearer ${token}` } });
+  if (!offersRes.ok) throw new Error(`Amadeus hotel offers failed: ${offersRes.status}`);
+  const offersData = (await offersRes.json()) as {
+    data: Array<{ hotel: { hotelId: string; name?: string }; offers: Array<{ price: { total: string; currency: string } }> }>;
+  };
+
+  return offersData.data
+    .filter((entry) => entry.offers.length > 0)
+    .map((entry) => ({
+      hotelId: entry.hotel.hotelId,
+      hotelName: entry.hotel.name ?? nameById.get(entry.hotel.hotelId) ?? entry.hotel.hotelId,
+      price: Math.min(...entry.offers.map((o) => parseFloat(o.price.total))),
+      currency: entry.offers[0].price.currency,
+    }));
+}

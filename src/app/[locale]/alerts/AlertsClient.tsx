@@ -48,9 +48,14 @@ export function AlertsClient({ locale }: { locale: Locale }) {
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
+  const [alertType, setAlertType] = useState<"flight" | "hotel">("flight");
   const [originIata, setOriginIata] = useState("");
   const [destinationIata, setDestinationIata] = useState("");
   const [departureDate, setDepartureDate] = useState("");
+  const [cityIata, setCityIata] = useState("");
+  const [cityName, setCityName] = useState("");
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
   const [targetPrice, setTargetPrice] = useState("");
 
   useEffect(() => {
@@ -64,6 +69,10 @@ export function AlertsClient({ locale }: { locale: Locale }) {
     setOriginIata("");
     setDestinationIata("");
     setDepartureDate("");
+    setCityIata("");
+    setCityName("");
+    setCheckInDate("");
+    setCheckOutDate("");
     setTargetPrice("");
     setFormError(null);
   }
@@ -71,7 +80,15 @@ export function AlertsClient({ locale }: { locale: Locale }) {
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
     const price = Number(targetPrice) || 0;
-    if (!price || !originIata || !destinationIata || !departureDate) return;
+    if (!price) return;
+
+    const body =
+      alertType === "hotel"
+        ? { type: "hotel", cityIata, cityName, checkInDate, checkOutDate, targetPrice: price }
+        : { type: "flight", originIata, destinationIata, departureDate, targetPrice: price };
+
+    if (alertType === "hotel" && (!cityIata || !checkInDate || !checkOutDate)) return;
+    if (alertType === "flight" && (!originIata || !destinationIata || !departureDate)) return;
 
     setSaving(true);
     setFormError(null);
@@ -79,21 +96,29 @@ export function AlertsClient({ locale }: { locale: Locale }) {
       const res = await fetch("/api/alerts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ originIata, destinationIata, departureDate, targetPrice: price }),
+        body: JSON.stringify(body),
       });
       if (res.status === 403) {
         alert(isTr ? "Plan limitine ulaştınız. Daha fazla alarm için Pro veya Max'e yükseltin." : "You've reached your plan limit. Upgrade to Pro or Max for more alerts.");
         return;
       }
       if (res.status === 404) {
-        setFormError(isTr ? "Bu tarih için uçuş bulunamadı." : "No flights found for that date.");
+        setFormError(
+          alertType === "hotel"
+            ? isTr
+              ? "Bu şehir kodu için otel bulunamadı."
+              : "No hotels found for that city code."
+            : isTr
+              ? "Bu tarih için uçuş bulunamadı."
+              : "No flights found for that date."
+        );
         return;
       }
       if (res.status === 503) {
         setFormError(
           isTr
-            ? "Uçuş fiyat servisi şu an bağlı değil (Amadeus API anahtarı gerekiyor)."
-            : "Flight pricing service isn't connected yet (needs an Amadeus API key)."
+            ? "Fiyat servisi şu an bağlı değil (Amadeus API anahtarı gerekiyor)."
+            : "Pricing service isn't connected yet (needs an Amadeus API key)."
         );
         return;
       }
@@ -154,42 +179,111 @@ export function AlertsClient({ locale }: { locale: Locale }) {
         >
           <p className="text-xs leading-relaxed text-foreground/50 sm:col-span-2">
             {isTr
-              ? "✈️ Şu an sadece uçuş fiyat alarmı oluşturabilirsiniz — Amadeus üzerinden gerçek fiyatlarla. Otel fiyat takibi, gerçek bir fiyat kaynağı bağlanana kadar kapalı."
-              : "✈️ Only flight price alerts can be created right now — backed by real Amadeus pricing. Hotel price tracking is disabled until a real pricing source is connected."}
+              ? "Gerçek Amadeus fiyatlarıyla çalışır — uçuş için havalimanı kodları, otel için şehir kodu (ör. PAR, IST) girin."
+              : "Backed by real Amadeus pricing — use airport codes for flights, a city code (e.g. PAR, IST) for hotels."}
           </p>
 
-          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
-            {isTr ? "Kalkış (havalimanı kodu)" : "Origin (airport code)"}
-            <input
-              value={originIata}
-              onChange={(e) => setOriginIata(e.target.value.toUpperCase())}
-              placeholder="IST"
-              maxLength={3}
-              required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-foreground outline-none focus:border-brand-400"
-            />
-          </label>
-          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
-            {isTr ? "Varış (havalimanı kodu)" : "Destination (airport code)"}
-            <input
-              value={destinationIata}
-              onChange={(e) => setDestinationIata(e.target.value.toUpperCase())}
-              placeholder="CDG"
-              maxLength={3}
-              required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-foreground outline-none focus:border-brand-400"
-            />
-          </label>
-          <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
-            {isTr ? "Kalkış tarihi" : "Departure date"}
-            <input
-              type="date"
-              value={departureDate}
-              onChange={(e) => setDepartureDate(e.target.value)}
-              required
-              className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
-            />
-          </label>
+          <div className="flex gap-2 sm:col-span-2">
+            <button
+              type="button"
+              onClick={() => setAlertType("flight")}
+              className={`flex-1 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-colors ${
+                alertType === "flight" ? "border-brand-500 bg-brand-500/15 text-brand-300" : "border-white/15 text-foreground/60"
+              }`}
+            >
+              ✈️ {isTr ? "Uçuş" : "Flight"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setAlertType("hotel")}
+              className={`flex-1 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-colors ${
+                alertType === "hotel" ? "border-brand-500 bg-brand-500/15 text-brand-300" : "border-white/15 text-foreground/60"
+              }`}
+            >
+              🏨 {isTr ? "Otel" : "Hotel"}
+            </button>
+          </div>
+
+          {alertType === "flight" ? (
+            <>
+              <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
+                {isTr ? "Kalkış (havalimanı kodu)" : "Origin (airport code)"}
+                <input
+                  value={originIata}
+                  onChange={(e) => setOriginIata(e.target.value.toUpperCase())}
+                  placeholder="IST"
+                  maxLength={3}
+                  required
+                  className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-foreground outline-none focus:border-brand-400"
+                />
+              </label>
+              <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
+                {isTr ? "Varış (havalimanı kodu)" : "Destination (airport code)"}
+                <input
+                  value={destinationIata}
+                  onChange={(e) => setDestinationIata(e.target.value.toUpperCase())}
+                  placeholder="CDG"
+                  maxLength={3}
+                  required
+                  className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-foreground outline-none focus:border-brand-400"
+                />
+              </label>
+              <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
+                {isTr ? "Kalkış tarihi" : "Departure date"}
+                <input
+                  type="date"
+                  value={departureDate}
+                  onChange={(e) => setDepartureDate(e.target.value)}
+                  required
+                  className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
+                />
+              </label>
+            </>
+          ) : (
+            <>
+              <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
+                {isTr ? "Şehir adı" : "City name"}
+                <input
+                  value={cityName}
+                  onChange={(e) => setCityName(e.target.value)}
+                  placeholder={isTr ? "Paris" : "Paris"}
+                  className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
+                />
+              </label>
+              <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
+                {isTr ? "Şehir kodu (IATA)" : "City code (IATA)"}
+                <input
+                  value={cityIata}
+                  onChange={(e) => setCityIata(e.target.value.toUpperCase())}
+                  placeholder="PAR"
+                  maxLength={3}
+                  required
+                  className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm uppercase text-foreground outline-none focus:border-brand-400"
+                />
+              </label>
+              <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
+                {isTr ? "Giriş tarihi" : "Check-in date"}
+                <input
+                  type="date"
+                  value={checkInDate}
+                  onChange={(e) => setCheckInDate(e.target.value)}
+                  required
+                  className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
+                />
+              </label>
+              <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
+                {isTr ? "Çıkış tarihi" : "Check-out date"}
+                <input
+                  type="date"
+                  value={checkOutDate}
+                  onChange={(e) => setCheckOutDate(e.target.value)}
+                  required
+                  className="rounded-xl border border-white/15 bg-sand-50 px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand-400"
+                />
+              </label>
+            </>
+          )}
+
           <label className="flex flex-col gap-2 text-sm font-medium text-foreground">
             {dict.alerts.form.targetPrice}
             <input
