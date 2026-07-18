@@ -1,4 +1,7 @@
+"use client";
+
 import { AmbientBackground } from "@/components/AmbientBackground";
+import { useTheme } from "@/components/ThemeProvider";
 
 // Purely decorative, full-page ambient background for the transport page.
 // Dot positions are deterministic (no Math.random at render) so
@@ -62,8 +65,17 @@ const DOTS = continentDots();
 const POINTS = Object.fromEntries(CITIES.map((c) => [c.name, project(c.lon, c.lat)]));
 
 export function TransportHeroBackground() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const gradient = isDark
+    ? "bg-gradient-to-br from-[#0a1a2e] via-[#0d2136] to-[#0a1830]"
+    : "bg-gradient-to-br from-[#e8f5f1] via-[#f2f7f6] to-[#e9f1f5]";
+  const dotColor = isDark ? "#34acf7" : "#0a6f5d";
+  const routeColor = isDark ? "#34acf7" : "#35c8a2";
+  const cityColor = isDark ? "#12a0ef" : "#14ab89";
+
   return (
-    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#0a1a2e] via-[#0d2136] to-[#0a1830]">
+    <AmbientBackground gradientClassName={gradient}>
       <div className="absolute left-1/2 top-16 h-96 w-96 -translate-x-1/2 rounded-full bg-gradient-to-br from-brand-300/30 via-white/0 to-white/0 blur-3xl" />
 
       <svg
@@ -72,7 +84,7 @@ export function TransportHeroBackground() {
         preserveAspectRatio="xMidYMid slice"
       >
         {DOTS.map((d, i) => (
-          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill="#34acf7" />
+          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill={dotColor} />
         ))}
       </svg>
 
@@ -91,8 +103,8 @@ export function TransportHeroBackground() {
           const d = arcPath(POINTS[a], POINTS[b]);
           return (
             <g key={`${a}-${b}`}>
-              <path d={d} stroke="#34acf7" strokeWidth={0.6} fill="none" opacity={0.18} />
-              <circle r={2.1} fill="#34acf7" opacity={0.75} filter="url(#transport-hero-glow)">
+              <path d={d} stroke={routeColor} strokeWidth={0.6} fill="none" opacity={0.18} />
+              <circle r={2.1} fill={routeColor} opacity={0.75} filter="url(#transport-hero-glow)">
                 <animateMotion dur={`${9 + i * 1.7}s`} repeatCount="indefinite" path={d} />
               </circle>
             </g>
@@ -107,7 +119,7 @@ export function TransportHeroBackground() {
               cx={p.x}
               cy={p.y}
               r={2}
-              fill="#12a0ef"
+              fill={cityColor}
               opacity={0.45}
               filter="url(#transport-hero-glow)"
             />

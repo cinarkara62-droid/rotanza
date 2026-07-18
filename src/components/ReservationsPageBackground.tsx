@@ -1,5 +1,8 @@
+"use client";
+
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { scatterDots } from "@/lib/bg-pattern";
+import { useTheme } from "@/components/ThemeProvider";
 
 // Teal-themed ambient background for the reservations page — a scattered
 // "ticket stub" line-art motif (rounded rect + dashed perforation + a
@@ -16,12 +19,12 @@ const TICKETS = [
   { x: 560, y: 60, r: 4 },
 ];
 
-function TicketStub({ x, y, r }: { x: number; y: number; r: number }) {
+function TicketStub({ x, y, r, color }: { x: number; y: number; r: number; color: string }) {
   return (
-    <g transform={`translate(${x} ${y}) rotate(${r})`} stroke="#34acf7" strokeWidth={1.3} fill="none">
+    <g transform={`translate(${x} ${y}) rotate(${r})`} stroke={color} strokeWidth={1.3} fill="none">
       <rect x={-24} y={-14} width={48} height={28} rx={4} />
-      <circle cx={0} cy={-14} r={2.4} fill="#34acf7" stroke="none" />
-      <circle cx={0} cy={14} r={2.4} fill="#34acf7" stroke="none" />
+      <circle cx={0} cy={-14} r={2.4} fill={color} stroke="none" />
+      <circle cx={0} cy={14} r={2.4} fill={color} stroke="none" />
       <line x1={0} y1={-9} x2={0} y2={9} strokeDasharray="2 3" />
     </g>
   );
@@ -35,15 +38,22 @@ const GLOW_BLOBS = [
 ];
 
 export function ReservationsPageBackground() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const gradient = isDark
+    ? "bg-gradient-to-br from-[#0a1a2e] via-[#0d2136] to-[#0a1830]"
+    : "bg-gradient-to-br from-[#e9f6f1] via-[#f4f8f6] to-[#eaf1f5]";
+  const lineColor = isDark ? "#34acf7" : "#0a6f5d";
+
   return (
-    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#0a1a2e] via-[#0d2136] to-[#0a1830]">
+    <AmbientBackground gradientClassName={gradient}>
       <svg
         viewBox="0 0 1000 500"
         className="absolute inset-0 h-full w-full opacity-[0.05]"
         preserveAspectRatio="xMidYMid slice"
       >
         {DOTS.map((d, i) => (
-          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill="#34acf7" />
+          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill={lineColor} />
         ))}
       </svg>
 
@@ -53,7 +63,7 @@ export function ReservationsPageBackground() {
         preserveAspectRatio="xMidYMid slice"
       >
         {TICKETS.map((t, i) => (
-          <TicketStub key={i} {...t} />
+          <TicketStub key={i} {...t} color={lineColor} />
         ))}
       </svg>
 

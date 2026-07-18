@@ -8,6 +8,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Providers } from "@/components/Providers";
+import { ThemeInitScript } from "@/components/ThemeInitScript";
 import { auth } from "@/auth";
 
 export function generateStaticParams() {
@@ -40,8 +41,9 @@ export default async function LocaleLayout({
   const session = await auth();
 
   return (
-    <html lang={locale} dir={isRtl(locale as Locale) ? "rtl" : "ltr"}>
+    <html lang={locale} dir={isRtl(locale as Locale) ? "rtl" : "ltr"} suppressHydrationWarning>
       <head>
+        <ThemeInitScript />
         <Script
           id="travelpayouts-drive"
           strategy="afterInteractive"

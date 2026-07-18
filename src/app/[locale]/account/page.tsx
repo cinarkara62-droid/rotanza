@@ -31,8 +31,11 @@ export default async function AccountPage({
   return (
     <div className="relative z-10 mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:px-8">
       <PageBackground
-        gradientClassName="bg-gradient-to-br from-[#0e1424] via-[#121a2e] to-[#0e1424]"
-        dotColor="#34acf7"
+        gradientClassName={{
+          light: "bg-gradient-to-br from-[#f4f0e6] via-[#faf9f6] to-[#eef3f2]",
+          dark: "bg-gradient-to-br from-[#0e1424] via-[#121a2e] to-[#0e1424]",
+        }}
+        dotColor={{ light: "#0a6f5d", dark: "#34acf7" }}
         dotSeedA={7}
         dotSeedB={19}
         blobs={[

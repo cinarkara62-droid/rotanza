@@ -1,11 +1,65 @@
 @import "tailwindcss";
 
-/* Dark navy + cyan theme, matched to the Rotanza AI logo
-   (deep navy #010d28 background, #22cafd -> #01adfc cyan-blue "R"). */
+/* Two themes: light (original site look, teal/green brand) is the
+   default for new visitors; dark (navy + cyan, matched to the Rotanza AI
+   logo) is opt-in via the theme toggle and persisted in localStorage
+   (see ThemeInitScript / ThemeProvider). Every color below is a plain
+   custom property so `[data-theme="dark"]` can override it — the
+   `--color-*` entries in @theme inline just point at these, so every
+   Tailwind utility (bg-brand-50, text-sand-100, ...) re-evaluates live
+   when the attribute flips, no per-component code needed. */
 :root {
+  --background: #fbfaf7;
+  --foreground: #10201c;
+  color-scheme: light;
+
+  --brand-50: #edfcf6;
+  --brand-100: #d3f8e9;
+  --brand-200: #a9f0d7;
+  --brand-300: #6fe1c0;
+  --brand-400: #35c8a2;
+  --brand-500: #14ab89;
+  --brand-600: #0a8a71;
+  --brand-700: #0a6f5d;
+  --brand-800: #0b594c;
+  --brand-900: #0c4a40;
+  --brand-950: #042a24;
+
+  --sand-50: #fbfaf7;
+  --sand-100: #f4f0e6;
+  --sand-200: #e9e1cd;
+  --sand-300: #dccdaa;
+
+  --coral-400: #ff9270;
+  --coral-500: #ff7a4d;
+  --coral-600: #f2632f;
+}
+
+:root[data-theme="dark"] {
   --background: #080f24;
   --foreground: #e7edf5;
   color-scheme: dark;
+
+  --brand-50: #eaf7ff;
+  --brand-100: #d2edfe;
+  --brand-200: #a6dbfd;
+  --brand-300: #6cc4fb;
+  --brand-400: #34acf7;
+  --brand-500: #12a0ef;
+  --brand-600: #0c85cc;
+  --brand-700: #0c6aa3;
+  --brand-800: #0f5484;
+  --brand-900: #11416a;
+  --brand-950: #0a2036;
+
+  --sand-50: #080f24;
+  --sand-100: #101a33;
+  --sand-200: #18253f;
+  --sand-300: #24365c;
+
+  --coral-400: #ff9270;
+  --coral-500: #ff7a4d;
+  --coral-600: #ff8a5c;
 }
 
 @theme inline {
@@ -14,32 +68,26 @@
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji";
 
-  /* brand = the logo's cyan/blue accent. 950 is a deep navy used for
-     section backgrounds (footer, CTA banners); 50 is a light cyan-tinted
-     color used for text/icon-fills sitting on dark surfaces. */
-  --color-brand-50: #eaf7ff;
-  --color-brand-100: #d2edfe;
-  --color-brand-200: #a6dbfd;
-  --color-brand-300: #6cc4fb;
-  --color-brand-400: #34acf7;
-  --color-brand-500: #12a0ef;
-  --color-brand-600: #0c85cc;
-  --color-brand-700: #0c6aa3;
-  --color-brand-800: #0f5484;
-  --color-brand-900: #11416a;
-  --color-brand-950: #0a2036;
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
 
-  /* sand = neutral surface scale, now dark: 50 matches the page
-     background (used for inset elements like inputs), 100/200/300 are
-     progressively lighter navy panels (card surfaces, hover states). */
-  --color-sand-50: #080f24;
-  --color-sand-100: #101a33;
-  --color-sand-200: #18253f;
-  --color-sand-300: #24365c;
+  --color-sand-50: var(--sand-50);
+  --color-sand-100: var(--sand-100);
+  --color-sand-200: var(--sand-200);
+  --color-sand-300: var(--sand-300);
 
-  --color-coral-400: #ff9270;
-  --color-coral-500: #ff7a4d;
-  --color-coral-600: #ff8a5c;
+  --color-coral-400: var(--coral-400);
+  --color-coral-500: var(--coral-500);
+  --color-coral-600: var(--coral-600);
 }
 
 body {

@@ -7,6 +7,7 @@ import { useSession, signOut } from "next-auth/react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const [open, setOpen] = useState(false);
@@ -50,6 +51,7 @@ export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           <div className="hidden sm:block">
             <LanguageSwitcher locale={locale} />
           </div>
+          <ThemeToggle className="hidden sm:flex" />
           {isAuthed ? (
             <div className="hidden items-center gap-2 sm:flex">
               <Link
@@ -110,7 +112,10 @@ export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             ))}
           </nav>
           <div className="mt-3 flex items-center justify-between">
-            <LanguageSwitcher locale={locale} />
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher locale={locale} />
+              <ThemeToggle />
+            </div>
             {isAuthed ? (
               <div className="flex items-center gap-2">
                 <Link

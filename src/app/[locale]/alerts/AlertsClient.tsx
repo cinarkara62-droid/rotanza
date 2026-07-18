@@ -118,8 +118,11 @@ export function AlertsClient({ locale }: { locale: Locale }) {
   return (
     <div className="relative z-10 mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
       <PageBackground
-        gradientClassName="bg-gradient-to-br from-[#171018] via-[#0d1f33] to-[#0a1a2e]"
-        dotColor="#f2632f"
+        gradientClassName={{
+          light: "bg-gradient-to-br from-[#fdf3ee] via-[#f6f8f7] to-[#eaf6f2]",
+          dark: "bg-gradient-to-br from-[#171018] via-[#0d1f33] to-[#0a1a2e]",
+        }}
+        dotColor={{ light: "#f2632f", dark: "#ff8a5c" }}
         dotSeedA={17}
         dotSeedB={53}
         blobs={[

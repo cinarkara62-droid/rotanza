@@ -155,8 +155,11 @@ export function PlannerClient({ locale }: { locale: Locale }) {
   return (
     <div className="relative z-10 mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       <PageBackground
-        gradientClassName="bg-gradient-to-br from-[#0a1a2e] via-[#0d2136] to-[#0a1830]"
-        dotColor="#34acf7"
+        gradientClassName={{
+          light: "bg-gradient-to-br from-[#eaf6f2] via-[#f4f7f6] to-[#e9f2f5]",
+          dark: "bg-gradient-to-br from-[#0a1a2e] via-[#0d2136] to-[#0a1830]",
+        }}
+        dotColor={{ light: "#0a6f5d", dark: "#34acf7" }}
         dotSeedA={41}
         dotSeedB={13}
         blobs={[

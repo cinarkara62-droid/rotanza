@@ -52,8 +52,11 @@ export function PricingClient({ locale }: { locale: Locale }) {
   return (
     <div className="relative z-10 mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
       <PageBackground
-        gradientClassName="bg-gradient-to-br from-[#0a1a2e] via-[#141826] to-[#171018]"
-        dotColor="#34acf7"
+        gradientClassName={{
+          light: "bg-gradient-to-br from-[#eaf6f2] via-[#f6f5f0] to-[#fdf3ee]",
+          dark: "bg-gradient-to-br from-[#0a1a2e] via-[#141826] to-[#171018]",
+        }}
+        dotColor={{ light: "#0a6f5d", dark: "#34acf7" }}
         dotSeedA={29}
         dotSeedB={11}
         blobs={[

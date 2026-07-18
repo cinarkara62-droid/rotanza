@@ -93,8 +93,11 @@ export function BudgetClient({ locale }: { locale: Locale }) {
   return (
     <div className="relative z-10 mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       <PageBackground
-        gradientClassName="bg-gradient-to-br from-[#171018] via-[#1c1520] to-[#14101a]"
-        dotColor="#f2632f"
+        gradientClassName={{
+          light: "bg-gradient-to-br from-[#fdf6ec] via-[#faf7f0] to-[#fdf1ea]",
+          dark: "bg-gradient-to-br from-[#171018] via-[#1c1520] to-[#14101a]",
+        }}
+        dotColor={{ light: "#f2632f", dark: "#ff8a5c" }}
         dotSeedA={23}
         dotSeedB={37}
         blobs={[

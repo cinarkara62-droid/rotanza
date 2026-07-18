@@ -1,5 +1,8 @@
+"use client";
+
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { scatterDots } from "@/lib/bg-pattern";
+import { useTheme } from "@/components/ThemeProvider";
 
 // Warm, food-appropriate counterpart to TransportHeroBackground — same
 // ambient technique (fixed, full-page, pointer-events-none) but themed
@@ -38,9 +41,9 @@ const CUPS = [
   { x: 950, y: 230, r: 0 },
 ];
 
-function Fork({ x, y, r }: { x: number; y: number; r: number }) {
+function Fork({ x, y, r, color }: { x: number; y: number; r: number; color: string }) {
   return (
-    <g transform={`translate(${x} ${y}) rotate(${r})`} stroke="#f2632f" strokeWidth={1.4} strokeLinecap="round" fill="none">
+    <g transform={`translate(${x} ${y}) rotate(${r})`} stroke={color} strokeWidth={1.4} strokeLinecap="round" fill="none">
       <line x1={-5} y1={-14} x2={-5} y2={-4} />
       <line x1={0} y1={-14} x2={0} y2={-4} />
       <line x1={5} y1={-14} x2={5} y2={-4} />
@@ -49,18 +52,18 @@ function Fork({ x, y, r }: { x: number; y: number; r: number }) {
   );
 }
 
-function Plate({ x, y }: { x: number; y: number }) {
+function Plate({ x, y, color }: { x: number; y: number; color: string }) {
   return (
-    <g transform={`translate(${x} ${y})`} stroke="#f2632f" strokeWidth={1.4} fill="none">
+    <g transform={`translate(${x} ${y})`} stroke={color} strokeWidth={1.4} fill="none">
       <circle r={14} />
       <circle r={9} />
     </g>
   );
 }
 
-function Cup({ x, y }: { x: number; y: number }) {
+function Cup({ x, y, color }: { x: number; y: number; color: string }) {
   return (
-    <g transform={`translate(${x} ${y})`} stroke="#f2632f" strokeWidth={1.4} fill="none" strokeLinecap="round">
+    <g transform={`translate(${x} ${y})`} stroke={color} strokeWidth={1.4} fill="none" strokeLinecap="round">
       <path d="M -10 -8 L -9 10 Q -9 14 -5 14 L 5 14 Q 9 14 9 10 L 10 -8 Z" />
       <path d="M 10 -4 Q 18 -4 18 3 Q 18 9 10 8" />
     </g>
@@ -68,15 +71,22 @@ function Cup({ x, y }: { x: number; y: number }) {
 }
 
 export function RestaurantsPageBackground() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const gradient = isDark
+    ? "bg-gradient-to-br from-[#171018] via-[#1c1520] to-[#14101a]"
+    : "bg-gradient-to-br from-[#fdf3ee] via-[#faf6f0] to-[#fdf0ec]";
+  const lineColor = isDark ? "#ff8a5c" : "#f2632f";
+
   return (
-    <AmbientBackground gradientClassName="bg-gradient-to-br from-[#171018] via-[#1c1520] to-[#14101a]">
+    <AmbientBackground gradientClassName={gradient}>
       <svg
         viewBox="0 0 1000 500"
         className="absolute inset-0 h-full w-full opacity-[0.05]"
         preserveAspectRatio="xMidYMid slice"
       >
         {DOTS.map((d, i) => (
-          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill="#f2632f" />
+          <circle key={i} cx={d.x} cy={d.y} r={1.3} fill={lineColor} />
         ))}
       </svg>
 
@@ -86,13 +96,13 @@ export function RestaurantsPageBackground() {
         preserveAspectRatio="xMidYMid slice"
       >
         {FORKS.map((f, i) => (
-          <Fork key={`fork-${i}`} {...f} />
+          <Fork key={`fork-${i}`} {...f} color={lineColor} />
         ))}
         {PLATES.map((p, i) => (
-          <Plate key={`plate-${i}`} {...p} />
+          <Plate key={`plate-${i}`} {...p} color={lineColor} />
         ))}
         {CUPS.map((c, i) => (
-          <Cup key={`cup-${i}`} {...c} />
+          <Cup key={`cup-${i}`} {...c} color={lineColor} />
         ))}
       </svg>
 
